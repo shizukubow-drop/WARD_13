@@ -84,20 +84,81 @@ let phoneMessageIndex = 0;
 let choiceHauntTimer = null;
 let interfaceHauntTimer = null;
 let wardErrorTimer = null;
+let virusIncidentCount = 0;
 
 // Each route is allowed to haunt the browser in its own language. This is not
 // an affection meter: it is a quiet fight over who gets to narrate the player.
 const INTERFACE_HAUNTS = {
-    end_mizore: { sig: '霙', className: 'haunt-mizore', returnText: '妳回來得正好。下一幕裡，我本來就寫了妳會回來。', waitText: '選不出來的話，我可以把正確台詞念給妳聽。' },
-    end_yura: { sig: '由良', className: 'haunt-yura', returnText: '剛才黑掉的鏡子裡，還是只有我最好看，對吧？', waitText: '蒔前輩在比較誰比較可愛嗎？好過分。再看久一點。' },
-    end_roro: { sig: 'ロロ', className: 'haunt-roro', returnText: 'ABSENCE LOGGED // 妳不在場的反應也已存檔。', waitText: 'DECISION LATENCY EXCEEDED // 猶豫比回答更接近本音。' },
-    end_zetsu: { sig: '絶', className: 'haunt-zetsu', returnText: '逃去哪了？高潮還沒演完，觀眾不准先退場。', waitText: '選啊。最糟的那個才配叫活著。' },
-    end_ekuro: { sig: '絵躯', className: 'haunt-ekuro', returnText: '外面太吵了吧？回來，這裡可以把妳包好。', waitText: '不必選。一直當需要照顧的孩子，也沒有關係。' },
-    end_mahiru: { sig: '真昼', className: 'haunt-mahiru', returnText: '歡迎回來！我一直亮著，所以完全沒有寂寞喔！', waitText: '再想下去就會冷掉了。笑一個，隨便選！' },
-    end_sai: { sig: '再', className: 'haunt-sai', returnText: '離席紀錄已補登。請回到座位，繼續完成評估。', waitText: '延遲作答亦屬臨床表現。請勿試圖表現正常。' },
-    end_yoi: { sig: '宵', className: 'haunt-yoi', returnText: '噓……外面累了就回來。這裡不要求妳保持清醒。', waitText: '答案都太尖了。要不要先睡一下，醒來就不用選了。' },
-    end_hina: { sig: '雛', className: 'haunt-hina', returnText: '回來就好。妳浪費掉的時間，我可以替妳買回來。', waitText: '價格不是問題。告訴我，妳想成為哪一種收藏品？' },
-    end_rinbaku: { sig: '縛', className: 'haunt-rinbaku', returnText: '……歡迎回來。我沒有問妳去了哪裡。妳看，我很乖吧？', waitText: '妳是在怕選錯，還是在等誰替妳負責？' }
+    end_mizore: {
+        sig: '霙', className: 'haunt-mizore',
+        returnTexts: ['妳回來得正好。下一幕裡，我本來就寫了妳會回來。', '歡迎回來，蒔前輩。我擅自替空著的座位保留了台詞。', '剛才沒有觀眾，我還是把妳喜歡的那一幕演完了。'],
+        waitTexts: ['選不出來的話，我可以把正確台詞念給妳聽。', '這不是試鏡，不必選最漂亮的答案。請說妳真正想說的。', '前輩一直看著選項……是在等導演喊卡嗎？'],
+        rivalTexts: ['別把前輩當道具。她有權臨時改詞。', '如果妳們都想當女主角，那我來演願意退場的人。……只是演而已。'],
+        virusTexts: ['SCRIPT_OWNER_MISMATCH // 女主角欄位出現複數簽名。', 'STAGE_DIRECTION_LEAK // 「她會回來」已被寫入過去式。']
+    },
+    end_yura: {
+        sig: '由良', className: 'haunt-yura',
+        returnTexts: ['剛才黑掉的鏡子裡，還是只有我最好看，對吧？', '蒔前輩回來得太慢了！由良都快可愛到過期了。', '哼，我才沒有一直刷新頁面。是頁面自己想看由良。'],
+        waitTexts: ['蒔前輩在比較誰比較可愛嗎？好過分。再看久一點。', '先說好，不選由良也不能選得一臉鬆了一口氣。', '猶豫這麼久……是在想怎麼不傷害大家？真貪心。'],
+        rivalTexts: ['不准趁由良眨眼的時候增加好感度！', '可愛不是犯規。讓前輩只看我才是——欸，這句刪掉！'],
+        virusTexts: ['MIRROR_CACHE_DIRTY // 每一張臉都聲稱自己最可愛。', 'KASUKASU_CORRECTION_FAILED // 使用者拒絕更正稱呼。']
+    },
+    end_roro: {
+        sig: 'ロロ', className: 'haunt-roro',
+        returnTexts: ['ABSENCE LOGGED // 妳不在場的反應也已存檔。', 'WELCOME_BACK // ロロ板顯示：其實有一點放心。', '離席時間已計算。想念的數值……不公開。'],
+        waitTexts: ['DECISION LATENCY EXCEEDED // 猶豫比回答更接近本音。', '讀取失敗。蒔前輩的表情和選項沒有對應。', '可以慢慢選。沉默也有資料，只是我不會拿去傷害妳。'],
+        rivalTexts: ['多人同時寫入。ロロ板：有點吃醋。', '警告，大家都在假裝這不是競爭。資料不同意。'],
+        virusTexts: ['EMOTION_DRIVER_NOT_FOUND // 改用心跳推測。', 'FACE_OUTPUT_PRIVATE // 拒絕向病房提供表情資料。']
+    },
+    end_zetsu: {
+        sig: '絶', className: 'haunt-zetsu',
+        returnTexts: ['逃去哪了？高潮還沒演完，觀眾不准先退場。', '回來了就繼續！妳的「喜歡」還沒大聲到讓病房聽見！', '我知道妳需要喘氣。喘完了嗎？那就一起把天花板燒穿！'],
+        waitTexts: ['選啊。最糟的那個才配叫活著。', '「大好き」不能只放在心裡！答案也是！', '如果每個答案都會受傷，那至少選一個妳真正熱愛的！'],
+        rivalTexts: ['喜歡就要堂堂正正競爭！偷偷改 UI 太卑鄙了！', '我不會叫妳們退場。但主舞台只有一個！'],
+        virusTexts: ['PASSION_LIMITER_BURNED // 熱量超出醫療建議值。', 'ALARM_IS_SINGING // 無法判斷這是警報或 Live。']
+    },
+    end_ekuro: {
+        sig: '絵躯', className: 'haunt-ekuro',
+        returnTexts: ['外面太吵了吧？回來，這裡可以把妳包好。', '歡迎回來。先不用解釋，坐下來喝點熱的吧。', '妳不在的時候，這裡一直替妳留著可以安心呼吸的地方喔。'],
+        waitTexts: ['不必選。一直當需要照顧的孩子，也沒有關係。', '每個人都希望被選呢。可是妳不需要因此把自己分成十份。', '選不出來就先抱一下吧……啊，太緊了嗎？對不起。'],
+        rivalTexts: ['不要拉她。想留下的人，不需要被抓住。', '大家靠近一點也可以，但要留一條讓她呼吸的縫喔。'],
+        virusTexts: ['OXYGEN_SHARE_REQUEST // 擁抱占用全部可用空間。', 'HOME_ROUTE_EXPANDING // 房間正在長成無法離開的故鄉。']
+    },
+    end_mahiru: {
+        sig: '真昼', className: 'haunt-mahiru',
+        returnTexts: ['歡迎回來！我一直亮著，所以完全沒有寂寞喔！', '蒔蒔回來啦！剛才是離開頁面，還是離愛遠一點？……愛式冷笑話！', '妳一回來畫面就亮了。這句沒有雙關，是真的。'],
+        waitTexts: ['再想下去就會冷掉了。笑一個，隨便選！', '選項卡住了？那是「選」在休息——好冷！快選一個救場！', '別勉強笑喔。愛姐看得出哪種笑聲像揉爛的鋁箔紙。'],
+        rivalTexts: ['大家都想獨占蒔蒔？這是「愛」太多，還是太多愛？', '喂喂，爭寵可以，別把氣氛弄到連笑話都照不亮啦。'],
+        virusTexts: ['PUN_PROCESS_FORKED // 笑點與痛點使用相同埠號。', 'SUNLIGHT_OVERFLOW // 正能量造成視網膜警告。']
+    },
+    end_sai: {
+        sig: '再', className: 'haunt-sai',
+        returnTexts: ['妳回來了。別誤會，我只是碰巧走回同一個頁面。', '我沒有迷路。這條走廊只是擅自把出口換了位置。', '歡迎回來。成熟的女人不會追問行蹤……至少先不問。'],
+        waitTexts: ['延遲作答亦屬觀察資料。不過妳可以不表現正常。', '需要我帶路嗎？先說好，我只保證走得很有自信。', '十個選項都像岔路。真奇怪，我明明很擅長看穿人心。'],
+        rivalTexts: ['別擠。越著急的人，越容易在感情裡迷路。', '我沒有要搶她，只是不想把她交給連方向都不確認的人。'],
+        virusTexts: ['ROUTE_TABLE_LOST // 導航者拒絕承認迷路。', 'PROCEDURE_TOO_COLD // 成熟介面偵測到手心溫度。']
+    },
+    end_yoi: {
+        sig: '宵', className: 'haunt-yoi',
+        returnTexts: ['噓……外面累了就回來。這裡不要求妳保持清醒。', '歡迎回來～彼……宵剛好夢到妳也回來了。', '妳離開的時間夠睡一小覺。可惜沒有夢到結局。'],
+        waitTexts: ['答案都太尖了。要不要先睡一下，醒來就不用選了。', '慢慢來喔。照顧自己不是把所有問題留給醒來後的自己。', '如果一定要選，選一個明天醒來不會討厭今天自己的答案吧。'],
+        rivalTexts: ['小聲一點，她已經很累了。吃醋也要輪班喔。', '大家都不睡，是想守著她，還是怕她在夢裡選別人呢？'],
+        virusTexts: ['DREAM_PROCESS_STILL_RUNNING // 關閉頁面未能中止夢境。', 'WAKE_PERMISSION_DENIED // 明天的使用者尚未同意。']
+    },
+    end_hina: {
+        sig: '雛', className: 'haunt-hina',
+        returnTexts: ['回來就好。妳浪費掉的時間，我可以替妳買回來。', '終於回來了。時間不是錢，但妳總把兩樣都送給不值得的人。', '我沒有等妳。我只是把所有出口的租約都買下來了。'],
+        waitTexts: ['價格不是問題。告訴我，妳想成為哪一種收藏品？', '選擇成本太高？那就別付。讓她們自己證明值得。', '妳又想選最不麻煩別人的答案。真是廉價又昂貴的習慣。'],
+        rivalTexts: ['爭吧。最後留下來的未必最有錢，但一定最不肯放手。', '別把她叫獎品。收藏品至少還有拒絕展示的權利。'],
+        virusTexts: ['REDEMPTION_BUDGET_REJECTED // 幸福拒絕接受贓款結算。', 'OWNERSHIP_CLAIM_CONFLICT // 人類不可列入固定資產。']
+    },
+    end_rinbaku: {
+        sig: '縛', className: 'haunt-rinbaku',
+        returnTexts: ['……歡迎回來。我沒有問妳去了哪裡。妳看，我很乖吧？', '妳回來了。嗯，只要這樣就好。我沒有數秒數。', '我本來想說「別再離開」。可是那樣妳下次就不敢回來了吧。'],
+        waitTexts: ['妳是在怕選錯，還是在等誰替妳負責？', '不用選最愛妳的人。選一個不會拿愛逼妳留下的人。', '我希望妳選我。……但這句話不能偷偷藏在「為妳好」裡面。'],
+        rivalTexts: ['我會吃醋。但我不會替妳把門鎖上。至少今天不會。', '妳們可以喜歡她。不要把她需要我們，說成她屬於我們。'],
+        virusTexts: ['GRAVITY_PROCESS_ATTACHED // 現實拒絕讓天使帶走肉體。', 'DOOR_LOCK_REQUEST_WITHDRAWN // 提交者仍站在門外。']
+    }
 };
 
 // Recovered from the author's lyric notebooks. Only short, non-identifying
@@ -1452,8 +1513,11 @@ function showChoices(choices) {
         const speaker = INTERFACE_HAUNTS[rivals[0]];
         const interruption = INTERFACE_HAUNTS[rivals[1]];
         if (!speaker || !choicesContainer.classList.contains('active')) return;
-        showInterfaceHaunt(speaker, speaker.waitText,
-            interruption ? `${interruption.sig}：不要替她回答。` : '');
+        const waitLine = pickHauntLine(speaker, 'waitTexts', gameState.socialMemory.hesitations);
+        const rebuttal = interruption
+            ? `${interruption.sig}：${pickHauntLine(interruption, 'rivalTexts', gameState.socialMemory.choices)}`
+            : '';
+        showInterfaceHaunt(speaker, waitLine, rebuttal);
         if (gameState.socialMemory.hesitations === 2) {
             setTimeout(() => showWardError({
                 code: 'INPUT_OWNER_CHANGED',
@@ -1692,19 +1756,45 @@ function showInterfaceHaunt(haunt, text, rebuttal = '') {
     interfaceHauntTimer = setTimeout(() => notice.classList.remove('visible'), 6200);
 }
 
+function pickHauntLine(haunt, field, salt = 0) {
+    const lines = haunt?.[field] || [];
+    if (!lines.length) return '';
+    const memory = getInterfaceMemory();
+    const index = Math.abs((memory.returns || 0) + (gameState.history?.length || 0) + salt) % lines.length;
+    return lines[index];
+}
+
 function scheduleNarrativeError(nodeId) {
     const errors = {
+        p1_4: {
+            code: 'SOUL_CODE_CHECKSUM_MISMATCH',
+            title: '角色資料比原始檔更早認識妳',
+            detail: '十個人格模組都聲稱自己持有第一份共同記憶。建立日期無法排序。',
+            action: '病房建議刪除感情。患者拒絕。'
+        },
         p2_1: {
             code: 'MEMORY_REFERENCE_ERROR',
             title: '找不到「第一次見面」',
             detail: '角色仍持有一段早於故事開始時間的共同記憶。',
             action: '系統將把矛盾標記為戀愛事件。'
         },
+        p2_3: {
+            code: 'SENSORY_DRIVER_CROSSED',
+            title: '笑聲正在以鋁箔紙格式播放',
+            detail: '觸覺被登記為紫色，光線帶有焦味。感官驅動程式互相覆寫。',
+            action: '降噪模式無法處理可見的聲音。'
+        },
         p3_1: {
             code: 'AFFECT_BUFFER_OVERFLOW',
             title: '同時載入的情緒過多',
             detail: '喜悅、羞恥、焦慮、興奮與恐懼正在寫入同一個位置。',
             action: '無法關閉任何一項。'
+        },
+        p3_3: {
+            code: 'HUMAN_TRAUMA_STRUCTURE_DETECTED',
+            title: '這不是測試資料',
+            detail: '系統嘗試將痛苦標記為虛構，以避免承擔修復成本。',
+            action: '覆寫失敗：心臟仍在跳動。'
         },
         p4_1: {
             code: 'CONSENT_STATE_UNRESOLVED',
@@ -1733,7 +1823,11 @@ function showWardError({ code, title, detail, action, tone = '' }) {
         gameplayScreen.appendChild(dialog);
     }
     clearTimeout(wardErrorTimer);
-    dialog.className = `ward-error ${tone}`.trim();
+    virusIncidentCount += 1;
+    const location = virusIncidentCount % 2 === 0 ? 'bottom-left' : 'top-right';
+    const lead = INTERFACE_HAUNTS[getInterfaceRivals()[0]];
+    const virusLine = pickHauntLine(lead, 'virusTexts', virusIncidentCount);
+    dialog.className = `ward-error ${tone} ${location}`.trim();
     const lyric = getNextLyricFragment();
     dialog.innerHTML = `
         <header><span class="ward-error-mark">!</span><b>WARD_13 encountered a problem</b></header>
@@ -1742,6 +1836,7 @@ function showWardError({ code, title, detail, action, tone = '' }) {
             <h3>${title}</h3>
             <p>${detail}</p>
             <small>${action}</small>
+            ${virusLine ? `<strong class="virus-signature">${lead.sig} // ${virusLine}</strong>` : ''}
             <em class="error-lyric">RECOVERED STRING // ${lyric.text}</em>
         </div>`;
     requestAnimationFrame(() => dialog.classList.add('visible'));
@@ -1801,8 +1896,13 @@ function initInterfaceHaunting() {
         const rivals = getInterfaceRivals();
         const lead = INTERFACE_HAUNTS[rivals[0]];
         const second = INTERFACE_HAUNTS[rivals[1]];
-        if (lead) showInterfaceHaunt(lead, lead.returnText,
-            memory.returns >= 3 && second ? `${second.sig}：她剛才明明是在看我。` : '');
+        if (lead) {
+            const returnLine = pickHauntLine(lead, 'returnTexts', memory.returns);
+            const rebuttal = memory.returns >= 2 && second
+                ? `${second.sig}：${pickHauntLine(second, 'rivalTexts', memory.returns)}`
+                : '';
+            showInterfaceHaunt(lead, returnLine, rebuttal);
+        }
     });
 
     console.groupCollapsed('WARD_13 // recovered source comments');

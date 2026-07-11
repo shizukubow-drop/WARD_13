@@ -880,8 +880,9 @@ body {
 }
 
 .text-container {
-    width: min(100%, 980px);
-    min-height: 0;
+    width: min(100%, 1160px);
+    height: min(68dvh, 610px);
+    min-height: 360px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -904,7 +905,7 @@ body {
     opacity: 1 !important;
     visibility: visible !important;
     overflow-y: auto;
-    max-height: calc(100dvh - 170px);
+    max-height: calc(100dvh - 142px);
     backdrop-filter: blur(4px) saturate(0.8);
     scrollbar-width: none;
 }
@@ -1796,20 +1797,23 @@ body.phase-4 {
     --haunt-color: #c91632;
     position: fixed;
     z-index: 116;
-    left: 50%;
-    top: 14%;
-    width: min(480px, calc(100vw - 28px));
+    width: min(430px, calc(100vw - 28px));
     border: 1px solid #4b4b52;
     background: #101014;
     color: #ddd;
     box-shadow: 0 22px 80px #000, 0 0 0 1px #000;
     font-family: var(--font-sys);
     opacity: 0;
-    transform: translate(-50%, -10px) scale(.985);
+    transform: translateY(-10px) scale(.985);
     pointer-events: none;
     transition: opacity .12s steps(2), transform .18s ease;
+    max-height: calc(100dvh - 24px);
+    overflow-y: auto;
 }
-.ward-error.visible { opacity: 1; transform: translate(-50%, 0) scale(1); }
+.ward-error.visible { opacity: 1; transform: translateY(0) scale(1); }
+.ward-error.top-right { top: clamp(52px, 8vh, 82px); right: clamp(12px, 2.8vw, 38px); }
+.ward-error.bottom-left { left: clamp(12px, 2.8vw, 38px); bottom: clamp(72px, 11vh, 108px); transform: translateY(10px) scale(.985); }
+.ward-error.bottom-left.visible { transform: translateY(0) scale(1); }
 .ward-error header { display: flex; align-items: center; gap: 9px; padding: 9px 12px; background: #26262c; border-bottom: 1px solid #3d3d44; font-size: .76rem; }
 .ward-error-mark { display: inline-grid; place-items: center; width: 19px; height: 19px; border-radius: 50%; background: var(--haunt-color); color: #fff; font-weight: 900; }
 .ward-error-body { padding: 18px 20px 20px; }
@@ -1818,6 +1822,7 @@ body.phase-4 {
 .ward-error p { margin: 0; color: #b8b8be; font: .88rem/1.65 var(--font-main); }
 .ward-error small { display: block; margin-top: 14px; padding-top: 10px; border-top: 1px solid #303036; color: #777780; line-height: 1.5; }
 .error-lyric { display: block; margin-top: 9px; color: #504a50; font: .64rem/1.5 var(--font-mono); }
+.virus-signature { display: block; margin-top: 10px; color: var(--haunt-color); font: .62rem/1.5 var(--font-mono); opacity: .74; }
 
 .lyric-ghost {
     position: fixed;
@@ -1849,7 +1854,8 @@ body.error-presence #gameplay-screen { animation: error-presence-shift .52s step
 
 @media (max-width: 600px) {
     .interface-haunt { top: calc(44px + env(safe-area-inset-top)); right: 12px; font-size: .9rem; }
-    .ward-error { top: calc(64px + env(safe-area-inset-top)); }
+    .ward-error.top-right { top: calc(54px + env(safe-area-inset-top)); right: 10px; }
+    .ward-error.bottom-left { left: 10px; bottom: calc(68px + env(safe-area-inset-bottom)); }
     .ward-error-body { padding: 16px; }
     .lyric-ghost { width: 72vw; font-size: .62rem; }
     #title-screen {
@@ -1884,6 +1890,8 @@ body.error-presence #gameplay-screen { animation: error-presence-shift .52s step
 
     .text-container {
         width: 100%;
+        height: calc(100dvh - 132px - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+        min-height: 0;
         font-size: clamp(0.95rem, 4.1vw, 1.05rem);
         max-height: calc(100dvh - 132px - env(safe-area-inset-top) - env(safe-area-inset-bottom));
         padding: 18px 16px;
@@ -1995,6 +2003,8 @@ body.error-presence #gameplay-screen { animation: error-presence-shift .52s step
     }
 
     .text-container {
+        height: calc(100dvh - 50px);
+        min-height: 0;
         max-height: calc(100dvh - 50px);
         padding: 12px 16px;
         font-size: 0.86rem;
@@ -2012,4 +2022,8 @@ body.error-presence #gameplay-screen { animation: error-presence-shift .52s step
     .choices-container {
         padding: 20px 84px 20px 12px;
     }
+
+    .ward-error { width: min(390px, calc(100vw - 96px)); max-height: calc(100dvh - 20px); }
+    .ward-error.top-right { top: 10px; right: 84px; }
+    .ward-error.bottom-left { left: 10px; bottom: 10px; }
 }
