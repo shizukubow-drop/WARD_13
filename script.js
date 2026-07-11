@@ -45,6 +45,7 @@ const btnBackChars = document.getElementById('btn-back-chars');
 const btnAuto = document.getElementById('btn-auto');
 const btnLog = document.getElementById('btn-log');
 const btnMenu = document.getElementById('btn-menu');
+const btnGameSettings = document.getElementById('btn-game-settings');
 const btnCloseLog = document.getElementById('btn-close-log');
 const btnFullscreen = document.getElementById('btn-fullscreen');
 const btnClearSave = document.getElementById('btn-clear-save');
@@ -74,6 +75,7 @@ let activeSaveSlot = parseInt(localStorage.getItem('ward13_active_slot') || '1',
 const SAVE_SLOT_COUNT = 6;
 let currentRenderedText = '';
 let choiceRevealPending = false;
+let settingsReturnScreen = titleScreen;
 let archiveReaderId = '';
 let archiveVisitCount = 0;
 let phoneMessageIndex = 0;
@@ -483,8 +485,18 @@ function init() {
         });
 
         // Settings
-        if (btnSettings) btnSettings.addEventListener('click', () => showScreen(settingsScreen, titleScreen));
-        if (btnBackSettings) btnBackSettings.addEventListener('click', () => showScreen(titleScreen, settingsScreen));
+        if (btnSettings) btnSettings.addEventListener('click', () => {
+            settingsReturnScreen = titleScreen;
+            renderSaveSlots();
+            showScreen(settingsScreen, titleScreen);
+        });
+        if (btnGameSettings) btnGameSettings.addEventListener('click', () => {
+            settingsReturnScreen = gameplayScreen;
+            saveGame();
+            renderSaveSlots();
+            showScreen(settingsScreen, gameplayScreen);
+        });
+        if (btnBackSettings) btnBackSettings.addEventListener('click', () => showScreen(settingsReturnScreen, settingsScreen));
 
         // Gallery
         if (btnGallery) btnGallery.addEventListener('click', () => {
