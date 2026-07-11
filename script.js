@@ -88,7 +88,7 @@ let autoPlay = false;
 let autoPlayInterval;
 let autoPlayDelay = 2000; // ms
 let activeSaveSlot = parseInt(localStorage.getItem('ward13_active_slot') || '1', 10);
-const SAVE_SLOT_COUNT = 6;
+const SAVE_SLOT_COUNT = 12;
 let currentRenderedText = '';
 let choiceRevealPending = false;
 let settingsReturnScreen = titleScreen;
