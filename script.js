@@ -251,10 +251,10 @@ const ENDINGS = {
         cardId: 'card-rinbaku',
         finalNode: 'end_rinbaku_cage_5'
     },
-    end_rinbaku_true: {
-        id: 'end_rinbaku_true',
+    end_rinbaku_good_mother: {
+        id: 'end_rinbaku_good_mother',
         startNode: 'end_rinbaku',
-        cardId: 'card-rinbaku-true',
+        cardId: 'card-rinbaku-good-mother',
         finalNode: 'end_rinbaku_8',
         requires: 'all_bad'
     }
@@ -275,12 +275,12 @@ const REQUIRED_BAD_ENDINGS = [
 
 // The web edition is designed for a short viral play cycle. Requiring every
 // route would turn the shared opening into ten nearly identical replays.
-const DAWN_FRAGMENT_THRESHOLD = 3;
+const WHITE_DOOR_FRAGMENT_THRESHOLD = 3;
 
 const SCORE_KEYS = [...REQUIRED_BAD_ENDINGS];
 
 const CHARACTER_UNLOCKS = {
-    maki: 'end_rinbaku_true',
+    maki: 'end_rinbaku_good_mother',
     mizore: 'end_mizore',
     yura: 'end_yura',
     roro: 'end_roro',
@@ -583,7 +583,7 @@ function init() {
         if (btnCloseQuickSave) btnCloseQuickSave.addEventListener('click', hideQuickSaveOverlay);
         if (btnWhiteDoor) btnWhiteDoor.addEventListener('click', (event) => {
             event.stopPropagation();
-            renderNode('end_rinbaku_true');
+            renderNode('end_rinbaku');
         });
         if (quickSaveOverlay) quickSaveOverlay.addEventListener('click', (event) => {
             event.stopPropagation();
@@ -849,7 +849,7 @@ function initArchiveLayer() {
     if (clearance) {
         const unlocked = getUnlockedEndings();
         const fragments = REQUIRED_BAD_ENDINGS.filter(key => unlocked[key]).length;
-        clearance.textContent = `READER No.14-${archiveReaderId} // VISIT ${String(archiveVisitCount).padStart(2, '0')} // FRAGMENTS ${Math.min(fragments, DAWN_FRAGMENT_THRESHOLD)}/${DAWN_FRAGMENT_THRESHOLD}`;
+        clearance.textContent = `READER No.14-${archiveReaderId} // VISIT ${String(archiveVisitCount).padStart(2, '0')} // FRAGMENTS ${Math.min(fragments, WHITE_DOOR_FRAGMENT_THRESHOLD)}/${WHITE_DOOR_FRAGMENT_THRESHOLD}`;
     }
 
     const returnMessages = [
@@ -1261,7 +1261,7 @@ function createInitialScores() {
 function shouldShowWhiteDoor() {
     const unlocked = getUnlockedEndings();
     const fragments = REQUIRED_BAD_ENDINGS.filter(key => unlocked[key]).length;
-    return fragments >= DAWN_FRAGMENT_THRESHOLD && !unlocked.end_rinbaku_true;
+    return fragments >= WHITE_DOOR_FRAGMENT_THRESHOLD && !unlocked.end_rinbaku_good_mother;
 }
 
 function applyChoiceEffects(choice) {
@@ -1536,9 +1536,9 @@ function showChoices(choices) {
         if (choice.requires) {
             const unlocked = getUnlockedEndings();
             const available = choice.requires === 'all_bad'
-                ? REQUIRED_BAD_ENDINGS.filter(key => unlocked[key]).length >= DAWN_FRAGMENT_THRESHOLD
-                : choice.requires === 'dawn'
-                    ? !!unlocked.end_rinbaku_true
+                ? REQUIRED_BAD_ENDINGS.filter(key => unlocked[key]).length >= WHITE_DOOR_FRAGMENT_THRESHOLD
+                : choice.requires === 'good_mother'
+                    ? !!unlocked.end_rinbaku_good_mother
                     : true;
             if (!available) {
                 btn.textContent = 'LOCKED // ' + choice.text;
@@ -1670,10 +1670,10 @@ function isEndingAvailable(endingKey, unlocked) {
     if (!ending) return false;
     if (!ending.requires) return true;
     if (ending.requires === 'all_bad') {
-        return REQUIRED_BAD_ENDINGS.filter(key => unlocked[key]).length >= DAWN_FRAGMENT_THRESHOLD;
+        return REQUIRED_BAD_ENDINGS.filter(key => unlocked[key]).length >= WHITE_DOOR_FRAGMENT_THRESHOLD;
     }
-    if (ending.requires === 'dawn') {
-        return !!unlocked.end_rinbaku_true;
+    if (ending.requires === 'good_mother') {
+        return !!unlocked.end_rinbaku_good_mother;
     }
     return true;
 }

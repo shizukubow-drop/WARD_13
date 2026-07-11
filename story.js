@@ -3,7 +3,7 @@ const story = {
     "white_door": {
         "text": "第十三社辦的三份結局紀錄都已經被翻開。\n\n黑色的走廊盡頭，出現了一段白色階梯。\n\n階梯盡頭只有一扇門。\n門外有人說，妳已經康復了。\n\n<span class='case-note'>SYSTEM: THREE ENDING FRAGMENTS CONFIRMED // WHITE DOOR OPENED</span>",
         "phase": "phase-4",
-        "next": "end_rinbaku_true"
+        "next": "end_rinbaku"
     },
     "start": {
         "text": "逢魔之時，夕陽不是落下去，而是被人塗在玻璃上。\n\n西校舍的窗戶亮得像燒壞的螢幕。黑板上寫著我的名字，又被誰用指甲刮掉一半：\n\n<span class='case-note'>PATIENT No.0 // AKIBA MAI // OBSERVATION CONTINUES</span>\n\n大概是ロロ替文化祭做的新介面。她總喜歡把普通點名寫得像機密檔案。\n\n今天是社團活動。這裡當然是學校。\n\n只是我想不起來自己何時走進這棟校舍。那段空白與放學鐘聲互相咬住，像潮濕垃圾袋裡的蟬殼，發出很小、很小的聲音。",
@@ -491,51 +491,6 @@ const story = {
         "next": null
     },
 
-    "end_rinbaku_true": {
-        "text": "🌅 鄰縛 TE 路線：【Reality / 疼痛的黎明】\n\n「小蒔……求求妳……回來……」\n\n有人在哭。\n不是黃昏。\n不是霙。\n不是任何漂亮的劇本。\n\n溫熱的液體滴在我的手背上。\n\n縛哭得很難看。\n因為真實的人哭起來都不漂亮。",
-        "phase": "phase-1",
-        "next": "end_rinbaku_true_2"
-    },
-    "end_rinbaku_true_2": {
-        "text": "我轉頭。\n\n宵拿著針筒。\n絵躯張開懷抱。\n由良遞來鏡片。\nロロ亮著 REC。\n絶站在火裡。\n雛打開籠門。\n再說再一次。\n真晝把燈開到最大。\n霙坐在安全的黃昏裡，等我回去。\n\n每一條路都很痛。\n每一條路都比醒來容易。",
-        "phase": "phase-1",
-        "next": "end_rinbaku_true_3"
-    },
-    "end_rinbaku_true_3": {
-        "text": "我低頭看著被子。\n\n那個不存在的武器在底下呼吸。\n它說：不要看。\n它說：只要相信我還在，妳就不是無助的女孩。\n\n縛抓住我的手。\n\n「小蒔，看著我。」\n\n她沒有說會好起來。\n她沒有撒謊。",
-        "phase": "phase-1",
-        "next": "end_rinbaku_true_4"
-    },
-    "end_rinbaku_true_4": {
-        "text": "我掀開被子。\n\n沒有劍。\n沒有能量棒。\n沒有被恐懼鍛造出來的男性器官。\n\n那裡什麼都沒有。\n\n只有蒼白的皮膚、突出的骨盆、還有我一直不敢承認的身體。\n\n我是女生。\n我是那個被留下來的人。\n我是我。",
-        "phase": "phase-1",
-        "next": "end_rinbaku_true_5"
-    },
-    "end_rinbaku_true_5": {
-        "text": "慘叫從喉嚨深處撕出來。\n\n不是憤怒。\n不是狂笑。\n不是演出。\n\n是哀嚎。\n\n回憶像潰堤的髒水湧進來：橘色甜味、床架聲、手機被搶走、跌在地上的膝蓋、深夜三個小時沒有句點的辱罵、用我的傷換來的錢、隔天若無其事詢問零用錢的聲音、那句「不要放在心上」、所有被我改名的痛。\n\n好痛。\n\n「縛……救我……」",
-        "phase": "phase-1",
-        "next": "end_rinbaku_true_5b"
-    },
-    "end_rinbaku_true_5b": {
-        "text": "髒水裡也浮著乾淨的東西。\n\n一隻牽著我入睡的手。\n一次共同完成的遊戲任務。\n一句妹妹出生以後，如果覺得偏心，一定要告訴我們。\n一個曾經相信自己無論做什麼都會被接住的孩子。\n\n正因為那些都是真的，我才一直等。\n等父親罵完。等母親安撫完所有人。等自己重新變得值得炫耀。等那份不用交換成績、薪水或服從的愛回來。\n\n可是愛一旦需要我先交出人生，就不再是家。\n\n我終於哭的不是「他們從沒愛過我」。\n\n我哭的是：他們明明愛過，最後卻還是選擇把失望砸在我身上。",
-        "phase": "phase-1",
-        "next": "end_rinbaku_true_6"
-    },
-    "end_rinbaku_true_6": {
-        "text": "縛沒有立刻抱我。\n\n她跪在我面前，抖得連牙齒都在響。\n\n「我不是妳的青梅竹馬。」\n\n她第一次拆掉那個安全又方便的身分。\n\n「我是妳妹妹。是家裡那個一直以為大家都很幸福的妹妹。」\n\n我看著她。她額角還留著被我推撞出的傷。\n\n「我不知道。」她哭得幾乎說不成句子，「他們沒有讓我知道妳經歷過什麼。我真的不知道。」\n\n然後她才抱住我。\n\n「嗯。我知道很痛。」\n\n她沒有說「加油」。\n沒有說「原諒」。\n沒有說「都過去了」。\n\n她只是陪我一起在爛泥裡呼吸。\n\n窗外的蟬鳴停了。",
-        "phase": "phase-1",
-        "next": "end_rinbaku_true_7"
-    },
-    "end_rinbaku_true_7": {
-        "text": "黃昏濾鏡褪色。\n\n窗外不是黎明。\n是漆黑的深夜。\n\n但深夜至少是真的。\n\n教室日光燈冷得刺眼。真晝仍站在過曝的白光裡，霙仍坐在牆邊等我；這所學校依然荒謬得真實。可我第一次沒有把自己的痛改寫成社團劇本。\n\n我只是痛。\n\n痛著活著。",
-        "phase": "phase-1",
-        "next": "end_rinbaku_true_8"
-    },
-    "end_rinbaku_true_8": {
-        "text": "<span class='ending-divider'>病歷翻到最後一頁。這一次，紙背沒有藏著另一個黃昏。</span>\n\n【病人 No.0 出院評估報告】\n\n個案意識清醒，定向感恢復。仍有強烈創傷痛苦與身體厭惡，但能以第一人稱描述：「我很痛。」\n\n縛：「我們沒有變好。我們只是醒來了。」\n\n【系統提示：成就解鎖：黎明】\n\n【TRUE END - Dawn】",
-        "phase": "phase-1",
-        "next": null
-    },
     "end_rinbaku_cage": {
         "text": "🎀 鄰縛 BE 路線：【Reality? / 沒有門的黃昏】\n\n我醒來時，縛正在替我梳頭。\n\n窗戶很亮，窗把卻被拆掉了。\n\n「小蒔已經不用回那個家了。」她笑得像終於完成一件拖了很多年的作業。",
         "phase": "phase-1", "next": "end_rinbaku_cage_2"
