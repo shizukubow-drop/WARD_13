@@ -81,6 +81,45 @@ let settingsReturnScreen = titleScreen;
 let archiveReaderId = '';
 let archiveVisitCount = 0;
 let phoneMessageIndex = 0;
+let choiceHauntTimer = null;
+let interfaceHauntTimer = null;
+let wardErrorTimer = null;
+
+// Each route is allowed to haunt the browser in its own language. This is not
+// an affection meter: it is a quiet fight over who gets to narrate the player.
+const INTERFACE_HAUNTS = {
+    end_mizore: { sig: '霙', className: 'haunt-mizore', returnText: '妳回來得正好。下一幕裡，我本來就寫了妳會回來。', waitText: '選不出來的話，我可以把正確台詞念給妳聽。' },
+    end_yura: { sig: '由良', className: 'haunt-yura', returnText: '剛才黑掉的鏡子裡，還是只有我最好看，對吧？', waitText: '蒔前輩在比較誰比較可愛嗎？好過分。再看久一點。' },
+    end_roro: { sig: 'ロロ', className: 'haunt-roro', returnText: 'ABSENCE LOGGED // 妳不在場的反應也已存檔。', waitText: 'DECISION LATENCY EXCEEDED // 猶豫比回答更接近本音。' },
+    end_zetsu: { sig: '絶', className: 'haunt-zetsu', returnText: '逃去哪了？高潮還沒演完，觀眾不准先退場。', waitText: '選啊。最糟的那個才配叫活著。' },
+    end_ekuro: { sig: '絵躯', className: 'haunt-ekuro', returnText: '外面太吵了吧？回來，這裡可以把妳包好。', waitText: '不必選。一直當需要照顧的孩子，也沒有關係。' },
+    end_mahiru: { sig: '真昼', className: 'haunt-mahiru', returnText: '歡迎回來！我一直亮著，所以完全沒有寂寞喔！', waitText: '再想下去就會冷掉了。笑一個，隨便選！' },
+    end_sai: { sig: '再', className: 'haunt-sai', returnText: '離席紀錄已補登。請回到座位，繼續完成評估。', waitText: '延遲作答亦屬臨床表現。請勿試圖表現正常。' },
+    end_yoi: { sig: '宵', className: 'haunt-yoi', returnText: '噓……外面累了就回來。這裡不要求妳保持清醒。', waitText: '答案都太尖了。要不要先睡一下，醒來就不用選了。' },
+    end_hina: { sig: '雛', className: 'haunt-hina', returnText: '回來就好。妳浪費掉的時間，我可以替妳買回來。', waitText: '價格不是問題。告訴我，妳想成為哪一種收藏品？' },
+    end_rinbaku: { sig: '縛', className: 'haunt-rinbaku', returnText: '……歡迎回來。我沒有問妳去了哪裡。妳看，我很乖吧？', waitText: '妳是在怕選錯，還是在等誰替妳負責？' }
+};
+
+// Recovered from the author's lyric notebooks. Only short, non-identifying
+// fragments are shipped; the source pages and private context stay private.
+const LYRIC_FRAGMENTS = [
+    { source: '心理創傷作為題材', text: '腦袋像開了很多關不掉的分頁。' },
+    { source: '額外幻想', text: '原本什麼都不做，也能被愛。' },
+    { source: '關於家庭，我看到的', text: '被扭曲的愛愛得太深。' },
+    { source: '二輪電影院', text: '夢裡沒有開口權限。' },
+    { source: '日常對話紀錄', text: '夢境兩班制，天庭排班中。' },
+    { source: '靈感紀錄', text: '無法理解，我就解離；解離不能，我就創造自己。' },
+    { source: '一百億的豪車', text: '目中無人，只有孤獨的自己。' },
+    { source: '風俗店小姐的心聲', text: '曠日廢時的鬧劇，不小心動了真心。' },
+    { source: '奇怪常客的心聲', text: '把我當成會回聲的峽谷就好。' },
+    { source: '三坪房', text: '活人太吵，我的腦子天天在開趴。' },
+    { source: '第三次世界大戰', text: '軌道在圓圈自轉，想法也在空轉。' },
+    { source: '變態＝戀愛', text: '光線太刺眼，我只剩回音。' },
+    { source: '尿壺', text: '一邊自我毀滅，一邊自我修復。' },
+    { source: '你喜歡秋天嗎？', text: '吃掉我的不安與恐懼。' },
+    { source: '御守掉落的那一秒', text: '妳把所有萌屬性都彩排。' },
+    { source: '網遊PARO', text: '血色黃昏，白花隕落。' }
+];
 
 // --- Audio (Placeholder, no music) ---
 let audioCtx = null;
@@ -952,6 +991,8 @@ function startGame() {
         currentNode: shouldShowWhiteDoor() ? 'white_door' : 'start',
         history: [],
         scores: createInitialScores(),
+        socialMemory: createSocialMemory(),
+        errorFlags: {},
         pendingEcho: '',
         atEnding: false
     };
@@ -983,6 +1024,8 @@ function loadState(state) {
     gameState = state;
     if (!gameState.history) gameState.history = [];
     if (!gameState.scores) gameState.scores = createInitialScores();
+    if (!gameState.socialMemory) gameState.socialMemory = createSocialMemory();
+    if (!gameState.errorFlags) gameState.errorFlags = {};
     if (gameState.pendingEcho === undefined) gameState.pendingEcho = '';
     if (gameState.atEnding === undefined) gameState.atEnding = false;
     renderSaveSlots();
@@ -1004,6 +1047,21 @@ function manualSave(slotIndex = activeSaveSlot) {
     saveGame();
     renderSaveSlots();
     if (btnLoad) btnLoad.style.display = '';
+
+    gameState.socialMemory = gameState.socialMemory || createSocialMemory();
+    gameState.socialMemory.manualSaves += 1;
+    if (gameState.socialMemory.manualSaves === 2) {
+        const rivals = getInterfaceRivals();
+        const lead = INTERFACE_HAUNTS[rivals[0]];
+        const second = INTERFACE_HAUNTS[rivals[1]];
+        setTimeout(() => showWardError({
+            code: 'SAVE_CONFLICT',
+            title: '無法確認要保存哪一個妳',
+            detail: `${lead?.sig || 'UNKNOWN'} 已宣告此存檔為她的路線。${second ? ` ${second.sig} 拒絕簽署。` : ''}`,
+            action: '已保留所有資料。衝突不影響實際存檔。',
+            tone: lead?.className || ''
+        }), 350);
+    }
 
     if (btnSave) {
         const original = btnSave.textContent;
@@ -1079,12 +1137,16 @@ function renderNode(nodeId) {
     choicesContainer.classList.add('hidden');
     choicesContainer.classList.remove('active');
     choiceRevealPending = false;
+    clearTimeout(choiceHauntTimer);
     if (textContainer) textContainer.scrollTop = 0;
 
     // Check for special animations
     if (nodeId === 'p1_14') {
         triggerBugFlood();
     }
+
+    scheduleNarrativeError(nodeId);
+    scheduleLyricGhost(nodeId);
 
     // Typewriter effect
     typeText(displayText, () => {
@@ -1145,6 +1207,21 @@ function applyChoiceEffects(choice) {
     if (!gameState.scores) gameState.scores = createInitialScores();
     if (!choice.effects) return;
 
+    const memory = gameState.socialMemory || createSocialMemory();
+    const previousLead = memory.lastChoiceLead;
+    const choiceLead = getDominantChoiceEffect(choice);
+    memory.choices += 1;
+    memory.previousChoiceLead = previousLead;
+    memory.lastChoiceLead = choiceLead;
+    if (choiceLead === previousLead) {
+        memory.streak += 1;
+    } else {
+        memory.streak = 1;
+        if (previousLead) memory.switches += 1;
+    }
+    memory.attention[choiceLead] = (memory.attention[choiceLead] || 0) + 1;
+    gameState.socialMemory = memory;
+
     Object.entries(choice.effects).forEach(([key, value]) => {
         if (gameState.scores[key] === undefined) gameState.scores[key] = 0;
         gameState.scores[key] += value;
@@ -1175,7 +1252,41 @@ function buildChoiceEcho(choice) {
         end_rinbaku: "REALITY ECHO // 縛沒有責備我。她只是把手收緊一點，像一條溫柔到不能報警的枷鎖。"
     };
 
-    return echoes[key] || "SYSTEM ECHO // 選項已紀錄。患者相信自己正在自由選擇。";
+    const base = echoes[key] || "SYSTEM ECHO // 選項已紀錄。患者相信自己正在自由選擇。";
+    return `${base}<br><br>${buildLivingReaction(key)}`;
+}
+
+function createSocialMemory() {
+    return {
+        choices: 0,
+        hesitations: 0,
+        switches: 0,
+        streak: 0,
+        lastChoiceLead: '',
+        previousChoiceLead: '',
+        manualSaves: 0,
+        attention: {}
+    };
+}
+
+function buildLivingReaction(chosenKey) {
+    const memory = gameState.socialMemory || createSocialMemory();
+    const chosen = INTERFACE_HAUNTS[chosenKey];
+    const previous = INTERFACE_HAUNTS[memory.previousChoiceLead];
+    const rivals = getInterfaceRivals().filter(key => key !== chosenKey);
+    const rival = INTERFACE_HAUNTS[rivals[0]];
+    if (!chosen) return '走廊裡有人笑了一聲。沒有人承認。';
+
+    if (memory.streak >= 3) {
+        return `<span class='living-reaction'>${chosen.sig}：「又是我。」<br>${rival?.sig || '某人'}：「妳不要說得像她已經選了妳。」</span>`;
+    }
+    if (memory.previousChoiceLead && memory.previousChoiceLead !== chosenKey && memory.switches >= 2) {
+        return `<span class='living-reaction'>${previous?.sig || '某人'}沒有看我。${chosen.sig}卻像早就知道我會改口，替我留好了位置。</span>`;
+    }
+    if ((memory.attention[chosenKey] || 0) === 1 && memory.choices > 3) {
+        return `<span class='living-reaction'>${chosen.sig}愣了一下：「原來妳看得到我。」<br>其他人的呼吸同時停了半拍。</span>`;
+    }
+    return `<span class='living-reaction'>${chosen.sig}記住了這個回答。${rival ? `${rival.sig}也記住了。` : ''}</span>`;
 }
 
 function chooseEndingByScores() {
@@ -1333,6 +1444,27 @@ function showChoices(choices) {
     choicesContainer.classList.remove('hidden');
     choicesContainer.classList.add('active');
 
+    clearTimeout(choiceHauntTimer);
+    choiceHauntTimer = setTimeout(() => {
+        gameState.socialMemory = gameState.socialMemory || createSocialMemory();
+        gameState.socialMemory.hesitations += 1;
+        const rivals = getInterfaceRivals();
+        const speaker = INTERFACE_HAUNTS[rivals[0]];
+        const interruption = INTERFACE_HAUNTS[rivals[1]];
+        if (!speaker || !choicesContainer.classList.contains('active')) return;
+        showInterfaceHaunt(speaker, speaker.waitText,
+            interruption ? `${interruption.sig}：不要替她回答。` : '');
+        if (gameState.socialMemory.hesitations === 2) {
+            setTimeout(() => showWardError({
+                code: 'INPUT_OWNER_CHANGED',
+                title: '選項正在等待另一位使用者',
+                detail: `${speaker.sig} 已在妳猶豫期間要求回答權限。`,
+                action: '要求遭拒。妳仍然可以自己選。',
+                tone: speaker.className
+            }), 900);
+        }
+    }, 9000);
+
     choices.forEach(choice => {
         const btn = document.createElement('button');
         btn.classList.add('choice-btn');
@@ -1353,6 +1485,7 @@ function showChoices(choices) {
             }
         }
         btn.onclick = () => {
+            clearTimeout(choiceHauntTimer);
             applyChoiceEffects(choice);
             gameState.pendingEcho = choice.echo || buildChoiceEcho(choice);
             choicesContainer.classList.add('hidden');
@@ -1408,6 +1541,8 @@ function toggleLog() {
             logContent.appendChild(div);
         });
 
+        appendResistanceAmendments(logContent);
+
         logOverlay.classList.remove('hidden');
         // Scroll to bottom
         setTimeout(() => {
@@ -1425,6 +1560,45 @@ function toggleLog() {
 function getUnlockedEndings() {
     const data = localStorage.getItem('ward13_endings');
     return data ? JSON.parse(data) : {};
+}
+
+function appendResistanceAmendments(container) {
+    const phasesSeen = new Set((gameState.history || []).map(entry => entry.phase));
+    const amendments = [
+        {
+            when: () => phasesSeen.has('phase-1'),
+            code: 'AMENDMENT // FAMILY_SUPPORT_RECURSION',
+            text: '子女不能同時被登記為「需要管教的負擔」與「家庭崩潰時必須接手的大人」。把責任塞給最能忍的人，不會使它成為她的責任。'
+        },
+        {
+            when: () => phasesSeen.has('phase-2'),
+            code: 'AMENDMENT // CONDITIONAL_AFFECTION_IS_NOT_CARE',
+            text: '先摧毀一個人的自信，再要求她表現得更有自信，不是栽培。以服從、成績、金錢或有用程度換取的安全，也不是無條件的愛。'
+        },
+        {
+            when: () => phasesSeen.has('phase-3'),
+            code: 'AMENDMENT // COERCION_INVALIDATES_CONSENT',
+            text: '被威脅、被控制、害怕激怒對方時所做的配合，不可被回填成自願。關係存在過，不代表往後每一次接近都自動獲得同意。'
+        },
+        {
+            when: () => phasesSeen.has('phase-4'),
+            code: 'AMENDMENT // SURVIVAL_BEHAVIOR_IS_NOT_PERMISSION',
+            text: '僵住、冷靜、假裝順從、保留證據或事後改變表現，都是可能的生存策略。它們不會把加害改寫成誤會，也不會把責任轉移給活下來的人。'
+        }
+    ];
+
+    amendments.filter(item => item.when()).forEach(item => {
+        const note = document.createElement('div');
+        note.className = 'log-entry resistance-amendment';
+        const label = document.createElement('div');
+        label.className = 'log-phase';
+        label.textContent = item.code;
+        const text = document.createElement('div');
+        text.className = 'log-text';
+        text.textContent = item.text;
+        note.append(label, text);
+        container.appendChild(note);
+    });
 }
 
 function isEndingAvailable(endingKey, unlocked) {
@@ -1477,6 +1651,173 @@ function updateGalleryCards() {
         card.classList.toggle('available', available && !unlocked[key]);
     });
 }
+
+function getInterfaceRivals() {
+    const scores = gameState.scores || createInitialScores();
+    const ranked = [...SCORE_KEYS].sort((a, b) => (scores[b] || 0) - (scores[a] || 0));
+    const hasPreference = (scores[ranked[0]] || 0) > 0;
+    if (hasPreference) return ranked;
+
+    const memory = getInterfaceMemory();
+    const offset = memory.returns % SCORE_KEYS.length;
+    return [...SCORE_KEYS.slice(offset), ...SCORE_KEYS.slice(0, offset)];
+}
+
+function getInterfaceMemory() {
+    try {
+        return { returns: 0, leftAt: 0, ...JSON.parse(localStorage.getItem('ward13_interface_memory') || '{}') };
+    } catch (_) {
+        return { returns: 0, leftAt: 0 };
+    }
+}
+
+function setInterfaceMemory(memory) {
+    localStorage.setItem('ward13_interface_memory', JSON.stringify(memory));
+}
+
+function showInterfaceHaunt(haunt, text, rebuttal = '') {
+    if (!gameplayScreen?.classList.contains('active')) return;
+    let notice = document.getElementById('interface-haunt');
+    if (!notice) {
+        notice = document.createElement('aside');
+        notice.id = 'interface-haunt';
+        notice.setAttribute('aria-live', 'polite');
+        gameplayScreen.appendChild(notice);
+    }
+
+    clearTimeout(interfaceHauntTimer);
+    notice.className = `interface-haunt ${haunt.className}`;
+    notice.innerHTML = `<span class="haunt-sig">${haunt.sig} // UI OVERRIDE</span><p>${text}</p>${rebuttal ? `<small>${rebuttal}</small>` : ''}`;
+    requestAnimationFrame(() => notice.classList.add('visible'));
+    interfaceHauntTimer = setTimeout(() => notice.classList.remove('visible'), 6200);
+}
+
+function scheduleNarrativeError(nodeId) {
+    const errors = {
+        p2_1: {
+            code: 'MEMORY_REFERENCE_ERROR',
+            title: '找不到「第一次見面」',
+            detail: '角色仍持有一段早於故事開始時間的共同記憶。',
+            action: '系統將把矛盾標記為戀愛事件。'
+        },
+        p3_1: {
+            code: 'AFFECT_BUFFER_OVERFLOW',
+            title: '同時載入的情緒過多',
+            detail: '喜悅、羞恥、焦慮、興奮與恐懼正在寫入同一個位置。',
+            action: '無法關閉任何一項。'
+        },
+        p4_1: {
+            code: 'CONSENT_STATE_UNRESOLVED',
+            title: '系統無法辨識「沒有反抗」',
+            detail: '生存反應被錯誤分類為同意。原始判定來源不明。',
+            action: '患者提出異議。病歷拒絕更新。'
+        }
+    };
+    const error = errors[nodeId];
+    if (!error || gameState.errorFlags?.[nodeId]) return;
+    gameState.errorFlags = gameState.errorFlags || {};
+    gameState.errorFlags[nodeId] = true;
+    saveGame();
+    setTimeout(() => showWardError(error), 2400);
+}
+
+function showWardError({ code, title, detail, action, tone = '' }) {
+    if (!gameplayScreen?.classList.contains('active')) return;
+    let dialog = document.getElementById('ward-error');
+    if (!dialog) {
+        dialog = document.createElement('section');
+        dialog.id = 'ward-error';
+        dialog.className = 'ward-error';
+        dialog.setAttribute('role', 'status');
+        dialog.setAttribute('aria-live', 'assertive');
+        gameplayScreen.appendChild(dialog);
+    }
+    clearTimeout(wardErrorTimer);
+    dialog.className = `ward-error ${tone}`.trim();
+    const lyric = getNextLyricFragment();
+    dialog.innerHTML = `
+        <header><span class="ward-error-mark">!</span><b>WARD_13 encountered a problem</b></header>
+        <div class="ward-error-body">
+            <code>${code}</code>
+            <h3>${title}</h3>
+            <p>${detail}</p>
+            <small>${action}</small>
+            <em class="error-lyric">RECOVERED STRING // ${lyric.text}</em>
+        </div>`;
+    requestAnimationFrame(() => dialog.classList.add('visible'));
+    document.body.classList.add('error-presence');
+    setTimeout(() => document.body.classList.remove('error-presence'), 520);
+    wardErrorTimer = setTimeout(() => dialog.classList.remove('visible'), 7600);
+}
+
+function getNextLyricFragment() {
+    const memory = getInterfaceMemory();
+    const historyDepth = gameState.history?.length || 0;
+    const index = (memory.returns * 3 + historyDepth + (gameState.socialMemory?.hesitations || 0)) % LYRIC_FRAGMENTS.length;
+    return LYRIC_FRAGMENTS[index];
+}
+
+function scheduleLyricGhost(nodeId) {
+    if (!gameplayScreen?.classList.contains('active')) return;
+    const depth = gameState.history?.length || 0;
+    if (depth < 2 || depth % 2 !== 0 || nodeId === 'white_door') return;
+    const fragment = LYRIC_FRAGMENTS[(depth / 2 - 1) % LYRIC_FRAGMENTS.length];
+    setTimeout(() => showLyricGhost(fragment, depth), 1100 + (depth % 3) * 700);
+}
+
+function showLyricGhost(fragment, seed) {
+    let ghost = document.getElementById('lyric-ghost');
+    if (!ghost) {
+        ghost = document.createElement('div');
+        ghost.id = 'lyric-ghost';
+        ghost.className = 'lyric-ghost';
+        ghost.setAttribute('aria-hidden', 'true');
+        gameplayScreen.appendChild(ghost);
+    }
+    const corners = ['top-left', 'top-right', 'bottom-left', 'bottom-right'];
+    ghost.className = `lyric-ghost ${corners[seed % corners.length]}`;
+    ghost.innerHTML = `<span>${fragment.text}</span><small>${fragment.source} // fragment recovered</small>`;
+    requestAnimationFrame(() => ghost.classList.add('visible'));
+    setTimeout(() => ghost.classList.remove('visible'), 4800);
+}
+
+function initInterfaceHaunting() {
+    document.addEventListener('visibilitychange', () => {
+        const memory = getInterfaceMemory();
+        if (document.hidden) {
+            memory.leftAt = Date.now();
+            setInterfaceMemory(memory);
+            const lead = INTERFACE_HAUNTS[getInterfaceRivals()[0]];
+            document.title = lead ? `${lead.sig}仍在這裡 // WARD_13` : 'WARD_13';
+            return;
+        }
+
+        const absence = memory.leftAt ? Date.now() - memory.leftAt : 0;
+        document.title = 'WARD_13／虫單蟲虫虫虫';
+        if (absence < 1800 || !gameplayScreen?.classList.contains('active')) return;
+        memory.returns += 1;
+        memory.leftAt = 0;
+        setInterfaceMemory(memory);
+        const rivals = getInterfaceRivals();
+        const lead = INTERFACE_HAUNTS[rivals[0]];
+        const second = INTERFACE_HAUNTS[rivals[1]];
+        if (lead) showInterfaceHaunt(lead, lead.returnText,
+            memory.returns >= 3 && second ? `${second.sig}：她剛才明明是在看我。` : '');
+    });
+
+    console.groupCollapsed('WARD_13 // recovered source comments');
+    console.log('// 她們不是攻略對象。她們在攻略同一個出口。');
+    console.log('// TODO: 找到一條不需要證明價值，也能被保留的路。');
+    console.log('// 理解錯誤的來源，不等於允許錯誤繼續執行。');
+    console.warn('CASE AMENDMENT // 生存者的應對方式不是加害者的免責條款。');
+    console.assert(false, 'INVALID FAMILY MODEL // 最會忍耐的人不等於最應該承擔的人。');
+    LYRIC_FRAGMENTS.forEach((fragment, index) => {
+        if (index % 4 === 0) console.debug(`RECOVERED_LYRIC_${String(index).padStart(2, '0')} // ${fragment.text}`);
+    });
+    console.groupEnd();
+}
+
+initInterfaceHaunting();
 
 function dismissChoices() {
     const node = story[gameState.currentNode];
