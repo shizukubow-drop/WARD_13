@@ -584,6 +584,17 @@
                 <!-- Choices will be injected here -->
             </div>
 
+            <div id="quick-save-overlay" class="quick-save-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="quick-save-title">
+                <div class="quick-save-panel">
+                    <div class="quick-save-header">
+                        <h2 id="quick-save-title">SELECT SAVE SLOT</h2>
+                        <button id="btn-close-quick-save" class="control-btn" type="button">✕</button>
+                    </div>
+                    <div id="quick-save-grid" class="save-slot-grid" aria-label="選擇存檔格"></div>
+                    <p class="quick-save-hint">選擇欄位後立即存檔。再次選擇已有紀錄的欄位將直接覆寫。</p>
+                </div>
+            </div>
+
             <!-- LOG Overlay -->
             <div id="log-overlay" class="log-overlay hidden">
                 <div class="log-header">
@@ -596,16 +607,7 @@
             </div>
 
             <div class="ui-controls">
-                <label class="quick-slot-label" for="quick-save-slot">SLOT</label>
-                <select id="quick-save-slot" class="control-select" aria-label="選擇存檔格">
-                    <option value="1">01</option>
-                    <option value="2">02</option>
-                    <option value="3">03</option>
-                    <option value="4">04</option>
-                    <option value="5">05</option>
-                    <option value="6">06</option>
-                </select>
-                <button id="btn-save" class="control-btn">SAVE 01</button>
+                <button id="btn-save" class="control-btn">SAVE</button>
                 <button id="btn-auto" class="control-btn">AUTO</button>
                 <button id="btn-log" class="control-btn">LOG</button>
                 <button id="btn-menu" class="control-btn">MENU</button>

@@ -54,7 +54,9 @@ const btnLoadSlot = document.getElementById('btn-load-slot');
 const btnDeleteSlot = document.getElementById('btn-delete-slot');
 const saveSlotGrid = document.getElementById('save-slot-grid');
 const saveSlotInfo = document.getElementById('save-slot-info');
-const quickSaveSlot = document.getElementById('quick-save-slot');
+const quickSaveOverlay = document.getElementById('quick-save-overlay');
+const quickSaveGrid = document.getElementById('quick-save-grid');
+const btnCloseQuickSave = document.getElementById('btn-close-quick-save');
 
 // --- Sliders ---
 const brightnessSlider = document.getElementById('brightness-slider');
@@ -459,6 +461,10 @@ function init() {
             });
         }
         document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && quickSaveOverlay && !quickSaveOverlay.classList.contains('hidden')) {
+                hideQuickSaveOverlay();
+                return;
+            }
             if (event.key === 'Escape' && choicesContainer.classList.contains('active')) {
                 dismissChoices();
             }
@@ -469,16 +475,12 @@ function init() {
         if (btnAuto) btnAuto.addEventListener('click', toggleAuto);
         if (btnLog) btnLog.addEventListener('click', toggleLog);
         if (btnCloseLog) btnCloseLog.addEventListener('click', toggleLog);
-        if (btnSave) btnSave.addEventListener('click', manualSave);
-        if (quickSaveSlot) {
-            quickSaveSlot.value = String(activeSaveSlot);
-            quickSaveSlot.addEventListener('change', () => {
-                activeSaveSlot = parseInt(quickSaveSlot.value, 10);
-                localStorage.setItem('ward13_active_slot', String(activeSaveSlot));
-                renderSaveSlots();
-                updateQuickSaveControl();
-            });
-        }
+        if (btnSave) btnSave.addEventListener('click', showQuickSaveOverlay);
+        if (btnCloseQuickSave) btnCloseQuickSave.addEventListener('click', hideQuickSaveOverlay);
+        if (quickSaveOverlay) quickSaveOverlay.addEventListener('click', (event) => {
+            event.stopPropagation();
+            if (event.target === quickSaveOverlay) hideQuickSaveOverlay();
+        });
 
         // Settings
         if (btnSettings) btnSettings.addEventListener('click', () => showScreen(settingsScreen, titleScreen));
@@ -855,8 +857,34 @@ function renderSaveSlots() {
 }
 
 function updateQuickSaveControl() {
-    if (quickSaveSlot) quickSaveSlot.value = String(activeSaveSlot);
-    if (btnSave) btnSave.textContent = `SAVE ${String(activeSaveSlot).padStart(2, '0')}`;
+    if (btnSave && !btnSave.classList.contains('active')) btnSave.textContent = 'SAVE';
+}
+
+function showQuickSaveOverlay() {
+    if (!quickSaveOverlay || !quickSaveGrid) return;
+    const slots = getSaveSlots();
+    quickSaveGrid.innerHTML = '';
+    for (let i = 1; i <= SAVE_SLOT_COUNT; i++) {
+        const data = slots[i];
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'save-slot-btn';
+        button.classList.toggle('filled', !!data);
+        button.innerHTML = `<span>${getSlotLabel(i)}</span><small>${data ? `${formatSlotTime(data.timestamp)} // ${data.nodeLabel || 'UNKNOWN'}` : 'EMPTY'}</small>`;
+        button.addEventListener('click', () => {
+            manualSave(i);
+            hideQuickSaveOverlay();
+        });
+        quickSaveGrid.appendChild(button);
+    }
+    quickSaveOverlay.classList.remove('hidden');
+    quickSaveOverlay.classList.add('active');
+}
+
+function hideQuickSaveOverlay() {
+    if (!quickSaveOverlay) return;
+    quickSaveOverlay.classList.add('hidden');
+    quickSaveOverlay.classList.remove('active');
 }
 
 // ============================================================
@@ -945,7 +973,9 @@ function loadState(state) {
     });
 }
 
-function manualSave() {
+function manualSave(slotIndex = activeSaveSlot) {
+    activeSaveSlot = slotIndex;
+    localStorage.setItem('ward13_active_slot', String(activeSaveSlot));
     const slots = getSaveSlots();
     slots[activeSaveSlot] = {
         timestamp: Date.now(),
