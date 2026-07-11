@@ -628,11 +628,11 @@ body {
 }
 
 .gallery-grid {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
     gap: 16px;
     width: 100%;
-    max-width: 450px;
+    max-width: 1050px;
     margin: 0 auto 2rem;
 }
 
@@ -1842,7 +1842,23 @@ body.phase-4 {
     }
 
     .gallery-grid {
-        max-width: 95%;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+        max-width: 100%;
+    }
+
+    .gallery-card {
+        padding: 12px 8px;
+        min-height: 148px;
+    }
+
+    .gallery-card .card-title {
+        font-size: .82rem;
+    }
+
+    .gallery-card .card-subtitle,
+    .gallery-card .card-badge {
+        font-size: .64rem;
     }
 
     .settings-grid {
