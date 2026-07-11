@@ -1,7 +1,7 @@
 const story = {
     // --- Shared route: Ward entry ---
     "white_door": {
-        "text": "第十三社辦的三份結局紀錄都已經被翻開。\n\n黑色的走廊盡頭，出現了一段白色階梯。\n\n階梯盡頭只有一扇門。\n門外有人說，妳已經康復了。\n\n<span class='case-note'>SYSTEM: THREE ENDING FRAGMENTS CONFIRMED // WHITE DOOR OPENED</span>",
+        "text": "第十三社辦的十份結局紀錄都已經被翻開。\n\n黑色的走廊盡頭，出現了一段白色階梯。\n\n階梯盡頭只有一扇門。\n門外有人說，妳已經康復了。\n\n<span class='case-note'>SYSTEM: TEN ENDING FRAGMENTS CONFIRMED // WHITE DOOR OPENED</span>",
         "phase": "phase-4",
         "next": "end_rinbaku"
     },

@@ -1,0 +1,9 @@
+name = "ward13-patient-registry"
+main = "src/index.js"
+compatibility_date = "2026-07-11"
+preview_urls = false
+
+[[d1_databases]]
+binding = "DB"
+database_name = "ward13-patients"
+database_id = "8bf0eae2-6cea-4a1b-9a68-40d734c9490e"

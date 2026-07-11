@@ -177,6 +177,15 @@ body {
     margin-bottom: 3rem;
 }
 
+.reader-clearance { white-space: pre-line; }
+.global-patient-count {
+    margin: 8px 0 0;
+    color: #9c9ca2;
+    font: .68rem/1.5 var(--font-sys);
+    letter-spacing: 1px;
+}
+.global-patient-count.registry-error { color: #8f5f68; }
+
 #title-screen h1.game-title {
     font-size: 4rem;
     margin-bottom: 0.5rem;
@@ -307,6 +316,85 @@ body {
     padding: 2rem;
     overflow-y: auto;
     scrollbar-width: none;
+}
+
+.support-door-panel {
+    position: absolute !important;
+    top: 50%;
+    right: clamp(18px, 4vw, 72px);
+    z-index: 6 !important;
+    width: min(330px, 29vw);
+    display: grid;
+    grid-template-columns: 58px 1fr;
+    gap: 16px;
+    align-items: start;
+    padding: 20px;
+    border: 1px solid rgba(255,255,255,.72);
+    background: linear-gradient(145deg, rgba(255,255,255,.12), rgba(4,4,6,.94) 38%);
+    box-shadow: 0 0 24px #ffffff22, 0 24px 70px #000c;
+    text-align: left;
+    transform: translateY(-50%);
+}
+
+.support-door-mini {
+    position: relative;
+    width: 52px;
+    aspect-ratio: .58;
+    background: #fff;
+    box-shadow: 0 0 12px #fff, 0 0 38px #ffffff88;
+}
+
+.support-door-mini span {
+    position: absolute;
+    top: 52%;
+    right: 8px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #111;
+}
+
+.support-door-copy { min-width: 0; }
+.support-door-kicker { margin: 0 0 8px; color: #aaa; font: .58rem/1.4 var(--font-sys); letter-spacing: 1.4px; }
+.support-door-copy h2 { margin: 0 0 9px; color: #fff; font: 1.08rem/1.35 var(--font-main); }
+.support-door-copy > p:not(.support-door-kicker) { margin: 0 0 14px; color: #c7c7ca; font: .82rem/1.62 var(--font-main); }
+.support-door-link { display: block; padding: 11px 12px; border: 1px solid #fff; color: #111; background: #fff; font: .72rem/1.35 var(--font-sys); text-align: center; text-decoration: none; transition: filter .2s ease, box-shadow .2s ease; }
+.support-door-link:hover,
+.support-door-link:focus-visible { filter: invert(1); box-shadow: 0 0 18px #fff8; outline: 0; }
+.support-door-copy small { display: block; margin-top: 9px; color: #777; font: .62rem/1.5 var(--font-sys); }
+
+@media (max-width: 900px) {
+    #title-screen.support-unlocked {
+        justify-content: flex-start;
+        overflow-y: auto;
+        padding: clamp(24px, 6vh, 58px) 14px 90px;
+    }
+    #title-screen.support-unlocked .title-header { margin-bottom: 1.4rem; }
+    #title-screen.support-unlocked .support-door-panel {
+        position: relative !important;
+        top: auto;
+        right: auto;
+        width: min(100%, 430px);
+        margin-top: 24px;
+        transform: none;
+    }
+    #title-screen.support-unlocked .credits {
+        position: relative;
+        bottom: auto;
+        margin-top: 24px;
+    }
+}
+
+@media (max-width: 420px) {
+    #title-screen.support-unlocked .support-door-panel {
+        grid-template-columns: 42px 1fr;
+        gap: 12px;
+        padding: 15px;
+    }
+    .support-door-mini { width: 40px; }
+    .support-door-copy h2 { font-size: .98rem; }
+    .support-door-copy > p:not(.support-door-kicker) { font-size: .76rem; }
+    .support-door-link { min-height: 44px; display: grid; place-items: center; }
 }
 
 .reader-clearance {
@@ -1749,7 +1837,7 @@ body.phase-4 {
     font-size: 0.7rem;
 }
 
-.white-door-scene { position:absolute; inset:0; z-index:108; overflow:hidden; background:#000; }
+#gameplay-screen > .white-door-scene { position:absolute; inset:0; z-index:108; overflow:hidden; background:#000; pointer-events:all; }
 .white-door-scene.hidden { display:none; }
 .white-door-scene p { position:absolute; left:50%; bottom:clamp(18px,5vh,48px); transform:translateX(-50%); width:min(86vw,560px); margin:0; color:#555; font:.78rem/1.7 var(--font-mono); text-align:center; }
 .white-door { position:absolute; left:50%; top:8%; width:clamp(62px,9vw,105px); aspect-ratio:.58; transform:translateX(-50%); border:0; background:#fff; box-shadow:0 0 20px #fff,0 0 90px #fff8; cursor:pointer; animation:white-door-breathe 3.6s ease-in-out infinite; }
@@ -2118,6 +2206,14 @@ body.error-presence #gameplay-screen { animation: error-presence-shift .52s step
     .gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 7px; }
     .gallery-card { min-height: 136px; padding: 10px 6px; }
     .save-slot-grid { gap: 6px; }
+}
+
+@media (max-width: 380px) and (max-height: 600px) and (orientation: portrait) {
+    #title-screen .title-header { margin-bottom: .75rem; }
+    #title-screen .menu { gap: 8px; }
+    #title-screen .menu-btn { min-height: 44px; padding: 8px 14px; }
+    #title-screen .credits { bottom: 4px; font-size: .68rem; }
+    #title-screen .credits p { margin: 2px 0; }
 }
 
 @media (max-height: 520px) and (orientation: landscape) {
