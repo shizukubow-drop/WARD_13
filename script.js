@@ -583,7 +583,7 @@ function init() {
         if (btnCloseQuickSave) btnCloseQuickSave.addEventListener('click', hideQuickSaveOverlay);
         if (btnWhiteDoor) btnWhiteDoor.addEventListener('click', (event) => {
             event.stopPropagation();
-            renderNode('end_rinbaku');
+            renderNode('end_rinbaku_true');
         });
         if (quickSaveOverlay) quickSaveOverlay.addEventListener('click', (event) => {
             event.stopPropagation();

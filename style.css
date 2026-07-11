@@ -25,6 +25,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    overscroll-behavior: none;
 }
 
 #game-container {
@@ -1007,6 +1008,11 @@ body {
     border-color: #fff;
 }
 
+button,
+[role="button"] {
+    touch-action: manipulation;
+}
+
 /* ================== CHOICES ================== */
 
 .choices-container {
@@ -1853,10 +1859,21 @@ body.error-presence #gameplay-screen { animation: error-presence-shift .52s step
 /* ================== RESPONSIVE ================== */
 
 @media (max-width: 600px) {
-    .interface-haunt { top: calc(44px + env(safe-area-inset-top)); right: 12px; font-size: .9rem; }
+    .interface-haunt {
+        top: calc(42px + env(safe-area-inset-top));
+        right: 10px;
+        width: calc(100vw - 20px);
+        max-height: 34dvh;
+        overflow-y: auto;
+        font-size: .86rem;
+    }
     .ward-error.top-right { top: calc(54px + env(safe-area-inset-top)); right: 10px; }
-    .ward-error.bottom-left { left: 10px; bottom: calc(68px + env(safe-area-inset-bottom)); }
-    .ward-error-body { padding: 16px; }
+    .ward-error.bottom-left { left: 10px; bottom: calc(62px + env(safe-area-inset-bottom)); }
+    .ward-error { width: calc(100vw - 20px); max-height: 42dvh; }
+    .ward-error-body { padding: 13px 14px 15px; }
+    .ward-error h3 { margin: 8px 0 6px; font-size: .94rem; }
+    .ward-error p { font-size: .82rem; line-height: 1.55; }
+    .ward-error small { margin-top: 9px; padding-top: 8px; }
     .lyric-ghost { width: 72vw; font-size: .62rem; }
     #title-screen {
         background:
@@ -1866,9 +1883,24 @@ body.error-presence #gameplay-screen { animation: error-presence-shift .52s step
     }
 
     #gameplay-screen {
-        padding: calc(42px + env(safe-area-inset-top)) 10px
-            calc(70px + env(safe-area-inset-bottom));
+        padding: calc(38px + env(safe-area-inset-top)) 8px
+            calc(58px + env(safe-area-inset-bottom));
     }
+
+    #warning-screen,
+    #settings-screen,
+    #gallery-screen,
+    #chars-screen {
+        justify-content: flex-start;
+        padding: calc(18px + env(safe-area-inset-top)) 12px calc(18px + env(safe-area-inset-bottom));
+        overflow-y: auto;
+    }
+
+    #phone-screen { align-items: stretch; }
+    .phone-shell { width: 100%; border-inline: 0; }
+    .phone-chat { padding: 12px 16px 18px; overscroll-behavior: contain; }
+    .phone-actions { padding: 10px 12px calc(10px + env(safe-area-inset-bottom)); }
+    .phone-primary, .phone-skip { min-height: 44px; }
 
     #title-screen h1.game-title {
         font-size: 2.5rem;
@@ -1890,12 +1922,13 @@ body.error-presence #gameplay-screen { animation: error-presence-shift .52s step
 
     .text-container {
         width: 100%;
-        height: calc(100dvh - 132px - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+        height: calc(100dvh - 108px - env(safe-area-inset-top) - env(safe-area-inset-bottom));
         min-height: 0;
-        font-size: clamp(0.95rem, 4.1vw, 1.05rem);
-        max-height: calc(100dvh - 132px - env(safe-area-inset-top) - env(safe-area-inset-bottom));
-        padding: 18px 16px;
-        line-height: 1.65;
+        font-size: clamp(0.92rem, 4vw, 1.02rem);
+        max-height: calc(100dvh - 108px - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+        padding: 15px 14px;
+        line-height: 1.62;
+        overscroll-behavior: contain;
     }
 
     .btn {
@@ -1920,30 +1953,31 @@ body.error-presence #gameplay-screen { animation: error-presence-shift .52s step
     .choice-btn {
         width: 100%;
         font-size: 0.92rem;
-        min-height: 48px;
-        padding: 13px 14px;
+        min-height: 46px;
+        padding: 11px 13px;
     }
 
     .choices-container {
         justify-content: flex-start;
-        padding: calc(46px + env(safe-area-inset-top)) 12px
+        padding: calc(24px + env(safe-area-inset-top)) 10px
             calc(24px + env(safe-area-inset-bottom));
+        overscroll-behavior: contain;
     }
 
     .ui-controls {
-        left: 10px;
-        right: 10px;
-        bottom: calc(10px + env(safe-area-inset-bottom));
+        left: 8px;
+        right: 8px;
+        bottom: calc(8px + env(safe-area-inset-bottom));
         display: grid;
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-        gap: 6px;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 4px;
         max-width: none;
     }
 
     .control-btn {
         min-height: 42px;
-        padding: 7px 4px;
-        font-size: 0.72rem;
+        padding: 7px 2px;
+        font-size: clamp(.6rem, 2.8vw, .7rem);
     }
 
     .phase-indicator {
@@ -1985,7 +2019,8 @@ body.error-presence #gameplay-screen { animation: error-presence-shift .52s step
     }
 
     .settings-grid {
-        max-width: 90%;
+        max-width: 100%;
+        gap: 19px;
     }
 
     .save-slot-grid {
@@ -1995,6 +2030,38 @@ body.error-presence #gameplay-screen { animation: error-presence-shift .52s step
     .save-slot-actions {
         grid-template-columns: 1fr;
     }
+
+    .log-header {
+        padding: calc(10px + env(safe-area-inset-top)) 12px 10px;
+    }
+
+    .log-content {
+        padding: 12px 14px calc(14px + env(safe-area-inset-bottom));
+        overscroll-behavior: contain;
+    }
+
+    .log-entry { padding: 12px 0; font-size: .92rem; }
+
+    .quick-save-overlay {
+        align-items: end;
+        padding: 10px 10px calc(10px + env(safe-area-inset-bottom));
+    }
+
+    .quick-save-panel {
+        width: 100%;
+        max-height: 82dvh;
+        overflow-y: auto;
+        box-sizing: border-box;
+    }
+}
+
+@media (max-width: 380px) and (orientation: portrait) {
+    #title-screen h1.game-title { font-size: 2.05rem; letter-spacing: 3px; }
+    .text-container { padding: 13px 12px; font-size: .9rem; line-height: 1.58; }
+    .phase-indicator { max-width: calc(100vw - 24px); overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+    .gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 7px; }
+    .gallery-card { min-height: 136px; padding: 10px 6px; }
+    .save-slot-grid { gap: 6px; }
 }
 
 @media (max-height: 520px) and (orientation: landscape) {

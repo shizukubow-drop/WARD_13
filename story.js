@@ -486,7 +486,7 @@ const story = {
         "next": "end_rinbaku_8"
     },
     "end_rinbaku_8": {
-        "text": "<span class='ending-divider'>兔子蘋果氧化成褐色，出院章仍然鮮紅得像剛蓋上去。</span>\n\n【病人 No.0】\n\n個案已恢復社會功能。重度憂鬱轉趨穩定，建議出院並回歸家庭支持系統。\n\n個案於評估中多次表示：「我已經好了。」\n\n床單上有未清理完全的蘋果泥。\n\n【TRUE END - The Good Mother】",
+        "text": "<span class='ending-divider'>兔子蘋果氧化成褐色，出院章仍然鮮紅得像剛蓋上去。</span>\n\n【病人 No.0】\n\n個案已恢復社會功能。重度憂鬱轉趨穩定，建議出院並回歸家庭支持系統。\n\n個案於評估中多次表示：「我已經好了。」\n\n床單上有未清理完全的蘋果泥。\n\n【FALSE END - The Good Mother】",
         "phase": "phase-1",
         "next": null
     },
