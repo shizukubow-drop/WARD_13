@@ -54,6 +54,7 @@ const btnLoadSlot = document.getElementById('btn-load-slot');
 const btnDeleteSlot = document.getElementById('btn-delete-slot');
 const saveSlotGrid = document.getElementById('save-slot-grid');
 const saveSlotInfo = document.getElementById('save-slot-info');
+const quickSaveSlot = document.getElementById('quick-save-slot');
 
 // --- Sliders ---
 const brightnessSlider = document.getElementById('brightness-slider');
@@ -266,7 +267,7 @@ const CHARACTER_DOSSIERS = {
     }
 };
 
-// What Maki believes she is reading before the archive contaminates itself.
+// What Mai believes she is reading before the archive contaminates itself.
 // These records are deliberately ordinary: she is at school, and the reader
 // has no authority to diagnose her friends before she does.
 const SCHOOL_DOSSIERS = {
@@ -347,7 +348,7 @@ function installArchiveMotifs() {
     if (!story?.start || story.start.text.includes('三坪。我走了七分鐘')) return;
 
     story.start.text = story.start.text
-        .replace('PATIENT No.0 // AKIBA MAKI // OBSERVATION CONTINUES', 'STUDENT No.0 // AKIBA MAKI // CLUB ATTENDANCE CONTINUES')
+        .replace('PATIENT No.0 // AKIBA MAI // OBSERVATION CONTINUES', 'STUDENT No.0 // AKIBA MAI // CLUB ATTENDANCE CONTINUES')
         + '\n\n校內地圖說這間社辦只有三坪。我走了七分鐘，還沒走到另一面牆。';
 
     story.p1_3.text = story.p1_3.text.replace(
@@ -357,8 +358,10 @@ function installArchiveMotifs() {
 
     story.p2_1.text = story.p2_1.text.replace(
         '\n\n腦內字幕自動校正：',
-        '\n\n她身後的樓梯扶手少了一枚生鏽卡扣。我攤開掌心，那枚卡扣不知何時躺在那裡，像我曾拆掉逃生門，又忘記自己為什麼需要逃。\n\n腦內字幕自動校正：'
+        "\n\n她身後的樓梯扶手少了一枚生鏽卡扣。我攤開掌心，那枚卡扣不知何時躺在那裡，像我曾拆掉逃生門，又忘記自己為什麼需要逃。\n\n<span class='glitch-text anomaly-trigger' data-anomaly='attendance' role='button' tabindex='0'>腦內字幕自動校正：</span>"
     );
+
+    story.p3_1.text = "<span class='glitch-text anomaly-trigger' data-anomaly='subtitle' role='button' tabindex='0'>字幕軌道：只有我聽得見</span>\n\n" + story.p3_1.text;
 
     story.p2_2.text = story.p2_2.text
         .replace(
@@ -424,8 +427,20 @@ function init() {
         // Gameplay click to advance
         if (gameplayScreen) {
             gameplayScreen.addEventListener('click', (e) => {
+                const anomaly = e.target.closest('.anomaly-trigger');
+                if (anomaly) {
+                    e.preventDefault();
+                    showInlineAnomaly(anomaly.dataset.anomaly);
+                    return;
+                }
+                const archiveLink = e.target.closest('a.archive-link');
+                if (archiveLink) {
+                    saveGame();
+                    sessionStorage.setItem('ward13_return_from_404', '1');
+                    return;
+                }
+                if (e.target.closest('a')) return;
                 if (e.target.tagName === 'BUTTON') return;
-                if (e.target.closest('.choices-container')) return;
                 if (e.target.closest('.ui-controls')) return;
                 if (e.target.closest('.log-overlay')) return;
 
@@ -455,6 +470,15 @@ function init() {
         if (btnLog) btnLog.addEventListener('click', toggleLog);
         if (btnCloseLog) btnCloseLog.addEventListener('click', toggleLog);
         if (btnSave) btnSave.addEventListener('click', manualSave);
+        if (quickSaveSlot) {
+            quickSaveSlot.value = String(activeSaveSlot);
+            quickSaveSlot.addEventListener('change', () => {
+                activeSaveSlot = parseInt(quickSaveSlot.value, 10);
+                localStorage.setItem('ward13_active_slot', String(activeSaveSlot));
+                renderSaveSlots();
+                updateQuickSaveControl();
+            });
+        }
 
         // Settings
         if (btnSettings) btnSettings.addEventListener('click', () => showScreen(settingsScreen, titleScreen));
@@ -512,7 +536,7 @@ function init() {
             manualSave();
         });
         // Normalize the hidden directory immediately so assistive technology,
-        // crawlers and fast readers do not see diagnostic labels before Maki.
+        // crawlers and fast readers do not see diagnostic labels before Mai.
         updateCharacterCards();
         if (btnLoadSlot) btnLoadSlot.addEventListener('click', () => loadManualSlot(activeSaveSlot));
         if (btnDeleteSlot) btnDeleteSlot.addEventListener('click', () => deleteManualSlot(activeSaveSlot));
@@ -528,7 +552,19 @@ function init() {
         if (btnLoad && !hasAnySave()) {
             btnLoad.style.display = 'none';
         }
-        showPhonePrologue();
+        const returnFrom404 = sessionStorage.getItem('ward13_return_from_404') === '1';
+        const returnSave = localStorage.getItem('ward13_save');
+        if (returnFrom404 && returnSave) {
+            sessionStorage.removeItem('ward13_return_from_404');
+            phoneScreen?.classList.add('hidden');
+            warningScreen?.classList.add('hidden');
+            titleScreen.classList.remove('hidden');
+            titleScreen.classList.add('active');
+            loadState(JSON.parse(returnSave));
+        } else {
+            sessionStorage.removeItem('ward13_return_from_404');
+            showPhonePrologue();
+        }
         console.log('WARD_13 init OK — all listeners bound');
     } catch (err) {
         console.error('WARD_13 init FAILED:', err);
@@ -586,6 +622,8 @@ function clearSave() {
         localStorage.removeItem('ward13_save_slots');
         localStorage.removeItem('ward13_endings');
         localStorage.removeItem('ward13_active_slot');
+        localStorage.removeItem('ward13_polluted');
+        sessionStorage.removeItem('ward13_return_from_404');
         activeSaveSlot = 1;
         renderSaveSlots();
         updateGalleryCards();
@@ -593,6 +631,30 @@ function clearSave() {
         if (btnLoad) btnLoad.style.display = 'none';
         alert('所有存檔已刪除。');
     }
+}
+
+function showInlineAnomaly(kind) {
+    if (document.querySelector('.inline-anomaly-overlay')) return;
+    const messages = {
+        attendance: [
+            'ATTENDANCE RECORD OVERWRITE',
+            '點名人數：11 → 12 → 11',
+            '系統沒有新增學生。系統只是暫時承認她坐在那裡。'
+        ],
+        subtitle: [
+            'SUBTITLE TRACK // NOT FOR PLAYER',
+            '「不要醒來」已被校正為「早安」。',
+            '字幕修改者：AKIBA MAI　修改時間：尚未發生'
+        ]
+    };
+    const lines = messages[kind] || messages.subtitle;
+    const overlay = document.createElement('div');
+    overlay.className = 'inline-anomaly-overlay';
+    overlay.setAttribute('role', 'status');
+    overlay.innerHTML = `<strong>${lines[0]}</strong><span>${lines[1]}</span><small>${lines[2]}</small>`;
+    gameplayScreen.appendChild(overlay);
+    window.setTimeout(() => overlay.classList.add('fading'), 2200);
+    window.setTimeout(() => overlay.remove(), 3000);
 }
 
 function revealTitleScreen() {
@@ -609,7 +671,11 @@ function showPhonePrologue() {
     phoneScreen.classList.remove('hidden');
     setTimeout(() => phoneScreen.classList.add('active'), 50);
     const items = phoneScreen.querySelectorAll('[data-delay]');
-    items.forEach(item => item.classList.remove('revealed'));
+    items.forEach(item => {
+        item.classList.remove('revealed');
+        item.hidden = true;
+        item.setAttribute('aria-hidden', 'true');
+    });
     phoneScreen.classList.remove('phone-corrupted');
     phoneMessageIndex = 0;
     if (btnOpenArchive) btnOpenArchive.disabled = true;
@@ -625,7 +691,9 @@ function revealNextPhoneMessage() {
     if (phoneMessageIndex >= items.length) return;
 
     const item = items[phoneMessageIndex++];
+    item.hidden = false;
     item.classList.add('revealed');
+    item.setAttribute('aria-hidden', 'false');
     if (item.classList.contains('corrupted')) {
         phoneScreen.classList.add('phone-corrupted');
     }
@@ -772,6 +840,7 @@ function renderSaveSlots() {
             activeSaveSlot = i;
             localStorage.setItem('ward13_active_slot', String(i));
             renderSaveSlots();
+            updateQuickSaveControl();
         });
         saveSlotGrid.appendChild(btn);
     }
@@ -782,6 +851,12 @@ function renderSaveSlots() {
             ? `${getSlotLabel(activeSaveSlot)} // ${formatSlotTime(data.timestamp)} // ${data.nodeLabel || 'UNKNOWN'}`
             : `${getSlotLabel(activeSaveSlot)} // EMPTY`;
     }
+    updateQuickSaveControl();
+}
+
+function updateQuickSaveControl() {
+    if (quickSaveSlot) quickSaveSlot.value = String(activeSaveSlot);
+    if (btnSave) btnSave.textContent = `SAVE ${String(activeSaveSlot).padStart(2, '0')}`;
 }
 
 // ============================================================
@@ -935,7 +1010,7 @@ function renderNode(nodeId) {
     gameState.atEnding = false;
     saveGame();
 
-    const displayText = composeNodeText(node);
+    const displayText = composeNodeText(nodeId, node);
     currentRenderedText = displayText;
 
     // Record to history for LOG
@@ -965,12 +1040,40 @@ function renderNode(nodeId) {
     });
 }
 
-function composeNodeText(node) {
+function composeNodeText(nodeId, node) {
     const echo = gameState.pendingEcho;
     gameState.pendingEcho = '';
-    if (!echo) return node.text;
+    const delayedConsequence = buildDelayedConsequence(nodeId);
+    const prelude = [echo, delayedConsequence].filter(Boolean).join('\n\n');
+    if (!prelude) return node.text;
 
-    return `<span class='choice-echo'>${echo}</span>\n\n${node.text}`;
+    return `<span class='choice-echo'>${prelude}</span>\n\n${node.text}`;
+}
+
+function buildDelayedConsequence(nodeId) {
+    const checkpoints = {
+        p2_1: 'DELAYED ECHO // 第一節課留下的東西，直到現在才從書包底部滲出來。',
+        p3_1: 'DELAYED ECHO // 昨天選過的答案先我一步抵達教室，坐在我的位子上。',
+        p4_1: 'DELAYED ECHO // 處置室讀取了我一路否認的偏好，並替它換上乾淨制服。'
+    };
+    if (!checkpoints[nodeId] || !gameState.scores) return '';
+
+    const dominant = SCORE_KEYS.reduce((best, key) => {
+        return (gameState.scores[key] || 0) > (gameState.scores[best] || 0) ? key : best;
+    }, SCORE_KEYS[0]);
+    const consequences = {
+        end_mizore: '霙把我的台詞本翻到下一頁；上面已經有我的筆跡，寫著我還沒說出口的求愛。',
+        end_yura: '每一塊反光面都慢半拍才模仿我，像由良正在鏡後決定哪一個我比較值得留下。',
+        end_roro: 'ロロ的錄影紅點沒有熄滅；我剛才刪掉的反應，被系統列為唯一可信的版本。',
+        end_zetsu: '絶把走廊廣播調到最大聲，連我的心跳都被迫跟著她錯拍。',
+        end_ekuro: '絵躯把袖口收得更緊，說這樣我就不會從自己身上漏出去。',
+        end_mahiru: '真昼的笑聲亮得過曝，我看見自己的影子被曬死在鞋尖旁邊。',
+        end_sai: '再替我整理衣領，指腹冰得像器械；她說整齊的人比較容易被判定為正常。',
+        end_yoi: '宵身上的甜味黏在舌根，所有門把都忽然像枕頭一樣柔軟。',
+        end_hina: '雛把帳單折成紙鶴塞進我口袋，提醒我連被拯救都有展示價格。',
+        end_rinbaku: '縛站得比記憶更近；她沒問我選了什麼，只替我揉著那隻曾經推開她的手。'
+    };
+    return `${checkpoints[nodeId]}<br>${consequences[dominant]}`;
 }
 
 function createInitialScores() {

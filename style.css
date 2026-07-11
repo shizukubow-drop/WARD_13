@@ -1051,6 +1051,22 @@ body {
     letter-spacing: 2px;
 }
 
+.quick-slot-label {
+    color: #777;
+    font-size: .72rem;
+    letter-spacing: .12em;
+}
+
+.control-select {
+    min-width: 54px;
+    height: 34px;
+    border: 1px solid #555;
+    background: #080808;
+    color: #ddd;
+    font: inherit;
+    text-align: center;
+}
+
 .choice-btn.locked,
 .choice-btn.locked:hover {
     color: #555;
@@ -1387,6 +1403,37 @@ body.phase-4 {
 .archive-link:focus-visible {
     color: #fff;
     background: #b60017;
+}
+
+.anomaly-trigger {
+    cursor: help;
+    text-decoration: underline wavy rgba(182, 0, 23, .65);
+    text-underline-offset: .18em;
+}
+
+.inline-anomaly-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 120;
+    display: grid;
+    place-content: center;
+    gap: .9rem;
+    padding: 2rem;
+    background: rgba(3, 3, 3, .96);
+    color: #d8d8d8;
+    font-family: var(--font-mono);
+    text-align: center;
+    pointer-events: none;
+    animation: anomaly-arrive .18s steps(2, end) both;
+}
+
+.inline-anomaly-overlay strong { color: #b60017; letter-spacing: .12em; }
+.inline-anomaly-overlay small { color: #676767; }
+.inline-anomaly-overlay.fading { opacity: 0; transition: opacity .7s ease; }
+
+@keyframes anomaly-arrive {
+    0% { opacity: 0; transform: translateX(-5px); filter: invert(1); }
+    100% { opacity: 1; transform: none; filter: none; }
 }
 
 @keyframes diagnosis-leak {

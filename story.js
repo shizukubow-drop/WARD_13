@@ -6,7 +6,7 @@ const story = {
         "next": "end_rinbaku_true"
     },
     "start": {
-        "text": "逢魔之時，夕陽不是落下去，而是被人塗在玻璃上。\n\n西校舍的窗戶亮得像燒壞的螢幕。黑板上寫著我的名字，又被誰用指甲刮掉一半：\n\n<span class='case-note'>PATIENT No.0 // AKIBA MAKI // OBSERVATION CONTINUES</span>\n\n大概是ロロ替文化祭做的新介面。她總喜歡把普通點名寫得像機密檔案。\n\n今天是社團活動。這裡當然是學校。\n\n只是我想不起來自己何時走進這棟校舍。那段空白與放學鐘聲互相咬住，像潮濕垃圾袋裡的蟬殼，發出很小、很小的聲音。",
+        "text": "逢魔之時，夕陽不是落下去，而是被人塗在玻璃上。\n\n西校舍的窗戶亮得像燒壞的螢幕。黑板上寫著我的名字，又被誰用指甲刮掉一半：\n\n<span class='case-note'>PATIENT No.0 // AKIBA MAI // OBSERVATION CONTINUES</span>\n\n大概是ロロ替文化祭做的新介面。她總喜歡把普通點名寫得像機密檔案。\n\n今天是社團活動。這裡當然是學校。\n\n只是我想不起來自己何時走進這棟校舍。那段空白與放學鐘聲互相咬住，像潮濕垃圾袋裡的蟬殼，發出很小、很小的聲音。",
         "phase": "phase-1",
         "next": "p1_2"
     },
@@ -15,8 +15,8 @@ const story = {
         "phase": "phase-1",
         "choices": [
             { "text": "「今天的妳，是永遠不會離開我的女主角。」", "next": "p1_3", "effects": { "end_mizore": 3, "end_rinbaku": 1 } },
-            { "text": "把那片乾燥的東西吞回去，裝作什麼都沒發生。", "next": "p1_3", "effects": { "end_roro": 2, "end_sai": 1 } },
-            { "text": "摸口袋裡的黑卡，想像只要付錢就能讓她更真。", "next": "p1_3", "effects": { "end_hina": 3, "end_mizore": 1 } }
+            { "text": "把那片乾燥的東西吞回去，裝作什麼都沒發生。", "next": "p1_3", "effects": { "end_yura": 3, "end_roro": 3 } },
+            { "text": "摸口袋裡的黑卡，想像只要付錢就能讓她更真。", "next": "p1_3", "effects": { "end_hina": 2, "end_mizore": 1 } }
         ]
     },
     "p1_3": {
@@ -29,8 +29,8 @@ const story = {
         "phase": "phase-1",
         "choices": [
             { "text": "握住她。就算弄髒也要握住。", "next": "p1_5", "effects": { "end_mizore": 2, "end_ekuro": 1 } },
-            { "text": "把手縮回來。乾淨的東西不該碰我。", "next": "p1_5", "effects": { "end_sai": 2, "end_roro": 1 } },
-            { "text": "想像自己有一把看不見的劍，能把燈砍掉。", "next": "p1_5", "effects": { "end_zetsu": 2, "end_yura": 1 } }
+            { "text": "把手縮回來。乾淨的東西不該碰我。", "next": "p1_5", "effects": { "end_sai": 4 } },
+            { "text": "想像自己有一把看不見的劍，能把燈砍掉。", "next": "p1_5", "effects": { "end_zetsu": 3, "end_yura": 1 } }
         ]
     },
     "p1_5": {
@@ -39,7 +39,7 @@ const story = {
         "choices": [
             { "text": "甩開她。冒牌貨沒有資格留下指印。", "next": "p1_6", "effects": { "end_rinbaku": 2, "end_yura": 1 } },
             { "text": "警告她別再扮演我的青梅竹馬。", "next": "p1_6", "effects": { "end_rinbaku": 3, "end_zetsu": 1 } },
-            { "text": "試著穿過她，證明粉紅色只是投影。", "next": "p1_6", "effects": { "end_roro": 2, "end_rinbaku": 1 } }
+            { "text": "試著穿過她，證明粉紅色只是投影。", "next": "p1_6", "effects": { "end_rinbaku": 1, "end_ekuro": 2 } }
         ]
     },
 
@@ -54,8 +54,8 @@ const story = {
         "text": "粉末落地的瞬間，變成一堆隱形眼鏡碎片。\n\n每一片都映出我的臉。\n每一片都比我更像我。\n\n「小蒔，要我陪妳嗎？」縛問。\n\n她額角貼了一塊紗布。她竟然把惡作劇演到下一幕，連紗布的位置都沒有換。\n\n腦內字幕自動校正：\n<span class='red-text'>妳一個人又會壞掉。</span>\n\n「不用。」我說。\n\n腦內字幕繼續校正：\n<span class='red-text'>不要看我。不要證明我需要妳。不要承認剛才那一下真的碰到了人。</span>",
         "phase": "phase-2",
         "choices": [
-            { "text": "推開縛。推得太用力也不要回頭。", "next": "p2_2", "effects": { "end_yura": 2, "end_zetsu": 1 } },
-            { "text": "讓她陪著，但一路假裝是自己選的。", "next": "p2_2", "effects": { "end_rinbaku": 3 } },
+            { "text": "推開縛。推得太用力也不要回頭。", "next": "p2_2", "effects": { "end_yura": 2 } },
+            { "text": "讓她陪著，但一路假裝是自己選的。", "next": "p2_2", "effects": { "end_rinbaku": 3, "end_hina": 1 } },
             { "text": "在心裡把這段對話存成 LOG，不處理。", "next": "p2_2", "effects": { "end_roro": 2 } }
         ]
     },
@@ -63,17 +63,17 @@ const story = {
         "text": "走廊盡頭有個嬌小的女孩對著化妝鏡補唇蜜。\n\n鏡見由良。蜜糖色短髮在耳側翹起，像兩片故意不肯服貼的小翅膀；制服被她改得比規定更可愛，胸前蝴蝶結綴著碎玻璃般的亮片。她的眼睛很大，嘴唇很軟，笑起來像一顆剛從包裝紙剝出的糖。蜜桃唇膏和烤甜麵包的香氣跟著她湊近，肩膀故意貼住我一下，再若無其事地離開。\n\n玩家應該會喜歡她。這種女孩天生知道鏡頭在哪裡，也知道怎樣把殘忍說成撒嬌。\n\n「蒔前輩最近都不來看由良，好寂寞喔。」\n\n她踮起腳，把小鏡子舉到我們中間。鏡中先出現由良精心整理過的臉，再出現我：眼下發青、嘴角乾裂、指甲縫卡著牆粉。兩張臉貼得像合照，也像警方把嫌疑人與受害者並排列印。\n\n「妳看，我們很像吧？」\n\n由良的聲音甜甜的。鏡面底下卻有其他嘴巴逐一張開。父親的、母親的、前任的、陌生網友的。那些嘴沒有臉，牙齦卻很清楚，濕亮的舌頭擠在玻璃後面，爭著替她說完下一句。\n\n<span class='red-text'>妳除了浪費時間還會什麼。\n考成這樣還敢說累。\n我們花那麼多錢栽培妳，養出一個只會找藉口的失敗品。\n不要裝病。不要每次做不好就怪家庭、怪補習、怪別人。\n妳被弄髒，是因為妳連自己都不會保護。\n最麻煩的是妳還要哭，好像全家都欠妳。</span>\n\n最糟的是，其中一張嘴曾經陪我玩遊戲，另一張曾在我怕黑時讓我握著手睡。溫柔與辱罵共用相同的牙齒，讓我連逃跑都像是在背叛曾經被愛過的自己。\n\n由良仍是可愛的。她甚至擔心地拉住我的袖口。正因她看起來那麼無辜，我揮拳砸向鏡面時，才分不清自己想打碎的是那些嘴、自己的臉，還是她。\n\n玻璃裂開。每一片都保留著由良的笑。\n\n我戴上抗噪耳機。耳機的黑色外殼也映出我。",
         "phase": "phase-2",
         "choices": [
-            { "text": "砸碎鏡子。讓它閉嘴。", "next": "p2_3", "effects": { "end_yura": 4, "end_zetsu": 1 } },
-            { "text": "對鏡子笑，證明自己比它更可愛。", "next": "p2_3", "effects": { "end_yura": 2, "end_mahiru": 1 } },
-            { "text": "把鏡子的聲音錄下來，命名為「不是我」。", "next": "p2_3", "effects": { "end_roro": 3, "end_sai": 1 } }
+            { "text": "砸碎鏡子。讓它閉嘴。", "next": "p2_3", "effects": { "end_yura": 4 } },
+            { "text": "對鏡子笑，證明自己比它更可愛。", "next": "p2_3", "effects": { "end_yura": 2, "end_mahiru": 4 } },
+            { "text": "把鏡子的聲音錄下來，命名為「不是我」。", "next": "p2_3", "effects": { "end_roro": 3 } }
         ]
     },
     "p2_3": {
         "text": "社辦裡坐著兩個女孩。\n\n第一個是天道真晝。她有蜂蜜曬過般的膚色與一頭會反光的金髮，袖子捲到手肘，手腕套著螢光色髮圈。她笑起來毫不節省，牙齒、聲音、體溫全都大方地露在外面，像太陽根本不懂什麼叫隱私。\n\n「Hey，蒔蒔，還好嗎？」\n\n真晝朝我揮手。她身上有柑橘汽水、防曬乳與剛運動完的汗味；健康、明亮、屬於還相信明天會來的人。她一掌拍上我的肩，掌心的熱隔著制服傳進來，我的心跳竟也被迫跟著她加快半拍。\n\n我本來也想喜歡她。但她每靠近一步，天花板的日光燈就多亮一排。她的笑聲逐漸失去音色，只剩下白。白色從耳道刮進腦子，像銀湯匙反覆刮著不鏽鋼碗，直到牙根發酸。\n\n第二個女孩叫四隈ロロ。她安靜地坐在真晝光線照不到的角落，灰黑長髮整齊遮住兩頰，纖細手腕上繫著顯示心率的電子錶。她靠近時有乾淨紙張、洗髮精和電子零件微熱的氣味；兩根冰涼指尖搭上我的手腕測脈，沒有多餘表情，反而讓那一小塊皮膚變得過分清楚。她抱著一塊方形手寫板，制服裙的格紋精準得像定位碼。\n\nロロ不是冷淡。她只是把表情藏在板子後面，讓數字替她承受被誤解的責任。\n\n板面亮起：\n<span class='case-note'>HEART RATE: 148 // MASKING: FAILED // SUBJECT SAYS: I AM FINE</span>\n\n「蒔前輩，現在的數值是，悲傷。」\n\n我說：「還可以。」\n\nロロ低下頭。電子錶發出很冷的一聲嗶。真晝還在笑。嗶聲與笑聲疊在一起，像心電圖開始學習如何假裝開朗。",
         "phase": "phase-2",
         "choices": [
-            { "text": "把耳機摘掉。吵才代表我還活著。", "next": "p2_4", "effects": { "end_mahiru": 4, "end_zetsu": 1 } },
-            { "text": "請ロロ把所有反應變成數字。數字不會羞辱人。", "next": "p2_4", "effects": { "end_roro": 4 } },
+            { "text": "把耳機摘掉。吵才代表我還活著。", "next": "p2_4", "effects": { "end_mahiru": 4 } },
+            { "text": "請ロロ把所有反應變成數字。數字不會羞辱人。", "next": "p2_4", "effects": { "end_roro": 2 } },
             { "text": "閉上眼，讓白光把我照到什麼都不用想。", "next": "p2_4", "effects": { "end_mahiru": 2, "end_sai": 2 } }
         ]
     },
@@ -81,7 +81,7 @@ const story = {
         "text": "我被真晝的白光趕出社辦，逃進轉角時，正好跌進湊宵的懷裡。\n\n宵是那種會使人第一眼就放低音量的女孩。淡紫色長髮鬆鬆束在肩側，眼睛半睜，寬大的針織外套裹著纖細身體；她身上有洗乾淨的枕套、甜牛奶與晚安藥的味道。看見她，肌肉便擅自理解成床。\n\n「小蒔，很累了吧。」\n\n她用袖口替我擦掉額角的汗，指腹柔軟冰涼。\n「睡一下就好了喔。醒來以前，世界不會向妳收費。」\n\n我幾乎愛上這句話。\n\n接著我看見透明輸液管混在她的髮絲之間。紫色液體一滴一滴滑落，像有人把黃昏榨成果汁，裝進吊袋，再沿著她的手臂灌入我的血。她的懷抱開始摸起來像紫色，嚐起來像過期糖漿、唾液與沒有洗乾淨的量杯。\n\n睡一下。只是睡一下。把世界關成靜音，把身體設定成不在場，把痛覺連同姓名丟進資源回收筒。\n\n門口有粉紅色的影子。縛額角的紗布滲出一小點紅。她沒有說話，只盯著宵撫摸我的手。\n\n那個眼神很像嫉妒。冒牌青梅竹馬竟然也會嫉妒社團學姊。我覺得這齣校園劇的編劇很有創作天分。",
         "phase": "phase-2",
         "choices": [
-            { "text": "把藥片藏在舌下。晚一點一起吞。", "next": "p3_1", "effects": { "end_yoi": 4, "end_roro": 1 } },
+            { "text": "把藥片藏在舌下。晚一點一起吞。", "next": "p3_1", "effects": { "end_yoi": 4 } },
             { "text": "躲進宵懷裡，假裝自己只是不小心睡著。", "next": "p3_1", "effects": { "end_yoi": 2, "end_ekuro": 2 } },
             { "text": "想像如果有人替我付清一切，我就可以不用醒。", "next": "p3_1", "effects": { "end_hina": 3, "end_yoi": 1 } }
         ]
@@ -93,7 +93,7 @@ const story = {
         "phase": "phase-3",
         "choices": [
             { "text": "跟著絶跳上舞台。我是無敵的。", "next": "p3_2", "effects": { "end_zetsu": 4, "end_mahiru": 1 } },
-            { "text": "叫ロロ繼續錄。只要有記錄，我就還存在。", "next": "p3_2", "effects": { "end_roro": 3, "end_zetsu": 1 } },
+            { "text": "叫ロロ繼續錄。只要有記錄，我就還存在。", "next": "p3_2", "effects": { "end_roro": 2, "end_zetsu": 1 } },
             { "text": "用黑卡灑滿天空，像撒錢，也像撒自己的命。", "next": "p3_2", "effects": { "end_hina": 3, "end_mahiru": 1 } }
         ]
     },
@@ -102,7 +102,7 @@ const story = {
         "phase": "phase-3",
         "choices": [
             { "text": "大喊「我是神」，把羞恥燒成灰。", "next": "p3_hina", "effects": { "end_zetsu": 3, "end_mahiru": 2 } },
-            { "text": "把笑聲交給錄影，自己退到天花板角落。", "next": "p3_hina", "effects": { "end_roro": 4 } },
+            { "text": "把笑聲交給錄影，自己退到天花板角落。", "next": "p3_hina", "effects": { "end_roro": 2 } },
             { "text": "想像有觀眾願意為這場醜態付費。", "next": "p3_hina", "effects": { "end_hina": 3, "end_mizore": 1 } }
         ]
     },
@@ -115,9 +115,9 @@ const story = {
         "text": "「把我也連接上去！」我對ロロ喊。\n「把我的歌聲傳遍全世界！」\n\nロロ沒有阻止我。\n儀器不會阻止人類。\n儀器只會記錄。\n\n她慢慢舉起螢幕。\n\n<span class='red-text'>[蒔前輩，妳尿褲子了。]</span>\n\n火焰瞬間熄滅。\n\n大腿內側的溫熱感變得具體，具體得令人作嘔。無敵的神站在被推倒的桌子上，裙子濕掉，嘴角還掛著勝利者的笑。\n\n如果這是一部默片，這裡應該要播放滑稽的小號，讓全場觀眾笑出聲。\n\n可是沒有觀眾。\n只有活動紀錄用的攝影機。\n只有濕掉的布料黏住皮膚。\n只有我還舉著手，像一個不知道掌聲已經結束的小丑。",
         "phase": "phase-3",
         "choices": [
-            { "text": "尖叫著否認。這不是我，這是系統錯誤。", "next": "p3_4", "effects": { "end_roro": 3, "end_sai": 1 } },
-            { "text": "笑得更大聲。神也可以尿濕裙子。", "next": "p3_4", "effects": { "end_mahiru": 3, "end_zetsu": 2 } },
-            { "text": "想把濕掉的自己塞進母親一樣的棉被裡。", "next": "p3_4", "effects": { "end_ekuro": 4, "end_yoi": 1 } }
+            { "text": "尖叫著否認。這不是我，這是系統錯誤。", "next": "p3_4", "effects": { "end_yura": 4, "end_sai": 1 } },
+            { "text": "笑得更大聲。神也可以尿濕裙子。", "next": "p3_4", "effects": { "end_mahiru": 3, "end_zetsu": 2, "end_mizore": 3 } },
+            { "text": "想把濕掉的自己塞進母親一樣的棉被裡。", "next": "p3_4", "effects": { "end_ekuro": 4, "end_yoi": 2 } }
         ]
     },
     "p3_4": {
@@ -125,7 +125,7 @@ const story = {
         "phase": "phase-3",
         "choices": [
             { "text": "命令ロロ刪掉影片。刪不掉就刪掉感情。", "next": "p4_1", "effects": { "end_roro": 3, "end_sai": 2 } },
-            { "text": "把濕掉的裙子當成戰旗，繼續革命。", "next": "p4_1", "effects": { "end_zetsu": 3, "end_mahiru": 1 } },
+            { "text": "把濕掉的裙子當成戰旗，繼續革命。", "next": "p4_1", "effects": { "end_zetsu": 3 } },
             { "text": "低頭求誰都好，讓我睡著，讓我不存在。", "next": "p4_1", "effects": { "end_yoi": 3, "end_ekuro": 2 } }
         ]
     },
@@ -137,7 +137,7 @@ const story = {
         "choices": [
             { "text": "接受絵躯的擁抱。被綁緊一點比較安心。", "next": "p4_2", "effects": { "end_ekuro": 4 } },
             { "text": "盯著點滴，數每一滴紫色睡眠。", "next": "p4_2", "effects": { "end_yoi": 4 } },
-            { "text": "在面罩裡練習不呼吸，像一具漂亮標本。", "next": "p4_2", "effects": { "end_sai": 3, "end_roro": 1 } }
+            { "text": "在面罩裡練習不呼吸，像一具漂亮標本。", "next": "p4_2", "effects": { "end_sai": 3 } }
         ]
     },
     "p4_2": {
@@ -145,7 +145,7 @@ const story = {
         "phase": "phase-4",
         "choices": [
             { "text": "請再再一次。把多餘的我切掉。", "next": "p4_3", "effects": { "end_sai": 4 } },
-            { "text": "想著只要特別輔導成功，縛就不用再看我壞掉。", "next": "p4_3", "effects": { "end_rinbaku": 3, "end_sai": 1 } },
+            { "text": "想著只要特別輔導成功，縛就不用再看我壞掉。", "next": "p4_3", "effects": { "end_rinbaku": 3, "end_hina": 1 } },
             { "text": "用最後一點力氣尋找霙。至少劇本不會電我。", "next": "p4_3", "effects": { "end_mizore": 3, "end_yoi": 1 } }
         ]
     },
@@ -154,7 +154,7 @@ const story = {
         "phase": "phase-4",
         "choices": [
             { "text": "告訴自己：我已經好了。我要回到她身邊。", "next": "diagnosis", "effects": { "end_rinbaku": 4 } },
-            { "text": "把縛的哭聲也收進資料夾，不要打開。", "next": "diagnosis", "effects": { "end_roro": 2, "end_sai": 1 } },
+            { "text": "把縛的哭聲也收進資料夾，不要打開。", "next": "diagnosis", "effects": { "end_ekuro": 2, "end_sai": 1 } },
             { "text": "想像有一個人會買下我，連縛都不用負責。", "next": "diagnosis", "effects": { "end_hina": 4 } },
             { "text": "在腦內呼喚霙，請她替我演完剩下的人生。", "next": "diagnosis", "effects": { "end_mizore": 4 } }
         ]

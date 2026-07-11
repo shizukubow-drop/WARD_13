@@ -24,9 +24,27 @@
     <p>你要求的學生不存在。</p>
     <p class="corrupt">更正：學生存在。不存在的是她的缺席紀錄。</p>
     <p>座位表：11　點名人數：12　可測得體溫：1</p>
-    <p>請回到教室。不要再數一次。<span class="cursor">█</span></p>
-    <p><a href="./">返回 WARD_13</a></p>
+    <p>請留在原地。系統正在把這次缺席縫回點名簿。<span class="cursor">█</span></p>
+    <p id="return-status">五秒後恢復上一段紀錄。</p>
+    <p><a id="return-now" href="./">立即返回剛才的進度</a></p>
     <small>W13-VOID-3F-0A-HEART // 門鎖沒有壞，它只是不願意承認門外有人。</small>
 </main>
+<script>
+    sessionStorage.setItem('ward13_return_from_404', '1');
+    let remaining = 5;
+    const status = document.getElementById('return-status');
+    document.getElementById('return-now')?.addEventListener('click', (event) => {
+        event.preventDefault();
+        history.back();
+    });
+    const timer = setInterval(() => {
+        remaining -= 1;
+        if (status) status.textContent = `${remaining} 秒後恢復上一段紀錄。`;
+        if (remaining <= 0) {
+            clearInterval(timer);
+            history.back();
+        }
+    }, 1000);
+</script>
 </body>
 </html>
