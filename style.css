@@ -1373,6 +1373,28 @@ body.phase-4 {
 }
 
 /* ================== CHARACTERS DATABASE SCREEN ================== */
+.char-card.diagnosed {
+    animation: diagnosis-leak 0.28s steps(2, end) both;
+}
+
+.archive-link {
+    color: #b60017;
+    text-decoration: underline dotted;
+    text-underline-offset: .2em;
+}
+
+.archive-link:hover,
+.archive-link:focus-visible {
+    color: #fff;
+    background: #b60017;
+}
+
+@keyframes diagnosis-leak {
+    0% { filter: none; transform: translateX(0); }
+    45% { filter: contrast(1.8) grayscale(1); transform: translateX(-2px); }
+    70% { filter: invert(0.08) saturate(1.6); transform: translateX(3px); }
+    100% { filter: none; transform: translateX(0); }
+}
 
 #chars-screen {
     background: rgba(0, 0, 0, 0.98) !important;

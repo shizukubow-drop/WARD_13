@@ -266,12 +266,123 @@ const CHARACTER_DOSSIERS = {
     }
 };
 
+// What Maki believes she is reading before the archive contaminates itself.
+// These records are deliberately ordinary: she is at school, and the reader
+// has no authority to diagnose her friends before she does.
+const SCHOOL_DOSSIERS = {
+    maki: {
+        status: '學生 / 在籍',
+        phase: 'No.0 // 同好會製作人',
+        appearance: '纖瘦、短髮，習慣戴著抗噪耳機。制服口袋塞滿票根、黑卡與寫到一半的企劃紙。',
+        personality: '嘴硬、敏銳、擅長用冷笑話收拾尷尬。把每個人的舞台記得比自己的作息更清楚。',
+        notes: '最近常在放學後留得太晚。本人堅稱只是社團工作。'
+    },
+    mizore: {
+        status: '學生 / 戲劇組', phase: 'No.1 // 表演科',
+        appearance: '茶褐長髮、藍眼睛與乾淨白洋裝；靠近時像繡球花、曬過的床單和雨後石階。',
+        personality: '端莊、細膩，總能接住別人的台詞。對蒔的注視比對舞台燈更敏感。',
+        notes: '替蒔保留靠窗的位置。沒有人記得她何時開始這麼做。'
+    },
+    yura: {
+        status: '學生 / 宣傳組', phase: 'No.2 // 一年級',
+        appearance: '蜜糖色短髮、玫紅眼睛、改短制服與碎亮片蝴蝶結，帶蜜桃唇膏與烤麵包香。',
+        personality: '愛漂亮、好勝、惡作劇成癮；生氣也像撒嬌，直到玩笑真的打中痛處。',
+        notes: '在蒔的譜架貼了十七張貼紙。位置圖由ロロ保管。'
+    },
+    roro: {
+        status: '學生 / 紀錄組', phase: 'No.3 // 資訊科',
+        appearance: '灰黑長髮、深色眼睛與整齊格紋裙，身上有紙張、洗髮精和電子零件微熱的氣味。',
+        personality: '寡言、精準，習慣先記錄再反應。手寫板上的表情比本人豐富。',
+        notes: '群組人數與帳號數不一致時，只有她沒有覺得奇怪。'
+    },
+    zetsu: {
+        status: '學生 / 舞台組', phase: 'No.4 // 二年級',
+        appearance: '黑色高馬尾、紅色舞台服、清亮紅眼；掌心溫暖，髮梢有舞台煙霧與柑橘洗髮精。',
+        personality: '熱烈、正直、音量永遠比場合大一格。相信喜歡就該震動整棟校舍。',
+        notes: '紫色便當並非化學事故。本人拒絕撤回此說法。'
+    },
+    ekuro: {
+        status: '學生 / 生活組', phase: 'No.5 // 交換生',
+        appearance: '麥穗般金色長髮、綠眼與米黃針織衫，帶奶油、蘋果和洗衣精的居家香味。',
+        personality: '寬厚、慢條斯理，擁抱時會先問冷不冷。溫柔得讓人忘記該回家。',
+        notes: '保健室的枕套總在她值日時換洗。'
+    },
+    mahiru: {
+        status: '學生 / 活動組', phase: 'No.6 // 二年級',
+        appearance: '蜂蜜色肌膚、反光金髮與螢光髮圈，聞起來像柑橘汽水、防曬乳和運動後的暖意。',
+        personality: '開朗、健談、冷笑話不計成本。最擅長把沉默說成大家一起休息。',
+        notes: '她拍的合照裡，窗邊偶爾會多出一個沒有入社的人。'
+    },
+    sai: {
+        status: '學生 / 服裝組', phase: 'No.7 // 三年級',
+        appearance: '深藍長髮、灰藍眼睛與剪裁如晚禮服的制服，帶消毒酒精和冷冽香水。',
+        personality: '成熟、從容、方向感不佳。替人整理衣領時不允許對方躲開。',
+        notes: '曾在同一層樓迷路四十分鐘。成熟的人只是選了較長的路。'
+    },
+    yoi: {
+        status: '學生 / 作曲組', phase: 'No.8 // 三年級',
+        appearance: '淡紫長髮、半睜睡眼與寬大針織外套，懷裡有枕套、甜牛奶和晚安前的柔香。',
+        personality: '慵懶、體貼，常把休息說成最重要的排練。借出半個枕頭後會把另一半也推過來。',
+        notes: '沒有人見過她趕早八，點名簿卻從未缺席。'
+    },
+    hina: {
+        status: '學生 / 校外顧問', phase: 'No.9 // 贊助代表',
+        appearance: '烏黑長髮、黑色洋裝、珍珠耳墜與高級香水，還有紅酒和新鈔拆封般的乾燥氣味。',
+        personality: '優雅、果斷，把照顧說得像收購。她認為門不肯開時，買下建築比較有效率。',
+        notes: '校方查無她的學籍，卻每學期都收到她署名的器材。'
+    },
+    rinbaku: {
+        status: '學生 / 臨時社員', phase: 'No.10 // 轉入日期不明',
+        appearance: '煙粉棕及肩髮、灰紫眼睛、粉色制服與腰側針線盒，帶皂香、曬乾衣物和藥草味。',
+        personality: '溫柔、固執，似乎早已熟悉蒔的每一種壞脾氣。被推開後仍會站在能看見她的位置。',
+        notes: '她說自己和蒔一起長大。群組沒有加入紀錄，班級座位表卻有被橡皮擦掉的凹痕。'
+    }
+};
+
+function isArchivePolluted() {
+    return localStorage.getItem('ward13_polluted') === '1' || Object.keys(getUnlockedEndings()).length > 0;
+}
+
+function installArchiveMotifs() {
+    if (!story?.start || story.start.text.includes('三坪。我走了七分鐘')) return;
+
+    story.start.text = story.start.text
+        .replace('PATIENT No.0 // AKIBA MAKI // OBSERVATION CONTINUES', 'STUDENT No.0 // AKIBA MAKI // CLUB ATTENDANCE CONTINUES')
+        + '\n\n校內地圖說這間社辦只有三坪。我走了七分鐘，還沒走到另一面牆。';
+
+    story.p1_3.text = story.p1_3.text.replace(
+        '\n\n霙微笑著靠近我。',
+        "\n\n走廊告示牌一閃而過：<a class='archive-link' href='./404.html'>缺席學生資料 // 404</a>。我再看時，那裡只剩一張褪色的校慶海報。\n\n霙微笑著靠近我。"
+    );
+
+    story.p2_1.text = story.p2_1.text.replace(
+        '\n\n腦內字幕自動校正：',
+        '\n\n她身後的樓梯扶手少了一枚生鏽卡扣。我攤開掌心，那枚卡扣不知何時躺在那裡，像我曾拆掉逃生門，又忘記自己為什麼需要逃。\n\n腦內字幕自動校正：'
+    );
+
+    story.p2_2.text = story.p2_2.text
+        .replace(
+            '我們花那麼多錢栽培妳，養出一個只會找藉口的失敗品。',
+            '我們花那麼多錢栽培妳，養出一個只會找藉口的失敗品。\n妳的賠償可以借家裡周轉，妳的人卻不能留在家裡白吃。\n手機拿來。聊天紀錄拿來。連受傷都不准有自己的版本。'
+        )
+        .replace(
+            '其中一張嘴曾經陪我玩遊戲，另一張曾在我怕黑時讓我握著手睡。',
+            '其中一張嘴曾經陪我玩賽車遊戲，讓我坐在膝上握方向盤；另一張曾在我怕黑時讓我握著手睡。'
+        );
+
+    story.p4_3.text = story.p4_3.text.replace(
+        '\n\n門縫裡沒有白光。',
+        '\n\n門外傳來一首走調的童謠。地下室的人說只要憋住呼吸，神就會替大家實現願望。我想許願回到十五歲，又怕十五歲的我仍然住在這裡。\n\n門縫裡沒有白光。'
+    );
+}
+
 // ============================================================
 // INITIALIZATION
 // ============================================================
 
 function init() {
     try {
+        installArchiveMotifs();
         initArchiveLayer();
         // The chat archive comes first. The content warning is revealed only
         // after the reader opens (or skips) the recovered attachment.
@@ -400,6 +511,9 @@ function init() {
         if (btnSaveSettings) btnSaveSettings.addEventListener('click', () => {
             manualSave();
         });
+        // Normalize the hidden directory immediately so assistive technology,
+        // crawlers and fast readers do not see diagnostic labels before Maki.
+        updateCharacterCards();
         if (btnLoadSlot) btnLoadSlot.addEventListener('click', () => loadManualSlot(activeSaveSlot));
         if (btnDeleteSlot) btnDeleteSlot.addEventListener('click', () => deleteManualSlot(activeSaveSlot));
 
@@ -951,6 +1065,9 @@ function updatePhase(phase) {
 
     if (phase) {
         document.body.classList.add(phase);
+        if (phase === 'phase-2' || phase === 'phase-3' || phase === 'phase-4') {
+            localStorage.setItem('ward13_polluted', '1');
+        }
         const phaseNames = {
             'phase-1': 'Phase 1: The Golden Delusion',
             'phase-2': 'Phase 2: The Red Anxiety',
@@ -1212,14 +1329,28 @@ function dismissChoices() {
 }
 
 function updateCharacterCards() {
+    const polluted = isArchivePolluted();
+    const title = document.getElementById('chars-title');
+    const subtitle = document.getElementById('chars-subtitle');
+    if (title) title.textContent = polluted ? '☠ SUBJECT DATABASE' : '✦ STUDENT DIRECTORY';
+    if (subtitle) subtitle.innerHTML = polluted
+        ? 'WARD_13 // 被驗者總覽 // CLEARANCE: <span class="blink-text">LEVEL-0</span>'
+        : '台場聯合學園 // 同好會名簿 // 放學後閲覽';
     document.querySelectorAll('.char-card').forEach(card => {
         const id = card.dataset.id;
         // Character introductions are part of the opening premise, not route
         // rewards. Ending gallery entries remain progression-gated.
         const isUnlocked = true;
-        const dossier = CHARACTER_DOSSIERS[id];
+        const dossier = polluted ? CHARACTER_DOSSIERS[id] : SCHOOL_DOSSIERS[id];
         card.classList.toggle('locked', !isUnlocked);
         card.classList.remove('expanded');
+        card.classList.toggle('diagnosed', polluted);
+        const tag = card.querySelector('.char-tag');
+        if (tag) {
+            tag.textContent = polluted ? (id === 'maki' ? 'PATIENT' : '診斷標籤') : (id === 'maki' ? 'PLAYER' : '學生');
+            tag.classList.toggle('tag-player', id === 'maki' && !polluted);
+            tag.classList.toggle('tag-delusion', polluted || id !== 'maki');
+        }
         if (dossier) populateCharacterCard(card, dossier);
     });
 }
@@ -1248,6 +1379,20 @@ function populateCharacterCard(card, dossier) {
         }
     });
 }
+
+/*
+ * ARCHIVE RECOVERY NOTES // intentionally non-operational
+ *
+ * THREE-SQUARE ROOM: the classroom expands on the map, never in the body.
+ * WORLD WAR III: every family argument is logged as an international incident.
+ * DEVIANCE=LOVE: remove the upper radical; the remaining heart still fails validation.
+ * DREAM INDEX: red-thread office / missing dog / four joined beds / rusted latch.
+ *
+ * checksum: W13-VOID-3F-0A-HEART
+ * solfege: mi - rest - do - rest - fa# - (door fails to close)
+ * This sequence was generated for the fiction. It encodes no person, account,
+ * identifier, date of birth, or recoverable source material.
+ */
 
 function replayEnding(endingKey) {
     const ending = ENDINGS[endingKey];
