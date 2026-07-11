@@ -1,7 +1,7 @@
 const story = {
     // --- Shared route: Ward entry ---
     "white_door": {
-        "text": "第十三社辦的所有活動紀錄都已經被翻開。\n\n黑色的走廊盡頭，出現了一扇門。\n\n門縫裡透出白光。\n不是黃昏，不是手術燈，也不是火災警報。\n\n那是太乾淨、太安靜、太不像出口的光。\n\n<span class='case-note'>SYSTEM: ALL BAD ENDINGS CONFIRMED // DAWN ROUTE OPENED</span>",
+        "text": "第十三社辦的三份結局紀錄都已經被翻開。\n\n黑色的走廊盡頭，出現了一段白色階梯。\n\n階梯盡頭只有一扇門。\n門外有人說，妳已經康復了。\n\n<span class='case-note'>SYSTEM: THREE ENDING FRAGMENTS CONFIRMED // WHITE DOOR OPENED</span>",
         "phase": "phase-4",
         "next": "end_rinbaku_true"
     },
@@ -456,7 +456,7 @@ const story = {
         "next": "end_rinbaku_3"
     },
     "end_rinbaku_3": {
-        "text": "她把蘋果遞給我。\n\n「妳媽媽很擔心妳。她也道歉了。」\n\n道歉。\n好柔軟的詞。\n柔軟到能把骨頭悶爛。\n\n我咬下蘋果。\n甜味在嘴裡散開，像被稀釋過的消毒水。",
+        "text": "她把蘋果遞給我。\n\n「妳媽媽很擔心妳。她也道歉了。」\n\n縛笑得明媚又放心。\n\n「伯母不愧是頂大博士畢業的呢。人美心善又有禮貌，幸好小蒔最後好起來了。」\n\n道歉。人美心善。\n好柔軟的詞。\n柔軟到能把骨頭悶爛。\n\n我咬下蘋果。\n甜味在嘴裡散開，像被稀釋過的消毒水。",
         "phase": "phase-1",
         "next": "end_rinbaku_4"
     },
@@ -486,7 +486,7 @@ const story = {
         "next": "end_rinbaku_8"
     },
     "end_rinbaku_8": {
-        "text": "<span class='ending-divider'>兔子蘋果氧化成褐色，出院章仍然鮮紅得像剛蓋上去。</span>\n\n【病人 No.0】\n\n個案已恢復社會功能。重度憂鬱轉趨穩定，建議出院並回歸家庭支持系統。\n\n個案於評估中多次表示：「我已經好了。」\n\n床單上有未清理完全的蘋果泥。\n\n【BAD END - The Discharge】",
+        "text": "<span class='ending-divider'>兔子蘋果氧化成褐色，出院章仍然鮮紅得像剛蓋上去。</span>\n\n【病人 No.0】\n\n個案已恢復社會功能。重度憂鬱轉趨穩定，建議出院並回歸家庭支持系統。\n\n個案於評估中多次表示：「我已經好了。」\n\n床單上有未清理完全的蘋果泥。\n\n【TRUE END - The Good Mother】",
         "phase": "phase-1",
         "next": null
     },
@@ -535,5 +535,25 @@ const story = {
         "text": "<span class='ending-divider'>病歷翻到最後一頁。這一次，紙背沒有藏著另一個黃昏。</span>\n\n【病人 No.0 出院評估報告】\n\n個案意識清醒，定向感恢復。仍有強烈創傷痛苦與身體厭惡，但能以第一人稱描述：「我很痛。」\n\n縛：「我們沒有變好。我們只是醒來了。」\n\n【系統提示：成就解鎖：黎明】\n\n【TRUE END - Dawn】",
         "phase": "phase-1",
         "next": null
+    },
+    "end_rinbaku_cage": {
+        "text": "🎀 鄰縛 BE 路線：【Reality? / 沒有門的黃昏】\n\n我醒來時，縛正在替我梳頭。\n\n窗戶很亮，窗把卻被拆掉了。\n\n「小蒔已經不用回那個家了。」她笑得像終於完成一件拖了很多年的作業。",
+        "phase": "phase-1", "next": "end_rinbaku_cage_2"
+    },
+    "end_rinbaku_cage_2": {
+        "text": "手機、鞋子、身分證都不見了。\n\n門外傳來三次上鎖聲。縛把兔子蘋果送到我嘴邊。\n\n「外面的人只會再弄痛妳。妹妹會保護姊姊的。」",
+        "phase": "phase-1", "next": "end_rinbaku_cage_3"
+    },
+    "end_rinbaku_cage_3": {
+        "text": "她知道我每一種藥的時間，知道我怕黑，知道怎麼抱才不會留下掙扎的空隙。\n\n我說這不是愛。\n\n縛把我的手貼在自己臉上，哭著問：「那為什麼小蒔只有在不能離開我的時候，才不會受傷？」",
+        "phase": "phase-1", "next": "end_rinbaku_cage_4"
+    },
+    "end_rinbaku_cage_4": {
+        "text": "日曆沒有日期。窗外永遠是放學前的黃昏。\n\n縛每天替我換衣服、餵飯、擦掉門板上的抓痕。\n\n她從不打我。從不罵我。\n\n所以沒有人能證明這裡是一座牢房。",
+        "phase": "phase-1", "next": "end_rinbaku_cage_5"
+    },
+    "end_rinbaku_cage_5": {
+        "text": "<span class='ending-divider'>粉色窗簾垂下來，把世界縫成只容得下兩個人的尺寸。</span>\n\n縛從背後抱住我。\n\n「沒關係，小蒔。妳不需要康復。」\n\n「只要永遠需要我就好了。」\n\n【BAD END - The Loving Cage】",
+        "phase": "phase-1", "next": null
     }
 };

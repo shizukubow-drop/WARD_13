@@ -58,6 +58,8 @@ const saveSlotInfo = document.getElementById('save-slot-info');
 const quickSaveOverlay = document.getElementById('quick-save-overlay');
 const quickSaveGrid = document.getElementById('quick-save-grid');
 const btnCloseQuickSave = document.getElementById('btn-close-quick-save');
+const whiteDoorScene = document.getElementById('white-door-scene');
+const btnWhiteDoor = document.getElementById('btn-white-door');
 
 // --- Sliders ---
 const brightnessSlider = document.getElementById('brightness-slider');
@@ -145,15 +147,15 @@ const ENDINGS = {
     },
     end_rinbaku: {
         id: 'end_rinbaku',
-        startNode: 'end_rinbaku',
+        startNode: 'end_rinbaku_cage',
         cardId: 'card-rinbaku',
-        finalNode: 'end_rinbaku_8'
+        finalNode: 'end_rinbaku_cage_5'
     },
     end_rinbaku_true: {
         id: 'end_rinbaku_true',
-        startNode: 'end_rinbaku_true',
+        startNode: 'end_rinbaku',
         cardId: 'card-rinbaku-true',
-        finalNode: 'end_rinbaku_true_8',
+        finalNode: 'end_rinbaku_8',
         requires: 'all_bad'
     }
 };
@@ -479,6 +481,10 @@ function init() {
         if (btnCloseLog) btnCloseLog.addEventListener('click', toggleLog);
         if (btnSave) btnSave.addEventListener('click', showQuickSaveOverlay);
         if (btnCloseQuickSave) btnCloseQuickSave.addEventListener('click', hideQuickSaveOverlay);
+        if (btnWhiteDoor) btnWhiteDoor.addEventListener('click', (event) => {
+            event.stopPropagation();
+            renderNode('end_rinbaku');
+        });
         if (quickSaveOverlay) quickSaveOverlay.addEventListener('click', (event) => {
             event.stopPropagation();
             if (event.target === quickSaveOverlay) hideQuickSaveOverlay();
@@ -1051,6 +1057,10 @@ function renderNode(nodeId) {
     gameState.currentNode = nodeId;
     gameState.atEnding = false;
     saveGame();
+    if (whiteDoorScene) {
+        whiteDoorScene.classList.toggle('hidden', nodeId !== 'white_door');
+        whiteDoorScene.classList.toggle('active', nodeId === 'white_door');
+    }
 
     const displayText = composeNodeText(nodeId, node);
     currentRenderedText = displayText;
@@ -1185,6 +1195,7 @@ function chooseEndingByScores() {
 }
 
 function finishNodePresentation(nodeId, node) {
+    if (nodeId === 'white_door') return;
     if (node.choices) {
         // Keep the final line on screen. Choices are only revealed by the
         // player's next, separate click so the scene has room to breathe.
@@ -1306,6 +1317,7 @@ function advanceStory() {
     }
 
     const node = story[gameState.currentNode];
+    if (gameState.currentNode === 'white_door') return;
     if (node && node.choices && choiceRevealPending) {
         choiceRevealPending = false;
         showChoices(node.choices);
