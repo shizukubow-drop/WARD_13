@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="WARD_13／虫單蟲虫虫虫 — 取材自作者真實經歷。人物與情節經合成及虛構化。">
+    <meta property="og:title" content="WARD_13／虫單蟲虫虫虫">
+    <meta property="og:description" content="痛苦是真的。第十三病房不是。至少，作者如此聲稱。">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#000000">
+    <title>WARD_13／虫單蟲虫虫虫</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;600&family=Roboto+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <!--
+        ARCHIVE RECOVERY NOTE 14-A
+        她不是青梅竹馬。
+        她知道家裡有三個女兒。
+        她不知道第一個女兒是拿來做什麼的。
+
+        If you found this in the source, the archive has already counted you.
+        Do not search for Patient No.0's legal name.
+    -->
+    <div id="game-container">
+        <!-- Warning Screen: shown after the recovered chat attachment is opened -->
+        <div id="warning-screen" class="screen hidden">
+            <div class="content">
+                <h1 class="warning-title">WARNING: PSYCHOLOGICAL HORROR</h1>
+                <p>本作品包含以下內容，可能會引起極度不適、焦慮或創傷觸發：</p>
+                <ul class="warning-list">
+                    <li>自殺意念與自殘行為 (Self-harm &amp; Suicide Ideation)</li>
+                    <li>非合意性行為與性暴力的隱喻 (Implied Sexual Violence)</li>
+                    <li>醫療濫用與藥物成癮 (Medical Abuse &amp; Substance Use)</li>
+                    <li>強烈的解離與精神恐怖描寫 (Severe Dissociation)</li>
+                </ul>
+                <p>此網站不適合心理狀態不穩定者、未滿 18 歲者瀏覽。</p>
+                <p>若您在遊玩過程中感到不適，請<strong>立即關閉網頁</strong>並尋求專業協助。</p>
+
+                <div class="warning-actions">
+                    <button id="btn-enter" class="btn warning-btn">我已滿 18
+                        歲且心理狀態良好，願意承擔風險</button>
+                    <button id="btn-leave" class="btn warning-btn"
+                        onclick="window.close(); window.location.href='about:blank';">離開此網站</button>
+                </div>
+
+                <div class="disclaimer">
+                    <p>DISCLAIMER:</p>
+                    <p>本作取材自作者真實經歷，人物與情節經合成及虛構化。</p>
+                    <p>痛苦是真的。第十三病房不是。至少，作者如此聲稱。</p>
+                    <br>
+                    <p class="glitch-text" data-text="Patient insists that the figures resemble 'idols from Odaiba.'">
+                        Patient insists that the figures resemble "idols from Odaiba."</p>
+                    <p>This symptom has been documented.</p>
+                    <p>Further discussion is not recommended.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Phone chat prologue: always the first screen -->
+        <div id="phone-screen" class="screen active">
+            <div class="phone-shell" aria-label="手機聊天紀錄">
+                <header class="phone-header">
+                    <div>
+                        <span class="phone-back">‹</span>
+                        <strong>同好會（11）</strong>
+                    </div>
+                    <small>10 人在線上</small>
+                </header>
+                <div id="phone-chat" class="phone-chat" role="button" tabindex="0" aria-label="點擊讀取下一則聊天訊息">
+                    <div class="chat-date" data-delay="0">昨天 18:07</div>
+                    <div class="chat-message incoming" data-delay="1"><i class="chat-avatar avatar-mizore" aria-hidden="true">💧</i><b>空木霙</b><p>蒔前輩，今天的讀劇謝謝妳。最後那一幕，我還是沒能演好「想留下來的人」。</p></div>
+                    <div class="chat-message incoming" data-delay="2"><i class="chat-avatar avatar-yura" aria-hidden="true">🪞</i><b>鏡見由良</b><p>因為霙子太沉重啦！女主角這時候應該可愛地抓住前輩衣角，像全世界最可愛的由良這樣☆</p></div>
+                    <div class="chat-message outgoing" data-delay="3"><i class="chat-avatar avatar-maki" aria-hidden="true">🍂</i><p>妳先把偷貼在我譜架上的貼紙撕掉</p><span>已讀 10</span></div>
+                    <div class="chat-message incoming" data-delay="4"><i class="chat-avatar avatar-yura" aria-hidden="true">🪞</i><b>鏡見由良</b><p>那是「天才製作人認證貼紙」！撕掉會失去由良保固喔！</p></div>
+                    <div class="chat-message incoming" data-delay="5"><i class="chat-avatar avatar-roro" aria-hidden="true">▣</i><b>四隈ロロ</b><p>貼紙共十七張。已建立位置圖。[ロロ板：得意]</p></div>
+                    <div class="chat-message outgoing" data-delay="6"><i class="chat-avatar avatar-maki" aria-hidden="true">🍂</i><p>為什麼妳有位置圖但沒有阻止她</p><span>已讀 10</span></div>
+                    <div class="chat-message incoming" data-delay="7"><i class="chat-avatar avatar-mahiru" aria-hidden="true">☀</i><b>天道真晝</b><p>因為那是「貼」心的行為嘛！……好冷？真晝宣布，冷場也是一種控場！</p></div>
+                    <div class="chat-message incoming" data-delay="8"><i class="chat-avatar avatar-zetsu" aria-hidden="true">🔥</i><b>赤羽絶</b><p>蒔！明天把副歌再升一個 Key 吧！「喜歡」如果不把屋頂震下來，怎麼能算傳達到了！</p></div>
+                    <div class="chat-message outgoing" data-delay="9"><i class="chat-avatar avatar-maki" aria-hidden="true">🍂</i><p>先把妳昨天做的紫色便當處理掉再談野心</p><span>已讀 10</span></div>
+                    <div class="chat-message incoming" data-delay="10"><i class="chat-avatar avatar-zetsu" aria-hidden="true">🔥</i><b>赤羽絶</b><p>那不是失敗！只是料理的熱情還沒有被世界理解！</p></div>
+
+                    <div class="chat-date" data-delay="11">昨天 21:13</div>
+                    <div class="chat-message incoming" data-delay="12"><i class="chat-avatar avatar-mizore" aria-hidden="true">💧</i><b>空木霙</b><p>蒔前輩，明天還能一起讀劇本嗎？我替妳留靠窗的位置。只要妳看著，我就能演得更像真正的我。</p></div>
+                    <div class="chat-message incoming" data-delay="13"><i class="chat-avatar avatar-yura" aria-hidden="true">🪞</i><b>鏡見由良</b><p>等一下，最可愛的學妹明明先傳訊息了，為什麼前輩只回霙？這個群組的審美壞掉了啦！</p></div>
+                    <div class="chat-message outgoing" data-delay="14"><i class="chat-avatar avatar-maki" aria-hidden="true">🍂</i><p>那妳幹麻第一個回</p><span>已讀 10</span></div>
+                    <div class="chat-message incoming" data-delay="15"><i class="chat-avatar avatar-yoi" aria-hidden="true">☾</i><b>湊宵</b><p>如果睡著了就不用回喔。明天借妳一半枕頭……剩下的一半，也可以借。宵很大方的～</p></div>
+                    <div class="chat-message incoming" data-delay="16"><i class="chat-avatar avatar-ekuro" aria-hidden="true">♡</i><b>綿瀬絵躯</b><p>Ciao，小蒔。明早一定要吃東西喔。絵躯會帶麵包，也會帶可以抱很久的份。</p></div>
+                    <div class="chat-message incoming" data-delay="17"><i class="chat-avatar avatar-sai" aria-hidden="true">◇</i><b>氷堂再</b><p>我可以去接妳。雖然上次在同一層樓迷路了四十分鐘……不准笑，成熟的女人只是選擇比較長的路。</p></div>
+                    <div class="chat-message incoming" data-delay="18"><i class="chat-avatar avatar-hina" aria-hidden="true">♢</i><b>姬海棠雛</b><p>車已經在樓下。小蒔只需要決定來不來，其他問題交給我。世界不肯替妳開門，我就把整棟樓買下來。</p></div>
+                    <div class="chat-message system-message" data-delay="19"><p>「鄰縛」已加入群組</p></div>
+                    <div class="chat-message outgoing" data-delay="20"><i class="chat-avatar avatar-maki" aria-hidden="true">🍂</i><p>誰加的</p><span>已讀 10</span></div>
+                    <div class="chat-message incoming" data-delay="21"><i class="chat-avatar avatar-roro" aria-hidden="true">▣</i><b>四隈ロロ</b><p>無新增成員紀錄。群組人數：十一。畫面上帳號數：十二。[ロロ板：錯誤]</p></div>
+                    <div class="chat-message incoming" data-delay="22"><i class="chat-avatar avatar-mahiru" aria-hidden="true">☀</i><b>天道真晝</b><p>十二個人、十一個位置……多出來的那位要不要坐真晝腿上？開玩笑的。欸，妳們怎麼都不回？</p></div>
+                    <div class="chat-message incoming" data-delay="23"><i class="chat-avatar avatar-mizore" aria-hidden="true">💧</i><b>空木霙</b><p>鄰縛……是新劇本裡的人物嗎？抱歉，我好像記得她，又想不起第一次見面是哪一幕。</p></div>
+                    <div class="chat-message incoming" data-delay="24"><i class="chat-avatar avatar-hina" aria-hidden="true">♢</i><b>姬海棠雛</b><p>既然大家都想不起來，就先別急著替記憶補寫開頭。有些人正是靠別人的解釋才出生的。</p></div>
+
+                    <div class="chat-date" data-delay="25">今天 02:41</div>
+                    <div class="chat-message incoming private" data-delay="26"><i class="chat-avatar avatar-rinbaku" aria-hidden="true">🎀</i><b>鄰縛</b><p>小蒔，妳還沒回家嗎？我一直在等妳。今天也是，明天也是。我們不是說好要一起走嗎？</p></div>
+                    <div class="chat-message outgoing" data-delay="27"><i class="chat-avatar avatar-maki" aria-hidden="true">🍂</i><p>不要這樣叫我。妳到底是誰</p><span>已讀</span></div>
+                    <div class="chat-message incoming private" data-delay="28"><i class="chat-avatar avatar-rinbaku" aria-hidden="true">🎀</i><b>鄰縛</b><p>……好。我不叫了。可是妳至少告訴我，妳現在安全嗎？只告訴我就好。不要告訴其他人。</p></div>
+                    <div class="chat-message outgoing" data-delay="29"><i class="chat-avatar avatar-maki" aria-hidden="true">🍂</i><p>妳只是趁我狀況不好時混進來的冒牌貨</p><span>已讀</span></div>
+                    <div class="chat-message incoming private" data-delay="30"><i class="chat-avatar avatar-rinbaku" aria-hidden="true">🎀</i><b>鄰縛</b><p>那妳今天還願意回我，是不是代表妳其實記得我？</p></div>
+                    <div class="chat-message system-message" data-delay="31"><p>鄰縛收回了一則訊息</p></div>
+                    <div class="chat-message incoming private" data-delay="32"><i class="chat-avatar avatar-rinbaku" aria-hidden="true">🎀</i><b>鄰縛</b><p>我把藥和水放在門外。妳不用開門。我不會碰妳。</p></div>
+                    <div class="chat-message outgoing" data-delay="33"><i class="chat-avatar avatar-maki" aria-hidden="true">🍂</i><p>冒牌貨不會知道我家門在哪裡</p><span>已讀</span></div>
+                    <div class="chat-message incoming corrupted" data-delay="34"><i class="chat-avatar avatar-rinbaku" aria-hidden="true">🎀</i><b>鄰縛</b><p>值日老師說妳只是比較愛作夢。她說這所學校一直都很正常。</p></div>
+                    <div class="chat-message system-message corrupted" data-delay="35"><p>群組名稱已變更為「WARD_13／缺席學生追蹤」</p></div>
+                    <div class="chat-message system-message corrupted" data-delay="36"><p>在線人數：0　已讀人數：11　登錄患者：1</p></div>
+                    <div class="chat-message system-message archive-attachment" data-delay="37">
+                        <p>未授權附件：PATIENT_00.html</p>
+                        <small>上傳者不存在於此群組</small>
+                    </div>
+                </div>
+                <footer class="phone-actions">
+                    <p id="phone-tap-hint" class="phone-tap-hint">點一下畫面，讀取下一則訊息</p>
+                    <button id="btn-open-archive" class="phone-primary" disabled>開啟附件</button>
+                    <button id="btn-skip-chat" class="phone-skip">略過紀錄</button>
+                </footer>
+            </div>
+        </div>
+
+        <!-- Title Screen -->
+        <div id="title-screen" class="screen hidden">
+            <div class="title-header">
+                <h1 class="game-title glitched" data-text="WARD_13">WARD_13</h1>
+                <p class="subtitle">虫單蟲虫虫虫</p>
+                <p id="reader-clearance" class="reader-clearance">READER No.14 // IDENTIFICATION PENDING</p>
+            </div>
+            <div class="menu">
+                <button id="btn-start" class="btn menu-btn">
+                    <span class="btn-icon">▶</span> 開始診療 <span class="btn-sub">START</span>
+                </button>
+                <button id="btn-load" class="btn menu-btn">
+                    <span class="btn-icon">↻</span> 繼續診療 <span class="btn-sub">LOAD</span>
+                </button>
+                <button id="btn-gallery" class="btn menu-btn">
+                    <span class="btn-icon">◈</span> 結局蒐集 <span class="btn-sub">GALLERY</span>
+                </button>
+                <button id="btn-chars" class="btn menu-btn">
+                    <span class="btn-icon">☠</span> 被驗者檔案 <span class="btn-sub">DATABASE</span>
+                </button>
+                <button id="btn-settings" class="btn menu-btn">
+                    <span class="btn-icon">⚙</span> 系統設定 <span class="btn-sub">SETTINGS</span>
+                </button>
+            </div>
+            <div class="credits">
+                <p>Created by 秋葉蒔 (Akiba Mai)</p>
+                <p class="archive-note">個案資料復原介面 // 未經授權的閱覽將被記錄</p>
+            </div>
+        </div>
+
+        <!-- Settings Screen -->
+        <div id="settings-screen" class="screen hidden">
+            <h1 class="settings-title">⚙ SETTINGS</h1>
+
+            <div class="settings-grid">
+                <div class="setting-item">
+                    <label for="brightness-slider">畫面亮度 BRIGHTNESS</label>
+                    <input type="range" id="brightness-slider" min="0" max="100" value="50" class="styled-slider"
+                        aria-label="Brightness control">
+                    <span id="brightness-val" class="slider-val">50</span>
+                </div>
+
+                <div class="setting-item">
+                    <label for="typespeed-slider">打字速度 TYPE SPEED</label>
+                    <input type="range" id="typespeed-slider" min="10" max="80" value="30" class="styled-slider"
+                        aria-label="Typing speed">
+                    <span id="typespeed-val" class="slider-val">30ms</span>
+                </div>
+
+                <div class="setting-item">
+                    <label for="autospeed-slider">自動推進 AUTO SPEED</label>
+                    <input type="range" id="autospeed-slider" min="1" max="5" value="2" step="0.5" class="styled-slider"
+                        aria-label="Auto play speed">
+                    <span id="autospeed-val" class="slider-val">2.0s</span>
+                </div>
+
+                <div class="setting-item setting-buttons">
+                    <button id="btn-fullscreen" class="btn setting-btn">⛶ 全螢幕 FULLSCREEN</button>
+                    <button id="btn-clear-save" class="btn setting-btn danger">✕ 刪除所有存檔 DELETE ALL</button>
+                </div>
+
+                <div class="setting-item save-manager">
+                    <label>手動存檔欄位 SAVE SLOTS</label>
+                    <div id="save-slot-grid" class="save-slot-grid" aria-label="Save slots"></div>
+                    <div id="save-slot-info" class="save-slot-info">SLOT 01 // EMPTY</div>
+                    <div class="save-slot-actions">
+                        <button id="btn-save-settings" class="btn setting-btn">SAVE</button>
+                        <button id="btn-load-slot" class="btn setting-btn">LOAD</button>
+                        <button id="btn-delete-slot" class="btn setting-btn danger">DELETE SLOT</button>
+                    </div>
+                </div>
+            </div>
+
+            <button id="btn-back-settings" class="btn">返回 (BACK)</button>
+        </div>
+
+        <!-- Gallery Screen -->
+        <div id="gallery-screen" class="screen hidden">
+            <h1 class="gallery-title">◈ ENDING GALLERY</h1>
+            <p class="gallery-subtitle">已解鎖 <span id="ending-progress">0 / 11</span>。取得三份不同結局殘片後，黎明路線才會出現。</p>
+
+            <div class="gallery-grid">
+                <div class="gallery-card" id="card-mizore" data-ending="end_mizore">
+                    <div class="card-emoji">🩸</div>
+                    <div class="card-title">空木霙</div>
+                    <div class="card-subtitle">Solipsism / 唯我論的玩偶屋</div>
+                    <div class="card-badge">BAD END - The Dollmaker</div>
+                    <div class="card-lock-overlay">
+                        <span class="lock-text">？？？</span>
+                    </div>
+                </div>
+
+                <div class="gallery-card" id="card-yura" data-ending="end_yura">
+                    <div class="card-emoji">🪞</div>
+                    <div class="card-title">鏡見由良</div>
+                    <div class="card-subtitle">Narcissism / 破碎鏡像</div>
+                    <div class="card-badge">BAD END - The Queen of Ward</div>
+                    <div class="card-lock-overlay">
+                        <span class="lock-text">？？？</span>
+                    </div>
+                </div>
+
+                <div class="gallery-card" id="card-roro" data-ending="end_roro">
+                    <div class="card-emoji">📟</div>
+                    <div class="card-title">四隈ロロ</div>
+                    <div class="card-subtitle">Cybernetics / 情感格式化</div>
+                    <div class="card-badge">BAD END - The Recorder</div>
+                    <div class="card-lock-overlay">
+                        <span class="lock-text">？？？</span>
+                    </div>
+                </div>
+
+                <div class="gallery-card" id="card-zetsu" data-ending="end_zetsu">
+                    <div class="card-emoji">🔥</div>
+                    <div class="card-title">赤羽絶</div>
+                    <div class="card-subtitle">Destruction / 焦土作戰</div>
+                    <div class="card-badge">BAD END - The Martyr</div>
+                    <div class="card-lock-overlay">
+                        <span class="lock-text">？？？</span>
+                    </div>
+                </div>
+
+                <div class="gallery-card" id="card-ekuro" data-ending="end_ekuro">
+                    <div class="card-emoji">🤱</div>
+                    <div class="card-title">綿瀬絵躯</div>
+                    <div class="card-subtitle">Regression / 羊水窒息</div>
+                    <div class="card-badge">BAD END - Eternal Infant</div>
+                    <div class="card-lock-overlay">
+                        <span class="lock-text">？？？</span>
+                    </div>
+                </div>
+
+                <div class="gallery-card" id="card-mahiru" data-ending="end_mahiru">
+                    <div class="card-emoji">🔦</div>
+                    <div class="card-title">天道真晝</div>
+                    <div class="card-subtitle">Mania / 過曝的太陽</div>
+                    <div class="card-badge">BAD END - Burnout Sun</div>
+                    <div class="card-lock-overlay">
+                        <span class="lock-text">？？？</span>
+                    </div>
+                </div>
+
+                <div class="gallery-card" id="card-sai" data-ending="end_sai">
+                    <div class="card-emoji">👠</div>
+                    <div class="card-title">氷堂再</div>
+                    <div class="card-subtitle">Lobotomy / 冰冷標本</div>
+                    <div class="card-badge">NORMAL END - The Specimen</div>
+                    <div class="card-lock-overlay">
+                        <span class="lock-text">？？？</span>
+                    </div>
+                </div>
+
+                <div class="gallery-card" id="card-yoi" data-ending="end_yoi">
+                    <div class="card-emoji">💉</div>
+                    <div class="card-title">湊宵</div>
+                    <div class="card-subtitle">Euthanasia / 甜蜜死亡</div>
+                    <div class="card-badge">BAD END - Sleeping Beauty</div>
+                    <div class="card-lock-overlay">
+                        <span class="lock-text">？？？</span>
+                    </div>
+                </div>
+
+                <div class="gallery-card" id="card-hina" data-ending="end_hina">
+                    <div class="card-emoji">🦋</div>
+                    <div class="card-title">姬海棠雛</div>
+                    <div class="card-subtitle">Ownership / 金絲雀</div>
+                    <div class="card-badge">DARK END - The Canary</div>
+                    <div class="card-lock-overlay">
+                        <span class="lock-text">？？？</span>
+                    </div>
+                </div>
+
+                <div class="gallery-card" id="card-rinbaku" data-ending="end_rinbaku">
+                    <div class="card-emoji">🎀</div>
+                    <div class="card-title">鄰縛</div>
+                    <div class="card-subtitle">Reality / 疼痛的黃昏</div>
+                    <div class="card-badge">BAD END - The Discharge</div>
+                    <div class="card-lock-overlay">
+                        <span class="lock-text">？？？</span>
+                    </div>
+                </div>
+
+                <div class="gallery-card true-card" id="card-rinbaku-true" data-ending="end_rinbaku_true">
+                    <div class="card-emoji">🌅</div>
+                    <div class="card-title">鄰縛</div>
+                    <div class="card-subtitle">Reality / 疼痛的黎明</div>
+                    <div class="card-badge">TRUE END - Dawn</div>
+                    <div class="card-lock-overlay">
+                        <span class="lock-text">？？？</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <button id="btn-back-gallery" class="btn">返回 (BACK)</button>
+        </div>
+
+        <!-- Characters Database Screen -->
+        <div id="chars-screen" class="screen hidden">
+            <div class="chars-header">
+                <h1 class="chars-title">☠ SUBJECT DATABASE</h1>
+                <p class="chars-subtitle">WARD_13 // 被驗者總覽 // CLEARANCE: <span class="blink-text">LEVEL-0</span></p>
+            </div>
+
+            <div class="chars-scroll">
+                <!-- 秋葉蒔 -->
+                <div class="char-card player" data-id="maki">
+                    <div class="char-header">
+                        <span class="char-id">No.0</span>
+                        <span class="char-name">秋葉蒔 <span class="char-name-en">Akiba Maki</span></span>
+                        <span class="char-tag tag-player">PLAYER</span>
+                    </div>
+                    <div class="char-body">
+                        <div class="char-field"><span class="field-key">STATUS:</span> <span
+                                class="field-val status-active">被驗者 / ACTIVE</span></div>
+                        <div class="char-field"><span class="field-key">ROLE:</span> <span
+                                class="field-val">主診斷對象。第十三病房的唯一常駐患者。</span></div>
+                        <div class="char-field"><span class="field-key">APPEARANCE:</span> <span
+                                class="field-val placeholder">[DATA PENDING]</span></div>
+                        <div class="char-field"><span class="field-key">PERSONALITY:</span> <span
+                                class="field-val placeholder">[DATA PENDING]</span></div>
+                        <div class="char-field"><span class="field-key">NOTES:</span> <span
+                                class="field-val placeholder">[DATA PENDING]</span></div>
+                    </div>
+                </div>
+
+                <!-- 空木霙 -->
+                <div class="char-card" data-id="mizore">
+                    <div class="char-header">
+                        <span class="char-id">No.1</span>
+                        <span class="char-name">空木霙 <span class="char-name-en">Utsugi Mashiro</span></span>
+                        <span class="char-tag tag-delusion">妄想體</span>
+                    </div>
+                    <div class="char-body">
+                        <div class="char-field"><span class="field-key">STATUS:</span> <span
+                                class="field-val status-delusion">妄想體 / CONSTRUCT</span></div>
+                        <div class="char-field"><span class="field-key">PHASE:</span> <span class="field-val">Phase 1 —
+                                The Golden Delusion</span></div>
+                        <div class="char-field"><span class="field-key">APPEARANCE:</span> <span
+                                class="field-val placeholder">[DATA PENDING]</span></div>
+                        <div class="char-field"><span class="field-key">PERSONALITY:</span> <span
+                                class="field-val placeholder">[DATA PENDING]</span></div>
+                        <div class="char-field"><span class="field-key">NOTES:</span> <span
+                                class="field-val placeholder">[DATA PENDING]</span></div>
+                    </div>
+                </div>
+
+                <!-- 鏡見由良 -->
+                <div class="char-card" data-id="yura">
+                    <div class="char-header">
+                        <span class="char-id">No.2</span>
+                        <span class="char-name">鏡見由良 <span class="char-name-en">Kagami Yura</span></span>
+                        <span class="char-tag tag-delusion">妄想體</span>
+                    </div>
+                    <div class="char-body">
+                        <div class="char-field"><span class="field-key">STATUS:</span> <span
+                                class="field-val status-delusion">妄想體 / CONSTRUCT</span></div>
+                        <div class="char-field"><span class="field-key">PHASE:</span> <span class="field-val">Phase 2 —
+                                The Red Anxiety</span></div>
+                        <div class="char-field"><span class="field-key">APPEARANCE:</span> <span
+                                class="field-val placeholder">[DATA PENDING]</span></div>
+                        <div class="char-field"><span class="field-key">PERSONALITY:</span> <span
+                                class="field-val placeholder">[DATA PENDING]</span></div>
+                        <div class="char-field"><span class="field-key">NOTES:</span> <span
+                                class="field-val placeholder">[DATA PENDING]</span></div>
+                    </div>
+                </div>
+
+                <!-- 四隈ロロ -->
+                <div class="char-card" data-id="roro">
+                    <div class="char-header">
+                        <span class="char-id">No.3</span>
+                        <span class="char-name">四隈ロロ <span class="char-name-en">Shiguma Roro</span></span>
+                        <span class="char-tag tag-delusion">妄想體</span>
+                    </div>
+                    <div class="char-body">
+                        <div class="char-field"><span class="field-key">STATUS:</span> <span
+                                class="field-val status-delusion">妄想體 / CONSTRUCT</span></div>
+                        <div class="char-field"><span class="field-key">PHASE:</span> <span class="field-val">Phase 3 —
+                                Chaotic Mania</span></div>
+                        <div class="char-field"><span class="field-key">APPEARANCE:</span> <span
+                                class="field-val placeholder">[DATA PENDING]</span></div>
+                        <div class="char-field"><span class="field-key">PERSONALITY:</span> <span
+                                class="field-val placeholder">[DATA PENDING]</span></div>
+                        <div class="char-field"><span class="field-key">NOTES:</span> <span
+                                class="field-val placeholder">[DATA PENDING]</span></div>
+                    </div>
+                </div>
+
+                <!-- 赤羽絶 -->
+                <div class="char-card" data-id="zetsu">
+                    <div class="char-header">
+                        <span class="char-id">No.4</span>
+                        <span class="char-name">赤羽絶 <span class="char-name-en">Akabane Zetsu</span></span>
+                        <span class="char-tag tag-delusion">妄想體</span>
+                    </div>
+                    <div class="char-body">
+                        <div class="char-field"><span class="field-key">STATUS:</span> <span
+                                class="field-val status-delusion">妄想體 / CONSTRUCT</span></div>
+                        <div class="char-field"><span class="field-key">PHASE:</span> <span class="field-val">Phase 3 —
+                                Chaotic Mania</span></div>
+                        <div class="char-field"><span class="field-key">APPEARANCE:</span> <span
+                                class="field-val placeholder">[DATA PENDING]</span></div>
+                        <div class="char-field"><span class="field-key">PERSONALITY:</span> <span
+                                class="field-val placeholder">[DATA PENDING]</span></div>
+                        <div class="char-field"><span class="field-key">NOTES:</span> <span
+                                class="field-val placeholder">[DATA PENDING]</span></div>
+                    </div>
+                </div>
+
+                <!-- 綿瀬絵躯 -->
+                <div class="char-card" data-id="ekuro">
+                    <div class="char-header">
+                        <span class="char-id">No.5</span>
+                        <span class="char-name">綿瀬絵躯 <span class="char-name-en">Watase Emu</span></span>
+                        <span class="char-tag tag-delusion">妄想體</span>
+                    </div>
+                    <div class="char-body">
+                        <div class="char-field"><span class="field-key">STATUS:</span> <span
+                                class="field-val status-delusion">妄想體 / CONSTRUCT</span></div>
+                        <div class="char-field"><span class="field-key">PHASE:</span> <span class="field-val">Phase 4 —
+                                The Cold Abyss</span></div>
+                        <div class="char-field"><span class="field-key">APPEARANCE:</span> <span
+                                class="field-val placeholder">[DATA PENDING]</span></div>
+                        <div class="char-field"><span class="field-key">PERSONALITY:</span> <span
+                                class="field-val placeholder">[DATA PENDING]</span></div>
+                        <div class="char-field"><span class="field-key">NOTES:</span> <span
+                                class="field-val placeholder">[DATA PENDING]</span></div>
+                    </div>
+                </div>
+
+                <!-- 天道真晝 -->
+                <div class="char-card" data-id="mahiru">
+                    <div class="char-header">
+                        <span class="char-id">No.6</span>
+                        <span class="char-name">天道真晝 <span class="char-name-en">Tendo Mahiru</span></span>
+                        <span class="char-tag tag-delusion">妄想體</span>
+                    </div>
+                    <div class="char-body">
+                        <div class="char-field"><span class="field-key">STATUS:</span> <span
+                                class="field-val status-delusion">妄想體 / CONSTRUCT</span></div>
+                        <div class="char-field"><span class="field-key">PHASE:</span> <span class="field-val">Phase 2 —
+                                The Red Anxiety</span></div>
+                        <div class="char-field"><span class="field-key">APPEARANCE:</span> <span
+                                class="field-val placeholder">[DATA PENDING]</span></div>
+                        <div class="char-field"><span class="field-key">PERSONALITY:</span> <span
+                                class="field-val placeholder">[DATA PENDING]</span></div>
+                        <div class="char-field"><span class="field-key">NOTES:</span> <span
+                                class="field-val placeholder">[DATA PENDING]</span></div>
+                    </div>
+                </div>
+
+                <!-- 氷堂再 -->
+                <div class="char-card" data-id="sai">
+                    <div class="char-header">
+                        <span class="char-id">No.7</span>
+                        <span class="char-name">氷堂再 <span class="char-name-en">Hyoudo Sai</span></span>
+                        <span class="char-tag tag-delusion">妄想體</span>
+                    </div>
+                    <div class="char-body">
+                        <div class="char-field"><span class="field-key">STATUS:</span> <span
+                                class="field-val status-delusion">妄想體 / CONSTRUCT</span></div>
+                        <div class="char-field"><span class="field-key">PHASE:</span> <span class="field-val">Phase 4 —
+                                The Cold Abyss</span></div>
+                        <div class="char-field"><span class="field-key">APPEARANCE:</span> <span
+                                class="field-val placeholder">[DATA PENDING]</span></div>
+                        <div class="char-field"><span class="field-key">PERSONALITY:</span> <span
+                                class="field-val placeholder">[DATA PENDING]</span></div>
+                        <div class="char-field"><span class="field-key">NOTES:</span> <span
+                                class="field-val placeholder">[DATA PENDING]</span></div>
+                    </div>
+                </div>
+
+                <!-- 湊宵 -->
+                <div class="char-card" data-id="yoi">
+                    <div class="char-header">
+                        <span class="char-id">No.8</span>
+                        <span class="char-name">湊宵 <span class="char-name-en">Minato Yoi</span></span>
+                        <span class="char-tag tag-delusion">妄想體</span>
+                    </div>
+                    <div class="char-body">
+                        <div class="char-field"><span class="field-key">STATUS:</span> <span
+                                class="field-val status-delusion">妄想體 / CONSTRUCT</span></div>
+                        <div class="char-field"><span class="field-key">PHASE:</span> <span class="field-val">Phase 2 /
+                                4 — Cross-phase</span></div>
+                        <div class="char-field"><span class="field-key">APPEARANCE:</span> <span
+                                class="field-val placeholder">[DATA PENDING]</span></div>
+                        <div class="char-field"><span class="field-key">PERSONALITY:</span> <span
+                                class="field-val placeholder">[DATA PENDING]</span></div>
+                        <div class="char-field"><span class="field-key">NOTES:</span> <span
+                                class="field-val placeholder">[DATA PENDING]</span></div>
+                    </div>
+                </div>
+
+                <!-- 姬海棠雛 -->
+                <div class="char-card" data-id="hina">
+                    <div class="char-header">
+                        <span class="char-id">No.9</span>
+                        <span class="char-name">姬海棠雛 <span class="char-name-en">Himekaidou Hina</span></span>
+                        <span class="char-tag tag-delusion">妄想體</span>
+                    </div>
+                    <div class="char-body">
+                        <div class="char-field"><span class="field-key">STATUS:</span> <span
+                                class="field-val status-delusion">妄想體 / CONSTRUCT</span></div>
+                        <div class="char-field"><span class="field-key">PHASE:</span> <span
+                                class="field-val">[UNCLASSIFIED]</span></div>
+                        <div class="char-field"><span class="field-key">APPEARANCE:</span> <span
+                                class="field-val placeholder">[DATA PENDING]</span></div>
+                        <div class="char-field"><span class="field-key">PERSONALITY:</span> <span
+                                class="field-val placeholder">[DATA PENDING]</span></div>
+                        <div class="char-field"><span class="field-key">NOTES:</span> <span
+                                class="field-val placeholder">[DATA PENDING]</span></div>
+                    </div>
+                </div>
+
+                <!-- 鄰縛 -->
+                <div class="char-card" data-id="rinbaku">
+                    <div class="char-header">
+                        <span class="char-id">No.10</span>
+                        <span class="char-name">鄰縛 <span class="char-name-en">Tonari Baku</span></span>
+                        <span class="char-tag tag-delusion">妄想體？</span>
+                    </div>
+                    <div class="char-body">
+                        <div class="char-field"><span class="field-key">STATUS:</span> <span
+                                class="field-val status-delusion">妄想體 / DOORKEEPER</span></div>
+                        <div class="char-field"><span class="field-key">RELATION:</span> <span
+                                class="field-val">自稱青梅竹馬的粉紅色看守。來源不明。</span></div>
+                        <div class="char-field"><span class="field-key">APPEARANCE:</span> <span
+                                class="field-val placeholder">[DATA PENDING]</span></div>
+                        <div class="char-field"><span class="field-key">PERSONALITY:</span> <span
+                                class="field-val placeholder">[DATA PENDING]</span></div>
+                        <div class="char-field"><span class="field-key">NOTES:</span> <span
+                                class="field-val placeholder">[DATA PENDING]</span></div>
+                    </div>
+                </div>
+
+            </div>
+
+            <button id="btn-back-chars" class="btn">返回 (BACK)</button>
+        </div>
+
+        <!-- Gameplay Screen -->
+        <div id="gameplay-screen" class="screen hidden">
+            <div id="phase-indicator" class="phase-indicator">Phase ?</div>
+
+            <!-- Bug flood container for Phase 1 animation -->
+            <div id="bug-flood-container"></div>
+
+            <div id="text-container" class="text-container">
+                <div id="history-log"></div>
+                <div id="current-text"></div>
+                <span id="caret" class="caret"></span>
+            </div>
+
+            <div id="choices-container" class="choices-container hidden">
+                <!-- Choices will be injected here -->
+            </div>
+
+            <!-- LOG Overlay -->
+            <div id="log-overlay" class="log-overlay hidden">
+                <div class="log-header">
+                    <h2>📜 對話紀錄 LOG</h2>
+                    <button id="btn-close-log" class="btn log-close-btn">✕ 關閉</button>
+                </div>
+                <div id="log-content" class="log-content">
+                    <!-- Log entries injected here -->
+                </div>
+            </div>
+
+            <div class="ui-controls">
+                <button id="btn-save" class="control-btn">SAVE</button>
+                <button id="btn-auto" class="control-btn">AUTO</button>
+                <button id="btn-log" class="control-btn">LOG</button>
+                <button id="btn-menu" class="control-btn">MENU</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="story.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
