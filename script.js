@@ -8,7 +8,8 @@ let gameState = {
     history: [],      // { phase, text } for LOG feature
     scores: {},
     pendingEcho: '',
-    atEnding: false
+    atEnding: false,
+    atPatientRegistration: false
 };
 
 // --- DOM Elements ---
@@ -60,6 +61,19 @@ const quickSaveGrid = document.getElementById('quick-save-grid');
 const btnCloseQuickSave = document.getElementById('btn-close-quick-save');
 const whiteDoorScene = document.getElementById('white-door-scene');
 const btnWhiteDoor = document.getElementById('btn-white-door');
+const supportDoorPanel = document.getElementById('support-door-panel');
+const supportDoorLink = document.getElementById('support-door-link');
+const supportDoorStatus = document.getElementById('support-door-status');
+const globalPatientCountEl = document.getElementById('global-patient-count');
+
+// Verified creator sponsorship page shown only after the TRUE ending.
+const SUPPORT_URL = 'https://ko-fi.com/akibamai';
+const SUPPORT_PROJECT_URL = 'https://github.com/shizukubow-drop/WARD_13';
+const GLOBAL_PATIENT_API_URL = 'https://ward13-patient-registry.shizukubow.workers.dev';
+const BASE_PATIENT_COUNT = 11;
+let globalPatientTotal = BASE_PATIENT_COUNT;
+let patientRegistrationPending = false;
+let patientRegistrationPromise = null;
 
 // --- Sliders ---
 const brightnessSlider = document.getElementById('brightness-slider');
@@ -273,9 +287,10 @@ const REQUIRED_BAD_ENDINGS = [
     'end_rinbaku'
 ];
 
-// The web edition is designed for a short viral play cycle. Requiring every
-// route would turn the shared opening into ten nearly identical replays.
-const WHITE_DOOR_FRAGMENT_THRESHOLD = 3;
+// The white door is the reward for completing every non-TRUE ending.
+// Derive the threshold from the route list so future additions cannot make
+// the counter and unlock condition disagree.
+const WHITE_DOOR_FRAGMENT_THRESHOLD = REQUIRED_BAD_ENDINGS.length;
 
 const SCORE_KEYS = [...REQUIRED_BAD_ENDINGS];
 
@@ -493,6 +508,7 @@ function init() {
     try {
         installArchiveMotifs();
         initArchiveLayer();
+        syncGlobalPatientState();
         // The chat archive comes first. The content warning is revealed only
         // after the reader opens (or skips) the recovered attachment.
         if (btnEnter) {
@@ -533,6 +549,13 @@ function init() {
         // Gameplay click to advance
         if (gameplayScreen) {
             gameplayScreen.addEventListener('click', (e) => {
+                const whiteDoorButton = e.target.closest('#btn-white-door');
+                if (whiteDoorButton) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    renderNode('end_rinbaku');
+                    return;
+                }
                 const anomaly = e.target.closest('.anomaly-trigger');
                 if (anomaly) {
                     e.preventDefault();
@@ -581,10 +604,11 @@ function init() {
         if (btnCloseLog) btnCloseLog.addEventListener('click', toggleLog);
         if (btnSave) btnSave.addEventListener('click', showQuickSaveOverlay);
         if (btnCloseQuickSave) btnCloseQuickSave.addEventListener('click', hideQuickSaveOverlay);
-        if (btnWhiteDoor) btnWhiteDoor.addEventListener('click', (event) => {
+        if (btnWhiteDoor) btnWhiteDoor.onclick = (event) => {
+            event.preventDefault();
             event.stopPropagation();
             renderNode('end_rinbaku');
-        });
+        };
         if (quickSaveOverlay) quickSaveOverlay.addEventListener('click', (event) => {
             event.stopPropagation();
             if (event.target === quickSaveOverlay) hideQuickSaveOverlay();
@@ -778,8 +802,153 @@ function showInlineAnomaly(kind) {
 }
 
 function revealTitleScreen() {
+    updateSupportDoor();
     titleScreen.classList.remove('hidden');
     setTimeout(() => titleScreen.classList.add('active'), 100);
+}
+
+function updateSupportDoor() {
+    if (!supportDoorPanel) return;
+    const unlocked = getUnlockedEndings();
+    const isVisible = !!unlocked.end_rinbaku_good_mother;
+    const hasSponsorPage = SUPPORT_URL.trim().length > 0;
+
+    supportDoorPanel.classList.toggle('hidden', !isVisible);
+    supportDoorPanel.setAttribute('aria-hidden', String(!isVisible));
+    titleScreen.classList.toggle('support-unlocked', isVisible);
+
+    if (!isVisible || !supportDoorLink) return;
+    supportDoorLink.href = hasSponsorPage ? SUPPORT_URL : SUPPORT_PROJECT_URL;
+    supportDoorLink.textContent = hasSponsorPage
+        ? '透過 Ko-fi 贊助 WARD_13 二代開發'
+        : '贊助管道準備中｜追蹤二代開發';
+    if (supportDoorStatus) {
+        supportDoorStatus.textContent = hasSponsorPage
+            ? '每一份支持，都會被用在新的形體、演出與故事上。'
+            : '正式贊助頁開放後，這扇門會直接通往製作計畫。';
+    }
+}
+
+function formatPatientNumber(value) {
+    return String(Math.max(BASE_PATIENT_COUNT, Number(value) || BASE_PATIENT_COUNT)).padStart(6, '0');
+}
+
+function getStoredPatientNumber() {
+    const value = Number(localStorage.getItem('ward13_patient_number') || '0');
+    return Number.isFinite(value) && value >= BASE_PATIENT_COUNT ? value : 0;
+}
+
+function getAnonymousCompletionId() {
+    let id = localStorage.getItem('ward13_completion_id');
+    if (!id) {
+        id = crypto.randomUUID();
+        localStorage.setItem('ward13_completion_id', id);
+    }
+    return id;
+}
+
+function updateIdentityDisplay() {
+    const clearance = document.getElementById('reader-clearance');
+    const patientNumber = getStoredPatientNumber();
+    const unlocked = getUnlockedEndings();
+    const fragments = REQUIRED_BAD_ENDINGS.filter(key => unlocked[key]).length;
+
+    if (clearance) {
+        clearance.textContent = patientNumber
+            ? `PATIENT No.${formatPatientNumber(patientNumber)}\nOBSERVATION CONTINUES`
+            : `READER No.14-${archiveReaderId} // VISIT ${String(archiveVisitCount).padStart(2, '0')} // FRAGMENTS ${Math.min(fragments, WHITE_DOOR_FRAGMENT_THRESHOLD)}/${WHITE_DOOR_FRAGMENT_THRESHOLD}`;
+    }
+    if (patientNumber && !document.hidden) {
+        document.title = `PATIENT No.${formatPatientNumber(patientNumber)} // OBSERVATION CONTINUES`;
+    }
+    updateGlobalPatientCount(globalPatientTotal);
+}
+
+function updateGlobalPatientCount(total, failed = false) {
+    globalPatientTotal = Math.max(BASE_PATIENT_COUNT, Number(total) || BASE_PATIENT_COUNT);
+    if (!globalPatientCountEl) return;
+    globalPatientCountEl.textContent = failed
+        ? `病人登錄總數：${formatPatientNumber(globalPatientTotal)} // 同步待重試`
+        : `病人登錄總數：${formatPatientNumber(globalPatientTotal)}`;
+    globalPatientCountEl.classList.toggle('registry-error', failed);
+}
+
+async function refreshGlobalPatientCount() {
+    if (!GLOBAL_PATIENT_API_URL) {
+        updateGlobalPatientCount(globalPatientTotal, true);
+        return null;
+    }
+    try {
+        const response = await fetch(`${GLOBAL_PATIENT_API_URL}/patients`, { cache: 'no-store' });
+        if (!response.ok) throw new Error(`registry_${response.status}`);
+        const data = await response.json();
+        updateGlobalPatientCount(data.total);
+        return data;
+    } catch (error) {
+        console.warn('PATIENT REGISTRY READ FAILED', error);
+        updateGlobalPatientCount(globalPatientTotal, true);
+        return null;
+    }
+}
+
+async function registerGlobalPatient() {
+    const stored = getStoredPatientNumber();
+    if (stored) return { patientNumber: stored, total: globalPatientTotal };
+    if (!GLOBAL_PATIENT_API_URL) return null;
+    if (patientRegistrationPromise) return patientRegistrationPromise;
+
+    patientRegistrationPromise = (async () => {
+        try {
+            const response = await fetch(`${GLOBAL_PATIENT_API_URL}/patients/complete`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ completionId: getAnonymousCompletionId() })
+            });
+            if (!response.ok) throw new Error(`registry_${response.status}`);
+            const data = await response.json();
+            localStorage.setItem('ward13_patient_number', String(data.patientNumber));
+            updateGlobalPatientCount(data.total);
+            updateIdentityDisplay();
+            return data;
+        } catch (error) {
+            console.warn('PATIENT REGISTRATION FAILED', error);
+            updateGlobalPatientCount(globalPatientTotal, true);
+            return null;
+        } finally {
+            patientRegistrationPromise = null;
+        }
+    })();
+
+    return patientRegistrationPromise;
+}
+
+async function syncGlobalPatientState() {
+    const unlocked = getUnlockedEndings();
+    if (unlocked.end_rinbaku_good_mother && !getStoredPatientNumber()) {
+        await registerGlobalPatient();
+    } else {
+        await refreshGlobalPatientCount();
+    }
+    updateIdentityDisplay();
+}
+
+async function showPatientRegistrationScene() {
+    patientRegistrationPending = true;
+    gameState.atEnding = false;
+    gameState.atPatientRegistration = true;
+    saveGame();
+    choicesContainer.classList.add('hidden');
+    choicesContainer.classList.remove('active');
+    caret.style.display = 'none';
+    currentTextEl.innerHTML = "<span class='case-note'>CASE REGISTRATION IN PROGRESS // GLOBAL INDEX</span>";
+
+    const result = await registerGlobalPatient();
+    currentTextEl.innerHTML = result
+        ? `CASE REVIEW COMPLETE<br><br>READER No.14 STATUS UPDATED:<br>OBSERVER → PATIENT<br><br>病人登錄總數：${formatPatientNumber(result.total)}`
+        : `CASE REVIEW COMPLETE<br><br>READER No.14 STATUS UPDATE PENDING<br>OBSERVER → PATIENT<br><br>病人登錄總數：同步待重試`;
+    currentRenderedText = currentTextEl.innerHTML;
+    patientRegistrationPending = false;
+    saveGame();
 }
 
 function showPhonePrologue() {
@@ -845,12 +1014,7 @@ function initArchiveLayer() {
     archiveVisitCount = parseInt(localStorage.getItem('ward13_visit_count') || '0', 10) + 1;
     localStorage.setItem('ward13_visit_count', archiveVisitCount);
 
-    const clearance = document.getElementById('reader-clearance');
-    if (clearance) {
-        const unlocked = getUnlockedEndings();
-        const fragments = REQUIRED_BAD_ENDINGS.filter(key => unlocked[key]).length;
-        clearance.textContent = `READER No.14-${archiveReaderId} // VISIT ${String(archiveVisitCount).padStart(2, '0')} // FRAGMENTS ${Math.min(fragments, WHITE_DOOR_FRAGMENT_THRESHOLD)}/${WHITE_DOOR_FRAGMENT_THRESHOLD}`;
-    }
+    updateIdentityDisplay();
 
     const returnMessages = [
         'WARD_13／虫單蟲虫虫虫',
@@ -858,13 +1022,19 @@ function initArchiveLayer() {
         '鄰縛：小蒔，妳還在嗎？',
         `READER 14-${archiveReaderId} // OBSERVATION CONTINUES`
     ];
-    document.title = returnMessages[Math.min(archiveVisitCount - 1, returnMessages.length - 1)];
+    const restoreArchiveTitle = () => {
+        const patientNumber = getStoredPatientNumber();
+        document.title = patientNumber
+            ? `PATIENT No.${formatPatientNumber(patientNumber)} // OBSERVATION CONTINUES`
+            : returnMessages[Math.min(archiveVisitCount - 1, returnMessages.length - 1)];
+    };
+    restoreArchiveTitle();
 
     document.addEventListener('visibilitychange', () => {
         if (document.hidden) {
             document.title = '（1）鄰縛：不要把我留在這裡';
         } else {
-            document.title = returnMessages[Math.min(archiveVisitCount - 1, returnMessages.length - 1)];
+            restoreArchiveTitle();
         }
     });
 
@@ -1035,8 +1205,11 @@ function showTitleScreen() {
     logOverlay.classList.add('hidden');
     setTimeout(() => {
         gameplayScreen.classList.add('hidden');
+        updateSupportDoor();
         titleScreen.classList.remove('hidden');
         titleScreen.classList.add('active');
+        updateIdentityDisplay();
+        syncGlobalPatientState();
         if (btnLoad && localStorage.getItem('ward13_save')) {
             btnLoad.style.display = '';
         }
@@ -1055,7 +1228,8 @@ function startGame() {
         socialMemory: createSocialMemory(),
         errorFlags: {},
         pendingEcho: '',
-        atEnding: false
+        atEnding: false,
+        atPatientRegistration: false
     };
     showGameplay(() => {
         renderNode(gameState.currentNode);
@@ -1089,6 +1263,7 @@ function loadState(state) {
     if (!gameState.errorFlags) gameState.errorFlags = {};
     if (gameState.pendingEcho === undefined) gameState.pendingEcho = '';
     if (gameState.atEnding === undefined) gameState.atEnding = false;
+    if (gameState.atPatientRegistration === undefined) gameState.atPatientRegistration = false;
     renderSaveSlots();
     showGameplay(() => {
         renderNode(gameState.currentNode);
@@ -1175,6 +1350,7 @@ function renderNode(nodeId) {
     // Save current node
     gameState.currentNode = nodeId;
     gameState.atEnding = false;
+    gameState.atPatientRegistration = false;
     saveGame();
     if (whiteDoorScene) {
         whiteDoorScene.classList.toggle('hidden', nodeId !== 'white_door');
@@ -1482,7 +1658,18 @@ function completeText() {
 }
 
 function advanceStory() {
+    if (gameState.atPatientRegistration) {
+        if (patientRegistrationPending) return;
+        gameState.atPatientRegistration = false;
+        saveGame();
+        showTitleScreen();
+        return;
+    }
     if (gameState.atEnding) {
+        if (gameState.currentNode === ENDINGS.end_rinbaku_good_mother.finalNode) {
+            showPatientRegistrationScene();
+            return;
+        }
         gameState.atEnding = false;
         showTitleScreen();
         return;
@@ -1709,7 +1896,9 @@ function updateGalleryCards() {
             card.onclick = () => replayEnding(key);
         } else {
             card.classList.remove('unlocked');
-            card.onclick = null;
+            // A gated ending becomes playable as soon as its requirements are
+            // met, even before its own card has been marked as completed.
+            card.onclick = available ? () => replayEnding(key) : null;
         }
 
         card.classList.toggle('available', available && !unlocked[key]);
@@ -2003,7 +2192,8 @@ function replayEnding(endingKey) {
         history: [],
         scores: createInitialScores(),
         pendingEcho: '',
-        atEnding: false
+        atEnding: false,
+        atPatientRegistration: false
     };
 
     galleryScreen.classList.remove('active');

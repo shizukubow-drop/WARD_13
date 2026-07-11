@@ -10,7 +10,7 @@
     <meta property="og:type" content="website">
     <meta name="theme-color" content="#000000">
     <title>WARD_13／虫單蟲虫虫虫</title>
-    <link rel="stylesheet" href="style.css?v=20260711-responsive-matrix-qa">
+    <link rel="stylesheet" href="style.css?v=20260712-global-patient-registry">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -132,6 +132,7 @@
                 <h1 class="game-title glitched" data-text="WARD_13">WARD_13</h1>
                 <p class="subtitle">虫單蟲虫虫虫</p>
                 <p id="reader-clearance" class="reader-clearance">READER No.14 // IDENTIFICATION PENDING</p>
+                <p id="global-patient-count" class="global-patient-count" aria-live="polite">病人登錄總數：連線中</p>
             </div>
             <div class="menu">
                 <button id="btn-start" class="btn menu-btn">
@@ -150,6 +151,18 @@
                     <span class="btn-icon">⚙</span> 系統設定 <span class="btn-sub">SETTINGS</span>
                 </button>
             </div>
+            <aside id="support-door-panel" class="support-door-panel hidden" aria-labelledby="support-door-title" aria-hidden="true">
+                <div class="support-door-mini" aria-hidden="true"><span></span></div>
+                <div class="support-door-copy">
+                    <p class="support-door-kicker">WHITE DOOR // SEQUEL FUND</p>
+                    <h2 id="support-door-title">讓第十三病房擁有下一個形體</h2>
+                    <p>妳的支持會用於二代的 3D 美術、更多演出、擴充劇情、真正完整的結局，以及中／英／日三語版本。</p>
+                    <p class="support-door-plan">目前：Ko-fi 純贊助｜之後：itch.io 完整版 US$3 / US$5（內部測試完成後公開）｜Patreon 暫不啟用</p>
+                    <a id="support-door-link" class="support-door-link" href="https://ko-fi.com/akibamai" target="_blank" rel="noopener noreferrer">透過 Ko-fi 贊助 WARD_13 二代開發</a>
+                    <small id="support-door-status">每一份支持，都會被用在新的形體、演出與故事上。</small>
+                    <small><a href="PRIVACY.md" target="_blank" rel="noopener noreferrer">全球病人登錄與隱私說明</a></small>
+                </div>
+            </aside>
             <div class="credits">
                 <p>Created by 秋葉蒔 (Akiba Mai)</p>
                 <p class="archive-note">個案資料復原介面 // 未經授權的閱覽將被記錄</p>
@@ -205,7 +218,7 @@
         <!-- Gallery Screen -->
         <div id="gallery-screen" class="screen hidden">
             <h1 class="gallery-title">◈ ENDING GALLERY</h1>
-            <p class="gallery-subtitle">已解鎖 <span id="ending-progress">0 / 11</span>。取得三份不同結局殘片後，白門才會出現。</p>
+            <p class="gallery-subtitle">已解鎖 <span id="ending-progress">0 / 11</span>。集齊十個非 TRUE 結局後，白門才會出現。</p>
 
             <div class="gallery-grid">
                 <div class="gallery-card" id="card-mizore" data-ending="end_mizore">
@@ -589,7 +602,7 @@
                     <span></span><span></span><span></span><span></span><span></span><span></span>
                     <span></span><span></span><span></span><span></span><span></span><span></span>
                 </div>
-                <button id="btn-white-door" class="white-door" type="button" aria-label="打開白門，進入真結局"><span class="white-door-knob"></span></button>
+                <button id="btn-white-door" class="white-door" type="button" aria-label="打開白門，進入真結局" onclick="renderNode('end_rinbaku')"><span class="white-door-knob"></span></button>
                 <p>門外有人說，妳已經康復了。</p>
             </div>
 
@@ -625,8 +638,8 @@
         </div>
     </div>
 
-    <script src="story.js?v=20260711-good-mother-door"></script>
-    <script src="script.js?v=20260711-good-mother-door"></script>
+    <script src="story.js?v=20260712-all-endings-door"></script>
+    <script src="script.js?v=20260712-kofi-support"></script>
 </body>
 
 </html>
