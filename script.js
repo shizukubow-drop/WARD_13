@@ -66,9 +66,8 @@ const supportDoorLink = document.getElementById('support-door-link');
 const supportDoorStatus = document.getElementById('support-door-status');
 const globalPatientCountEl = document.getElementById('global-patient-count');
 
-// Set this to the creator's Ko-fi (or another verified sponsorship page) when
-// it is ready. Until then the post-TRUE CTA honestly links to project updates.
-const SUPPORT_URL = '';
+// Verified creator sponsorship page shown only after the TRUE ending.
+const SUPPORT_URL = 'https://ko-fi.com/akibamai';
 const SUPPORT_PROJECT_URL = 'https://github.com/shizukubow-drop/WARD_13';
 const GLOBAL_PATIENT_API_URL = 'https://ward13-patient-registry.shizukubow.workers.dev';
 const BASE_PATIENT_COUNT = 11;
@@ -821,7 +820,7 @@ function updateSupportDoor() {
     if (!isVisible || !supportDoorLink) return;
     supportDoorLink.href = hasSponsorPage ? SUPPORT_URL : SUPPORT_PROJECT_URL;
     supportDoorLink.textContent = hasSponsorPage
-        ? '贊助 WARD_13 二代開發'
+        ? '透過 Ko-fi 贊助 WARD_13 二代開發'
         : '贊助管道準備中｜追蹤二代開發';
     if (supportDoorStatus) {
         supportDoorStatus.textContent = hasSponsorPage
