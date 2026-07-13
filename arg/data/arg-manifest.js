@@ -6,10 +6,13 @@ window.WARD13_ARG_MANIFEST = {
     fictional: true,
     region: "東京臨海副都心・台場地区"
   },
-  storageKey: "ward13_arg_state_v2",
-  completeKey: "ward13_arg_complete_v2",
+  storageKey: "ward13_arg_state_v3",
+  completeKey: "ward13_arg_complete_v3",
   views: [
     { id: "portal", file: "index.html", public: true, navigation: true },
+    { id: "about", file: "about.html", public: true, navigation: false },
+    { id: "news", file: "news.html", public: true, navigation: false },
+    { id: "cooperation", file: "cooperation.html", public: true, navigation: false },
     { id: "outpatient", file: "outpatient.html", public: true, navigation: true },
     { id: "departments", file: "departments.html", public: true, navigation: true },
     { id: "doctors", file: "doctors.html", public: true, navigation: true },
