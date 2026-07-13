@@ -1339,3 +1339,213 @@ window.WARD13_ARG_CONTENT = {
     }
   }
 };
+
+window.WARD13_ARG_PUBLIC_2016 = {
+  locales: {
+    ja: {
+      nav: { about: "病院概要", cooperation: "医療関係者の方へ", news: "お知らせ" },
+      ui: { textSize: "文字サイズ", small: "小", standard: "標準", large: "大", print: "印刷", siteMap: "サイトマップ", updated: "更新日 2016/07/15" },
+      portal2016: {
+        audienceTitle: "目的から探す",
+        patientTitle: "初めて受診される方", patientBody: "初診受付、紹介状、当日の持ち物と受診の流れをご案内します。",
+        visitorTitle: "入院・面会の方", visitorBody: "面会時間、入館手続き、病棟でのお願いをご確認ください。",
+        professionalTitle: "医療関係者の方", professionalBody: "患者さんのご紹介、診療予約、地域医療連携室のご案内です。",
+        profileTitle: "病院概要（2015年度実績）", allNews: "お知らせ一覧を見る",
+        news3Date: "2016/07/08", news3Title: "夏季期間中の外来診療について", news3Body: "診療科ごとの休診・代診は外来担当表でご確認ください。"
+      },
+      about: {
+        title: "病院概要", lead: "台場臨海記念病院の理念、施設概要、指定医療機関および診療実績をご案内します。",
+        principleTitle: "基本理念", principleBody: "私たちは東京湾岸地域の急性期・専門医療を担い、患者さんの尊厳と安全を第一に、地域の医療機関と切れ目のない診療を行います。",
+        overviewTitle: "施設概要", operatorLabel: "開設者", operatorValue: "医療法人 潮境会", openedLabel: "開院", bedsLabel: "許可病床数", departmentsLabel: "標榜診療科", directorLabel: "病院長", locationLabel: "所在地",
+        designationTitle: "主な指定・承認", designationList: "地域医療支援病院｜二次救急医療機関｜災害時医療連携病院｜臨床研修指定病院",
+        statsTitle: "2015年度 診療実績", outpatientStatLabel: "一日平均外来患者数", emergencyStatLabel: "救急受診件数", ambulanceStatLabel: "救急車受入件数",
+        historyTitle: "沿革", historyBody: "1998年4月に開院。2001年に湾岸観察棟を増築し、2014年に外来棟と救急診療部を改修しました。",
+        note: "掲載数値は2015年度集計または2016年4月1日現在です。"
+      },
+      cooperation: {
+        title: "医療関係者の方へ", lead: "地域の医療機関からの患者紹介、診療予約、逆紹介および診療情報の連携窓口です。",
+        audienceNote: "このページは医療機関・介護事業所などの関係者向けです。一般の受診相談は外来受診案内をご覧ください。",
+        deskTitle: "地域医療連携室", deskBody: "紹介患者さんの予約調整、転院相談、診療情報の受け渡し、退院後の地域支援を一つの窓口で取り扱います。", deskHours: "受付　平日 8:30–17:00／土曜 8:30–12:00",
+        referralTitle: "紹介予約の流れ", referralBody: "診療情報提供書をご準備のうえ、紹介元医療機関から地域医療連携室へお申し込みください。",
+        step1: "紹介診療科と緊急度を確認", step2: "診療情報提供書・検査資料を送付", step3: "当院から予約日時を回答", step4: "患者さんへ予約票と持ち物を案内",
+        documentsTitle: "ご用意いただくもの", documentsList: "診療情報提供書｜画像・検査データ｜保険情報｜紹介元連絡票",
+        returnTitle: "逆紹介・転院相談", returnBody: "急性期治療後は、患者さんと相談のうえ地域のかかりつけ医・回復期施設へ診療情報を引き継ぎます。",
+        urgentTitle: "緊急のご紹介", urgentBody: "緊急性が高い場合は、紹介元医療機関向け案内に記載された専用回線から当直医への取次ぎをお申し出ください。",
+        note: "個人情報を含む資料は、当院所定の方法以外で送信しないでください。"
+      },
+      news: {
+        title: "お知らせ", lead: "患者さん・地域の皆さま・医療関係者へのお知らせを掲載しています。",
+        categoryPatient: "患者さんへ", categoryMedical: "医療関係者", categoryEvent: "地域・講座", categoryFacility: "施設・設備", categoryAdmin: "病院から",
+        n2Date: "2016/07/08", n2Title: "夏季期間中の外来診療について", n2Body: "診療科ごとの休診・代診は外来担当表でご確認ください。",
+        n3Date: "2016/06/20", n3Title: "第18回 湾岸健康講座を開催します", n3Body: "地域の方向けに、睡眠とこころの健康をテーマとした公開講座を開催します。",
+        n4Date: "2016/04/01", n4Title: "外来担当医表を更新しました", n4Body: "2016年4月以降の担当医、専門外来および休診日の情報を更新しました。",
+        n5Date: "2016/02/15", n5Title: "救急入口改修工事のお知らせ", n5Body: "夜間・休日は仮設案内表示に従い、南側救急受付をご利用ください。",
+        note: "過去のお知らせは年度ごとに保管しています。"
+      }
+    },
+    zh: {
+      nav: { about: "醫院概要", cooperation: "醫療人員專區", news: "最新公告" },
+      ui: { textSize: "文字大小", small: "小", standard: "標準", large: "大", print: "列印", siteMap: "網站地圖", updated: "更新日 2016/07/15" },
+      portal2016: {
+        audienceTitle: "依目的查找",
+        patientTitle: "首次就診者", patientBody: "說明初診報到、轉介信、當日攜帶物品與就診流程。",
+        visitorTitle: "住院與探病者", visitorBody: "請先確認探病時間、入館手續與病房注意事項。",
+        professionalTitle: "醫療人員", professionalBody: "提供病患轉介、門診預約與區域醫療合作窗口資訊。",
+        profileTitle: "醫院概要（2015年度實績）", allNews: "查看所有公告",
+        news3Date: "2016/07/08", news3Title: "暑期門診安排公告", news3Body: "各科休診與代診情形請參閱門診醫師表。"
+      },
+      about: {
+        title: "醫院概要", lead: "介紹台場臨海紀念醫院的理念、設施概要、指定醫療資格與診療實績。",
+        principleTitle: "基本理念", principleBody: "本院承擔東京灣岸地區的急性與專科醫療，以病患尊嚴與安全為先，並與區域醫療機構提供不中斷的照護。",
+        overviewTitle: "設施概要", operatorLabel: "設立者", operatorValue: "醫療法人 潮境會", openedLabel: "開院", bedsLabel: "核准病床數", departmentsLabel: "標榜診療科", directorLabel: "院長", locationLabel: "所在地",
+        designationTitle: "主要指定與認可", designationList: "區域醫療支援醫院｜二級急救醫療機構｜災害醫療合作醫院｜臨床研修指定醫院",
+        statsTitle: "2015年度診療實績", outpatientStatLabel: "平均每日門診人次", emergencyStatLabel: "急診就診人次", ambulanceStatLabel: "救護車收治件數",
+        historyTitle: "沿革", historyBody: "1998年4月開院。2001年增建灣岸觀察棟，2014年整修門診大樓與急診部。",
+        note: "所列數據為2015年度統計或截至2016年4月1日之資料。"
+      },
+      cooperation: {
+        title: "醫療人員專區", lead: "辦理區域醫療機構的病患轉介、診療預約、轉回照護與診療資訊合作。",
+        audienceNote: "本頁供醫療機構與長照單位等專業人員使用。一般就診諮詢請參閱門診就診指南。",
+        deskTitle: "區域醫療合作室", deskBody: "統一受理轉介病患預約、轉院諮詢、診療資訊交接與出院後區域支援。", deskHours: "受理時間　平日 8:30–17:00／週六 8:30–12:00",
+        referralTitle: "轉介預約流程", referralBody: "請備妥診療資訊提供書，由轉介醫療機構向區域醫療合作室提出申請。",
+        step1: "確認轉介科別與緊急程度", step2: "傳送診療資訊書與檢查資料", step3: "本院回覆預約日期與時間", step4: "向病患說明預約單與攜帶物品",
+        documentsTitle: "應備資料", documentsList: "診療資訊提供書｜影像與檢查資料｜保險資訊｜轉介機構聯絡單",
+        returnTitle: "轉回照護與轉院諮詢", returnBody: "急性治療結束後，經與病患討論，將診療資訊交接給區域家庭醫師或恢復期機構。",
+        urgentTitle: "緊急轉介", urgentBody: "情況緊急時，請使用轉介機構專用指南記載的專線，要求轉接當值醫師。",
+        note: "含有個人資料的文件，請勿透過本院規定以外的方式傳送。"
+      },
+      news: {
+        title: "最新公告", lead: "刊載提供給病患、區域居民與醫療人員的院方消息。",
+        categoryPatient: "病患公告", categoryMedical: "醫療人員", categoryEvent: "社區・講座", categoryFacility: "設施・設備", categoryAdmin: "院方公告",
+        n2Date: "2016/07/08", n2Title: "暑期門診安排公告", n2Body: "各科休診與代診情形請參閱門診醫師表。",
+        n3Date: "2016/06/20", n3Title: "第18屆灣岸健康講座", n3Body: "將為區域居民舉辦以睡眠與心理健康為主題的公開講座。",
+        n4Date: "2016/04/01", n4Title: "門診醫師表更新", n4Body: "已更新2016年4月起的主治醫師、專科門診與休診日資訊。",
+        n5Date: "2016/02/15", n5Title: "急診入口整修工程公告", n5Body: "夜間與假日請依臨時指標前往南側急診櫃檯。",
+        note: "歷年公告按年度保存。"
+      }
+    },
+    "zh-Hans": {
+      nav: { about: "医院概况", cooperation: "医疗人员专区", news: "最新通知" },
+      ui: { textSize: "文字大小", small: "小", standard: "标准", large: "大", print: "打印", siteMap: "网站地图", updated: "更新日期 2016/07/15" },
+      portal2016: {
+        audienceTitle: "按目的查找",
+        patientTitle: "首次就诊者", patientBody: "说明初诊报到、转诊信、当日携带物品及就诊流程。",
+        visitorTitle: "住院与探视者", visitorBody: "请先确认探视时间、入馆手续及病房注意事项。",
+        professionalTitle: "医疗人员", professionalBody: "提供患者转诊、门诊预约及区域医疗协作窗口信息。",
+        profileTitle: "医院概况（2015年度实绩）", allNews: "查看全部通知",
+        news3Date: "2016/07/08", news3Title: "暑期门诊安排通知", news3Body: "各科停诊与代诊情况请参阅门诊医师表。"
+      },
+      about: {
+        title: "医院概况", lead: "介绍台场临海纪念医院的理念、设施概况、指定医疗资质及诊疗实绩。",
+        principleTitle: "基本理念", principleBody: "本院承担东京湾岸地区的急性与专科医疗，以患者尊严和安全为先，并与区域医疗机构提供连续照护。",
+        overviewTitle: "设施概况", operatorLabel: "设立方", operatorValue: "医疗法人 潮境会", openedLabel: "开院", bedsLabel: "核准床位数", departmentsLabel: "标榜诊疗科", directorLabel: "院长", locationLabel: "所在地",
+        designationTitle: "主要指定与认可", designationList: "区域医疗支援医院｜二级急救医疗机构｜灾害医疗协作医院｜临床研修指定医院",
+        statsTitle: "2015年度诊疗实绩", outpatientStatLabel: "日均门诊人次", emergencyStatLabel: "急诊就诊人次", ambulanceStatLabel: "救护车接收件数",
+        historyTitle: "沿革", historyBody: "1998年4月开院。2001年增建湾岸观察栋，2014年改建门诊楼与急诊部。",
+        note: "所列数据为2015年度统计或截至2016年4月1日的资料。"
+      },
+      cooperation: {
+        title: "医疗人员专区", lead: "办理区域医疗机构的患者转诊、诊疗预约、转回照护及诊疗信息协作。",
+        audienceNote: "本页供医疗机构和长期照护单位等专业人员使用。一般就诊咨询请查看门诊就诊指南。",
+        deskTitle: "区域医疗协作室", deskBody: "统一受理转诊患者预约、转院咨询、诊疗信息交接及出院后的区域支援。", deskHours: "受理时间　工作日 8:30–17:00／周六 8:30–12:00",
+        referralTitle: "转诊预约流程", referralBody: "请备妥诊疗信息提供书，由转诊医疗机构向区域医疗协作室提出申请。",
+        step1: "确认转诊科室与紧急程度", step2: "发送诊疗信息书与检查资料", step3: "本院回复预约日期和时间", step4: "向患者说明预约单及携带物品",
+        documentsTitle: "应备资料", documentsList: "诊疗信息提供书｜影像与检查资料｜保险信息｜转诊机构联系单",
+        returnTitle: "转回照护与转院咨询", returnBody: "急性治疗结束后，经与患者沟通，将诊疗信息移交给区域家庭医生或恢复期机构。",
+        urgentTitle: "紧急转诊", urgentBody: "情况紧急时，请使用转诊机构专用指南所载专线，要求转接值班医师。",
+        note: "含有个人信息的文件，请勿通过本院规定以外的方式发送。"
+      },
+      news: {
+        title: "最新通知", lead: "刊载面向患者、区域居民及医疗人员的院方信息。",
+        categoryPatient: "患者通知", categoryMedical: "医疗人员", categoryEvent: "社区・讲座", categoryFacility: "设施・设备", categoryAdmin: "院方通知",
+        n2Date: "2016/07/08", n2Title: "暑期门诊安排通知", n2Body: "各科停诊与代诊情况请参阅门诊医师表。",
+        n3Date: "2016/06/20", n3Title: "举办第18届湾岸健康讲座", n3Body: "将为区域居民举办以睡眠与心理健康为主题的公开讲座。",
+        n4Date: "2016/04/01", n4Title: "门诊医师表已更新", n4Body: "已更新2016年4月起的主治医师、专科门诊及停诊日信息。",
+        n5Date: "2016/02/15", n5Title: "急诊入口改建工程通知", n5Body: "夜间及节假日请按临时指示前往南侧急诊服务台。",
+        note: "历年通知按年度保存。"
+      }
+    },
+    ko: {
+      nav: { about: "병원 개요", cooperation: "의료기관 전용", news: "병원 소식" },
+      ui: { textSize: "글자 크기", small: "작게", standard: "보통", large: "크게", print: "인쇄", siteMap: "사이트맵", updated: "갱신일 2016/07/15" },
+      portal2016: {
+        audienceTitle: "목적별 안내",
+        patientTitle: "처음 내원하시는 분", patientBody: "초진 접수, 진료의뢰서, 당일 준비물과 진료 절차를 안내합니다.",
+        visitorTitle: "입원・면회 안내", visitorBody: "면회 시간, 출입 절차와 병동 이용 수칙을 확인해 주십시오.",
+        professionalTitle: "의료기관 관계자", professionalBody: "환자 의뢰, 진료 예약 및 지역의료협력실 이용 안내입니다.",
+        profileTitle: "병원 개요(2015년도 실적)", allNews: "전체 소식 보기",
+        news3Date: "2016/07/08", news3Title: "하계 외래 진료 안내", news3Body: "진료과별 휴진과 대진은 외래 담당표에서 확인해 주십시오."
+      },
+      about: {
+        title: "병원 개요", lead: "다이바 임해기념병원의 이념, 시설 개요, 지정 의료기관 현황과 진료 실적을 안내합니다.",
+        principleTitle: "기본 이념", principleBody: "도쿄만 연안 지역의 급성기・전문 의료를 담당하며, 환자의 존엄과 안전을 최우선으로 지역 의료기관과 연속적인 진료를 제공합니다.",
+        overviewTitle: "시설 개요", operatorLabel: "개설자", operatorValue: "의료법인 시오자카이", openedLabel: "개원", bedsLabel: "허가 병상 수", departmentsLabel: "표방 진료과", directorLabel: "병원장", locationLabel: "소재지",
+        designationTitle: "주요 지정・승인", designationList: "지역의료지원병원｜2차 응급의료기관｜재해 의료협력병원｜임상연수 지정병원",
+        statsTitle: "2015년도 진료 실적", outpatientStatLabel: "일평균 외래 환자", emergencyStatLabel: "응급 진료 건수", ambulanceStatLabel: "구급차 수용 건수",
+        historyTitle: "연혁", historyBody: "1998년 4월 개원. 2001년 만안 관찰동을 증축하고 2014년 외래동과 응급진료부를 개보수했습니다.",
+        note: "게재 수치는 2015년도 집계 또는 2016년 4월 1일 현재 자료입니다."
+      },
+      cooperation: {
+        title: "의료기관 관계자 안내", lead: "지역 의료기관의 환자 의뢰, 진료 예약, 회송 및 진료정보 연계 창구입니다.",
+        audienceNote: "이 페이지는 의료기관과 요양기관 관계자용입니다. 일반 진료 상담은 외래 진료 안내를 이용해 주십시오.",
+        deskTitle: "지역의료협력실", deskBody: "의뢰 환자 예약 조정, 전원 상담, 진료정보 전달과 퇴원 후 지역 지원을 한 창구에서 담당합니다.", deskHours: "접수　평일 8:30–17:00／토요일 8:30–12:00",
+        referralTitle: "진료 의뢰 절차", referralBody: "진료정보제공서를 준비하여 의뢰 의료기관에서 지역의료협력실로 신청해 주십시오.",
+        step1: "의뢰 진료과와 긴급도 확인", step2: "진료정보제공서와 검사자료 전송", step3: "본원에서 예약 일시 회신", step4: "환자에게 예약표와 준비물 안내",
+        documentsTitle: "준비 서류", documentsList: "진료정보제공서｜영상・검사자료｜보험정보｜의뢰기관 연락표",
+        returnTitle: "회송・전원 상담", returnBody: "급성기 치료 후 환자와 상의하여 지역 주치의 또는 회복기 기관으로 진료정보를 인계합니다.",
+        urgentTitle: "긴급 의뢰", urgentBody: "긴급성이 높은 경우 의료기관용 안내에 기재된 전용 회선으로 당직의 연결을 요청해 주십시오.",
+        note: "개인정보가 포함된 자료는 본원이 정한 방법 외에는 전송하지 마십시오."
+      },
+      news: {
+        title: "병원 소식", lead: "환자, 지역 주민과 의료기관 관계자를 위한 소식을 게시합니다.",
+        categoryPatient: "환자 안내", categoryMedical: "의료기관", categoryEvent: "지역・강좌", categoryFacility: "시설・설비", categoryAdmin: "병원 공지",
+        n2Date: "2016/07/08", n2Title: "하계 외래 진료 안내", n2Body: "진료과별 휴진과 대진은 외래 담당표에서 확인해 주십시오.",
+        n3Date: "2016/06/20", n3Title: "제18회 만안 건강강좌 개최", n3Body: "지역 주민을 대상으로 수면과 마음 건강에 관한 공개강좌를 개최합니다.",
+        n4Date: "2016/04/01", n4Title: "외래 담당의 표 갱신", n4Body: "2016년 4월 이후 담당의, 전문외래와 휴진일 정보를 갱신했습니다.",
+        n5Date: "2016/02/15", n5Title: "응급 출입구 개보수 안내", n5Body: "야간과 휴일에는 임시 안내표지에 따라 남측 응급접수를 이용해 주십시오.",
+        note: "지난 소식은 연도별로 보관합니다."
+      }
+    },
+    en: {
+      nav: { about: "Hospital Profile", cooperation: "For Medical Providers", news: "News" },
+      ui: { textSize: "Text size", small: "Small", standard: "Standard", large: "Large", print: "Print", siteMap: "Site map", updated: "Updated 2016/07/15" },
+      portal2016: {
+        audienceTitle: "Find information by purpose",
+        patientTitle: "First-time patients", patientBody: "Initial registration, referral letters, what to bring, and the sequence of your visit.",
+        visitorTitle: "Inpatients and visitors", visitorBody: "Please check visiting hours, entry procedures, and ward policies before arrival.",
+        professionalTitle: "Medical providers", professionalBody: "Patient referrals, appointment coordination, and the Regional Medical Liaison Office.",
+        profileTitle: "Hospital profile (FY2015)", allNews: "View all news",
+        news3Date: "2016/07/08", news3Title: "Outpatient services during the summer period", news3Body: "Please consult the outpatient roster for department closures and substitute physicians."
+      },
+      about: {
+        title: "Hospital Profile", lead: "Mission, facilities, institutional designations, and activity figures for Daiba Waterfront Memorial Hospital.",
+        principleTitle: "Our mission", principleBody: "We provide acute and specialist care for the Tokyo waterfront, placing patient dignity and safety first while working continuously with community medical providers.",
+        overviewTitle: "Facility overview", operatorLabel: "Operator", operatorValue: "Shiokai Medical Corporation", openedLabel: "Opened", bedsLabel: "Licensed beds", departmentsLabel: "Clinical departments", directorLabel: "Hospital Director", locationLabel: "Location",
+        designationTitle: "Principal designations", designationList: "Regional Medical Support Hospital｜Secondary Emergency Medical Institution｜Disaster Medical Liaison Hospital｜Designated Clinical Training Hospital",
+        statsTitle: "FY2015 activity", outpatientStatLabel: "Average outpatients per day", emergencyStatLabel: "Emergency visits", ambulanceStatLabel: "Ambulance admissions",
+        historyTitle: "History", historyBody: "Opened in April 1998. The Bayside Observation Annex was added in 2001, and the outpatient building and emergency department were renovated in 2014.",
+        note: "Figures are for FY2015 or current as of April 1, 2016."
+      },
+      cooperation: {
+        title: "For Medical Providers", lead: "The liaison point for referrals, appointment coordination, return referrals, transfers, and clinical information exchange.",
+        audienceNote: "This page is intended for medical and long-term care providers. Patients seeking general advice should use the Outpatient Care guide.",
+        deskTitle: "Regional Medical Liaison Office", deskBody: "One office coordinates referred-patient appointments, transfer consultations, exchange of clinical records, and community support after discharge.", deskHours: "Hours: Weekdays 8:30–17:00 / Saturday 8:30–12:00",
+        referralTitle: "Referral appointment process", referralBody: "Prepare a clinical referral letter and have the referring provider submit the request to the Regional Medical Liaison Office.",
+        step1: "Confirm the department and urgency", step2: "Send the referral letter and test materials", step3: "Receive the appointment date from our hospital", step4: "Give the patient the appointment slip and preparation list",
+        documentsTitle: "Required materials", documentsList: "Clinical referral letter｜Imaging and test data｜Insurance information｜Referring-provider contact sheet",
+        returnTitle: "Return referrals and transfers", returnBody: "After acute treatment, we consult the patient and transfer clinical information to their community physician or a rehabilitation provider.",
+        urgentTitle: "Urgent referrals", urgentBody: "For an urgent case, use the dedicated line shown in the provider referral guide and request connection to the physician on duty.",
+        note: "Do not transmit documents containing personal information by any method other than those specified by the hospital."
+      },
+      news: {
+        title: "News", lead: "Notices for patients, the waterfront community, and medical providers.",
+        categoryPatient: "For Patients", categoryMedical: "Medical Providers", categoryEvent: "Community & Lectures", categoryFacility: "Facilities", categoryAdmin: "Hospital Notice",
+        n2Date: "2016/07/08", n2Title: "Outpatient services during the summer period", n2Body: "Please consult the outpatient roster for department closures and substitute physicians.",
+        n3Date: "2016/06/20", n3Title: "18th Waterfront Health Lecture", n3Body: "A public lecture for community residents will address sleep and mental well-being.",
+        n4Date: "2016/04/01", n4Title: "Outpatient physician roster updated", n4Body: "Physicians, specialist clinics, and closure dates from April 2016 have been updated.",
+        n5Date: "2016/02/15", n5Title: "Emergency entrance renovation", n5Body: "At night and on holidays, follow the temporary signs to Emergency Reception on the south side.",
+        note: "Earlier notices are retained by fiscal year."
+      }
+    }
+  }
+};
