@@ -6,7 +6,7 @@
 
   function freshState() {
     return {
-      version: 1,
+      version: 2,
       locale: 'ja',
       clues: [],
       gates: {},
@@ -20,7 +20,7 @@
   function loadState() {
     try {
       const parsed = JSON.parse(localStorage.getItem(manifest.storageKey) || 'null');
-      if (!parsed || parsed.version !== 1) return freshState();
+      if (!parsed || parsed.version !== 2) return freshState();
       return {
         ...freshState(),
         ...parsed,

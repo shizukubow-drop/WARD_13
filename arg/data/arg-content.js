@@ -19,7 +19,7 @@ window.WARD13_ARG_CONTENT = {
   locales: {
     ja: {
       global: {
-        workLabel: "WARD_13 FICTIONAL ARCHIVE",
+        workLabel: "WARD_13 ARCHIVE",
         institution: "医療法人 潮境会　台場臨海記念病院",
         region: "東京臨海副都心・台場地区",
         fictionNotice: "本サイトはフィクション作品『WARD_13』の一部です。実在する病院・医療従事者・患者・事件とは関係ありません。",
@@ -49,11 +49,11 @@ window.WARD13_ARG_CONTENT = {
       portal: {
         title: "台場臨海記念病院",
         subtitle: "水際の静けさと、途切れない観察を。",
-        intro: "当院は東京臨海副都心・台場地区に設置された架空の医療施設です。現在、旧湾岸観察棟に関する一般照会を停止しています。",
+        intro: "当院は東京臨海副都心・台場地区の地域医療を担う総合病院です。現在、旧湾岸観察棟に関する一般照会を停止しています。",
         emergency: "旧システム由来の検索結果について",
         emergencyBody: "検索エンジンに残る旧ページは、2016年以前の保管資料です。内容の正確性は保証されません。",
         news1Title: "電子記録システム定期保守のお知らせ",
-        news1Date: "2026/07/13",
+        news1Date: "2016/07/15",
         news1Body: "午前1時13分から午前5時13分まで、保管記録の一部が断続的に表示されます。",
         news2Title: "旧湾岸観察棟の案内終了について",
         news2Date: "2013/09/13",
@@ -70,7 +70,7 @@ window.WARD13_ARG_CONTENT = {
         quickDoctors: "常勤医と外来担当日のご案内",
         quickFloor: "外来、検査、病棟、院内施設の配置",
         quickAccess: "鉄道・バス・面会受付のご案内",
-        footerStatus: "PUBLIC WEB / 最終同期 2026-07-13 05:13 JST"
+        footerStatus: "PUBLIC WEB / 最終同期 2016-07-15 05:13 JST"
       },
       outpatient: {
         title: "外来受診のご案内",
@@ -97,7 +97,7 @@ window.WARD13_ARG_CONTENT = {
         step3: "各診療科受付・問診",
         step4: "診察・検査・処置",
         step5: "会計・院外処方箋の受け取り",
-        note: "このページの医療機関・受付時間・制度案内は ARG のために構成された架空情報です。実際の受診には使用できません。"
+        note: "受付時間は診療科や予約内容により異なる場合があります。来院前に最新の案内をご確認ください。"
       },
       departments: {
         title: "診療科・専門外来",
@@ -114,14 +114,13 @@ window.WARD13_ARG_CONTENT = {
         clinicsList: "不整脈外来｜睡眠時無呼吸外来｜もの忘れ外来｜女性心身外来｜児童思春期外来｜ストレス関連疾患外来｜禁煙支援外来｜セカンドオピニオン外来",
         reservationTitle: "専門外来の予約について",
         reservationBody: "専門外来は原則として一般外来での診察後、または地域医療機関からの紹介により予約します。曜日・担当医は変更になる場合があります。",
-        note: "診療科名・専門外来名は作品上の設定です。実在の医療機関の診療体制を示すものではありません。"
+        note: "担当医・診療日は変更になる場合があります。"
       },
       doctors: {
         title: "医師紹介",
         lead: "各診療科の常勤医・責任者と主な専門領域、外来担当日をご案内します。",
         updatedLabel: "外来担当表更新",
-        updated: "2026年7月1日",
-        fictionNote: "以下の医師名、経歴、専門領域はすべて本作のために作られた架空の情報です。",
+        updated: "2016年7月1日",
         fieldLabel: "専門",
         scheduleLabel: "外来",
         d1Department: "総合内科",
@@ -164,7 +163,7 @@ window.WARD13_ARG_CONTENT = {
         d8Role: "救急・災害医療センター長",
         d8Field: "救急医学、災害医療、集中治療",
         d8Schedule: "救急診療担当（紹介外来なし）",
-        note: "休診・代診情報は本作内の架空運用です。現実の医療判断や受診先選びには利用しないでください。"
+        note: "休診・代診情報は当日の院内掲示および各診療科受付でご確認ください。"
       },
       floor: {
         title: "院内フロア案内",
@@ -186,7 +185,7 @@ window.WARD13_ARG_CONTENT = {
         f1Label: "1F", f1Title: "総合受付・救急外来", f1Body: "総合案内、初再診受付、会計、救急外来、患者支援センター、薬局窓口、売店",
         b1Label: "B1", b1Title: "画像診断・リハビリテーション", b1Body: "一般撮影、CT、MRI、核医学検査、放射線治療、理学・作業・言語療法室",
         b2Label: "B2", b2Title: "病歴管理・設備区画", b2Body: "診療情報管理室、災害備蓄庫、設備機械室（一般立入不可）",
-        note: "13階が掲載されていない状態は、旧サイト保管庫へ続く ARG 上の手がかりです。実在する建物の案内ではありません。"
+        note: "管理区域は職員の案内なく立ち入れません。"
       },
       access: {
         title: "交通・面会案内",
@@ -194,13 +193,13 @@ window.WARD13_ARG_CONTENT = {
         mapLabel: "台場周辺概略図",
         station1Short: "ゆりかもめ 台場駅",
         station2Short: "りんかい線 東京テレポート駅",
-        mapNotice: "概略図／縮尺・位置関係は架空です",
-        locationTitle: "所在地（作品設定）",
-        address: "東京都港区台場・臨海医療区画（架空住所／実在する所在地ではありません）",
+        mapNotice: "概略図／縮尺は正確ではありません",
+        locationTitle: "所在地",
+        address: "東京都港区台場・臨海医療区画",
         railTitle: "鉄道",
         railBody: "ゆりかもめ「台場駅」から徒歩約6分。りんかい線「東京テレポート駅」から徒歩約12分。",
         busTitle: "路線バス",
-        busBody: "「台場臨海病院前」（架空停留所）下車。運行時刻は各交通事業者の案内をご確認ください。",
+        busBody: "「台場臨海病院前」下車。運行時刻は各交通事業者の案内をご確認ください。",
         carTitle: "自動車・駐車場",
         carBody: "患者送迎用の乗降場と有料駐車場を設けています。救急車動線への駐停車はできません。",
         visitTitle: "面会時間",
@@ -208,10 +207,10 @@ window.WARD13_ARG_CONTENT = {
         entryTitle: "面会受付",
         entryBody: "1階面会受付で入館証を受け取り、病棟スタッフの案内に従ってください。体調不良時の面会はお控えください。",
         contactTitle: "お問い合わせ",
-        contactBody: "本サイトは ARG の架空病院サイトのため、実在する代表電話・予約窓口・問い合わせフォームは設置していません。",
+        contactBody: "診療・面会・各種手続きに関するお問い合わせは、1階総合案内で承ります。",
         barrierTitle: "バリアフリー",
         barrierBody: "車いす対応出入口、多目的トイレ、授乳室、筆談ボード、院内用車いすを各公開フロアに配置しています。",
-        note: "台場駅・東京テレポート駅は実在しますが、病院、停留所、住所、所要時間はすべて作品上の設定です。現地探索は行わないでください。"
+        note: "来院前に交通機関の運行状況をご確認ください。"
       },
       archive: {
         title: "旧サイト保管庫",
@@ -252,7 +251,7 @@ window.WARD13_ARG_CONTENT = {
         subtitle: "最終保守日の月日を4桁で入力してください。",
         placeholder: "MMDD",
         denied: "認証情報が一致しません。公開告知の日付を確認してください。",
-        hint1: "定期保守日は7月13日です。",
+        hint1: "定期保守日は7月15日です。",
         hint2: "月2桁＋日2桁。年は入力しません。",
         panelTitle: "管理者追記 / 2013-09-13",
         panelBody: "CASE 00 は退院処理を行わない。第13観察区の入口を削除し、端末側の表示だけを残す。人形識別名を保守端末の合言葉として登録した。",
@@ -304,7 +303,7 @@ window.WARD13_ARG_CONTENT = {
       },
       clue: {
         floor_13_omitted: "公開フロア案内から13階だけが欠落している。",
-        date_0713: "システムは7月13日の05:13に同期を繰り返している。",
+        date_0715: "システムは7月15日の05:13に同期を繰り返している。",
         archive_13_exists: "旧索引には第13観察区の閉鎖記録が残っている。",
         maintenance_crt_w13: "撤去済み端末 CRT-W13 が現在も信号を受信している。",
         cicada_channel: "端末の音声回線には蝉に似た周期ノイズが残る。",
@@ -323,7 +322,7 @@ window.WARD13_ARG_CONTENT = {
     },
     zh: {
       global: {
-        workLabel: "WARD_13 FICTIONAL ARCHIVE",
+        workLabel: "WARD_13 ARCHIVE",
         institution: "醫療法人 潮境會　台場臨海紀念病院",
         region: "東京臨海副都心・台場地區",
         fictionNotice: "本網站是虛構作品《WARD_13》的一部分，與任何真實醫院、醫療人員、病患或事件無關。",
@@ -353,11 +352,11 @@ window.WARD13_ARG_CONTENT = {
       portal: {
         title: "台場臨海紀念病院",
         subtitle: "在水際的寧靜裡，持續不間斷的觀察。",
-        intro: "本院是設於東京臨海副都心・台場地區的架空醫療設施。目前停止受理舊灣岸觀察棟的一般查詢。",
+        intro: "本院是負責東京臨海副都心・台場地區醫療的綜合病院。目前停止受理舊灣岸觀察棟的一般查詢。",
         emergency: "關於舊系統留下的搜尋結果",
         emergencyBody: "搜尋引擎仍可能顯示2016年以前的封存頁面，其內容完整性與正確性不受保證。",
         news1Title: "電子紀錄系統定期維護公告",
-        news1Date: "2026/07/13",
+        news1Date: "2016/07/15",
         news1Body: "凌晨1時13分至5時13分，部分封存紀錄可能斷續出現。",
         news2Title: "舊灣岸觀察棟停止導覽",
         news2Date: "2013/09/13",
@@ -374,7 +373,7 @@ window.WARD13_ARG_CONTENT = {
         quickDoctors: "常勤醫師與外來看診日期",
         quickFloor: "門診、檢查、病房與院內設施配置",
         quickAccess: "鐵路、公車與探視受理資訊",
-        footerStatus: "PUBLIC WEB / 最後同步 2026-07-13 05:13 JST"
+        footerStatus: "PUBLIC WEB / 最後同步 2016-07-15 05:13 JST"
       },
       outpatient: {
         title: "外來就診資訊",
@@ -401,7 +400,7 @@ window.WARD13_ARG_CONTENT = {
         step3: "診療科報到與問診",
         step4: "診察、檢查與處置",
         step5: "結帳並領取院外處方箋",
-        note: "本頁的醫療機構、受理時間與制度均為 ARG 虛構資訊，不可作為實際就醫依據。"
+        note: "受理時間可能因診療科或預約內容而異，來院前請確認最新公告。"
       },
       departments: {
         title: "診療科・專門門診",
@@ -418,14 +417,13 @@ window.WARD13_ARG_CONTENT = {
         clinicsList: "心律不整門診｜睡眠呼吸中止門診｜記憶門診｜女性身心門診｜兒童青少年門診｜壓力相關疾病門診｜戒菸支援門診｜第二意見門診",
         reservationTitle: "專門門診預約方式",
         reservationBody: "原則上須經一般門診診察，或由地區醫療機構轉介後預約。看診日期與負責醫師可能臨時變更。",
-        note: "診療科及專門門診均為作品設定，不代表任何真實醫療機構的診療體制。"
+        note: "負責醫師與看診日期可能有所變更。"
       },
       doctors: {
         title: "醫師介紹",
         lead: "介紹各診療科常勤醫師、負責人、主要專長與外來看診日期。",
         updatedLabel: "外來看診表更新",
-        updated: "2026年7月1日",
-        fictionNote: "以下醫師姓名、經歷與專長全是為本作創作的虛構資訊。",
+        updated: "2016年7月1日",
         fieldLabel: "專長",
         scheduleLabel: "外來",
         d1Department: "綜合內科",
@@ -468,7 +466,7 @@ window.WARD13_ARG_CONTENT = {
         d8Role: "急救・災害醫療中心長",
         d8Field: "急救醫學、災害醫療、重症照護",
         d8Schedule: "負責急救診療（無轉診門診）",
-        note: "休診及代診資訊屬於作品內的虛構運作，不可用於現實醫療判斷或選擇就醫地點。"
+        note: "休診與代診資訊請以當日院內公告及各診療科櫃檯為準。"
       },
       floor: {
         title: "院內樓層導覽",
@@ -490,7 +488,7 @@ window.WARD13_ARG_CONTENT = {
         f1Label: "1F", f1Title: "綜合受理・急救門診", f1Body: "綜合服務台、初複診受理、結帳、急救門診、病患支援中心、藥局窗口、商店",
         b1Label: "B1", b1Title: "影像診斷・復健", b1Body: "一般攝影、CT、MRI、核醫檢查、放射線治療、物理・職能・語言治療室",
         b2Label: "B2", b2Title: "病歷管理・設備區", b2Body: "診療資訊管理室、災害備品庫、設備機械室（禁止一般人員進入）",
-        note: "未刊載13樓是通往舊站封存庫的 ARG 線索，並非真實建築物的導覽。"
+        note: "管理區域未經職員引導不得進入。"
       },
       access: {
         title: "交通・探視資訊",
@@ -498,13 +496,13 @@ window.WARD13_ARG_CONTENT = {
         mapLabel: "台場周邊概略圖",
         station1Short: "百合海鷗號 台場站",
         station2Short: "臨海線 東京電訊站",
-        mapNotice: "概略圖／比例與位置關係皆為虛構",
-        locationTitle: "所在地（作品設定）",
-        address: "東京都港區台場・臨海醫療區劃（虛構地址／並非真實所在地）",
+        mapNotice: "概略圖／比例並非精確",
+        locationTitle: "所在地",
+        address: "東京都港區台場・臨海醫療區劃",
         railTitle: "鐵路",
         railBody: "自百合海鷗號「台場站」步行約6分鐘；自臨海線「東京電訊站」步行約12分鐘。",
         busTitle: "公車",
-        busBody: "於「台場臨海病院前」（虛構站牌）下車。班次請以各交通業者公告為準。",
+        busBody: "於「台場臨海病院前」下車。班次請以各交通業者公告為準。",
         carTitle: "汽車與停車場",
         carBody: "設有病患接送區及收費停車場，禁止在救護車動線停車。",
         visitTitle: "探視時間",
@@ -512,10 +510,10 @@ window.WARD13_ARG_CONTENT = {
         entryTitle: "探視受理",
         entryBody: "請在1樓探視受理處領取入館證，並遵循病房人員指示。身體不適時請勿探視。",
         contactTitle: "聯絡本院",
-        contactBody: "本網站為 ARG 虛構病院網站，未設置真實代表電話、預約窗口或聯絡表單。",
+        contactBody: "診療、探視與各項手續相關問題，請洽1樓綜合服務台。",
         barrierTitle: "無障礙設施",
         barrierBody: "公開樓層設有輪椅出入口、多功能廁所、哺乳室、書寫溝通板與院內輪椅。",
-        note: "台場站與東京電訊站確實存在，但病院、站牌、地址與時間全為作品設定，請勿前往現地探索。"
+        note: "來院前請先確認交通機關的最新運行狀況。"
       },
       archive: {
         title: "舊站封存庫",
@@ -556,7 +554,7 @@ window.WARD13_ARG_CONTENT = {
         subtitle: "請以4位數輸入最後維護日的月日。",
         placeholder: "MMDD",
         denied: "驗證資料不符，請核對公開公告日期。",
-        hint1: "定期維護日是7月13日。",
+        hint1: "定期維護日是7月15日。",
         hint2: "月份2位＋日期2位，不輸入年份。",
         panelTitle: "管理者追加紀錄 / 2013-09-13",
         panelBody: "CASE 00 不執行出院處理。刪除第13觀察區的入口，只保留終端顯示；將人偶識別名登錄為維護終端通關詞。",
@@ -608,7 +606,7 @@ window.WARD13_ARG_CONTENT = {
       },
       clue: {
         floor_13_omitted: "公開樓層導覽只有13樓遭到省略。",
-        date_0713: "系統不斷在7月13日05:13重新同步。",
+        date_0715: "系統不斷在7月15日05:13重新同步。",
         archive_13_exists: "舊索引留下了第13觀察區的關閉紀錄。",
         maintenance_crt_w13: "已拆除的CRT-W13終端至今仍在接收訊號。",
         cicada_channel: "終端音訊線路殘留近似蟬鳴的週期雜訊。",
@@ -627,7 +625,7 @@ window.WARD13_ARG_CONTENT = {
     },
     "zh-Hans": {
       global: {
-        workLabel: "WARD_13 FICTIONAL ARCHIVE",
+        workLabel: "WARD_13 ARCHIVE",
         institution: "医疗法人 潮境会　台场临海纪念病院",
         region: "东京临海副都心・台场地区",
         fictionNotice: "本网站是虚构作品《WARD_13》的一部分，与任何真实医院、医务人员、患者或事件无关。",
@@ -657,11 +655,11 @@ window.WARD13_ARG_CONTENT = {
       portal: {
         title: "台场临海纪念病院",
         subtitle: "守护水岸的宁静，持续不间断的观察。",
-        intro: "本院是设于东京临海副都心・台场地区的虚构医疗设施。目前停止受理有关旧湾岸观察栋的一般咨询。",
+        intro: "本院是承担东京临海副都心・台场地区医疗服务的综合病院。目前停止受理有关旧湾岸观察栋的一般咨询。",
         emergency: "关于旧系统搜索结果的说明",
         emergencyBody: "搜索引擎中残留的旧页面均为2016年以前的存档资料，内容的完整性与准确性不作保证。",
         news1Title: "电子记录系统定期维护通知",
-        news1Date: "2026/07/13",
+        news1Date: "2016/07/15",
         news1Body: "凌晨1时13分至5时13分，部分存档记录可能间歇显示。",
         news2Title: "旧湾岸观察栋停止参观通知",
         news2Date: "2013/09/13",
@@ -678,7 +676,7 @@ window.WARD13_ARG_CONTENT = {
         quickDoctors: "常勤医生及门诊日期",
         quickFloor: "门诊、检查、病房及院内设施分布",
         quickAccess: "轨道交通、公交及探视受理信息",
-        footerStatus: "PUBLIC WEB / 最后同步 2026-07-13 05:13 JST"
+        footerStatus: "PUBLIC WEB / 最后同步 2016-07-15 05:13 JST"
       },
       outpatient: {
         title: "门诊就诊指南",
@@ -705,7 +703,7 @@ window.WARD13_ARG_CONTENT = {
         step3: "诊疗科报到及问诊",
         step4: "诊察、检查与处置",
         step5: "结算并领取院外处方",
-        note: "本页所述医疗机构、受理时间及制度均为 ARG 虚构信息，不可作为实际就医依据。"
+        note: "受理时间可能因诊疗科或预约内容而异，来院前请确认最新通知。"
       },
       departments: {
         title: "诊疗科・专科门诊",
@@ -722,14 +720,13 @@ window.WARD13_ARG_CONTENT = {
         clinicsList: "心律失常门诊｜睡眠呼吸暂停门诊｜记忆门诊｜女性心身门诊｜儿童青少年门诊｜压力相关疾病门诊｜戒烟支援门诊｜第二诊疗意见门诊",
         reservationTitle: "专科门诊预约方式",
         reservationBody: "原则上须经普通门诊诊察，或由地区医疗机构转介后预约。诊疗日期及负责医生可能临时调整。",
-        note: "诊疗科及专科门诊均为作品设定，不代表任何真实医疗机构的诊疗体系。"
+        note: "负责医生及诊疗日期可能有所调整。"
       },
       doctors: {
         title: "医生介绍",
         lead: "介绍各诊疗科常勤医生、负责人、主要专长及门诊日期。",
         updatedLabel: "门诊排班表更新",
-        updated: "2026年7月1日",
-        fictionNote: "以下医生姓名、经历及专长均为本作创作的虚构信息。",
+        updated: "2016年7月1日",
         fieldLabel: "专长",
         scheduleLabel: "门诊",
         d1Department: "综合内科", d1Name: "高瀬 直人（TAKASE NAOTO）", d1Role: "副院长・综合内科部长", d1Field: "综合诊疗、感染病、地区医疗协作", d1Schedule: "周一、周四上午",
@@ -740,7 +737,7 @@ window.WARD13_ARG_CONTENT = {
         d6Department: "整形外科", d6Name: "白石 冬馬（SHIRAISHI TOMA）", d6Role: "整形外科部长", d6Field: "脊柱、关节外科、运动损伤", d6Schedule: "周二、周四上午",
         d7Department: "妇产科", d7Name: "朝倉 玲奈（ASAKURA RENA）", d7Role: "围产期中心主任", d7Field: "围产期医疗、女性健康", d7Schedule: "周一、周三、周五上午",
         d8Department: "急救科", d8Name: "相原 律（AIHARA RITSU）", d8Role: "急救・灾害医疗中心主任", d8Field: "急救医学、灾害医疗、重症监护", d8Schedule: "负责急救诊疗（无转诊门诊）",
-        note: "休诊及代诊信息属于作品内的虚构运营，不可用于现实医疗判断或选择就医地点。"
+        note: "休诊及代诊信息请以当日院内通知及各诊疗科窗口为准。"
       },
       floor: {
         title: "院内楼层指南", lead: "介绍门诊、检查、病房与患者支援设施的分布。", publicNote: "出于病房安全管理考虑，不公开病室编号及管理区域路线。探视人员请先前往1楼探视受理处。",
@@ -760,19 +757,19 @@ window.WARD13_ARG_CONTENT = {
         f1Label: "1F", f1Title: "综合受理・急救门诊", f1Body: "综合服务台、初复诊受理、结算、急救门诊、患者支援中心、药房窗口、商店",
         b1Label: "B1", b1Title: "影像诊断・康复", b1Body: "普通摄影、CT、MRI、核医学检查、放射治疗、物理・作业・语言治疗室",
         b2Label: "B2", b2Title: "病历管理・设备区", b2Body: "诊疗信息管理室、灾害储备库、设备机械室（非工作人员禁止进入）",
-        note: "未刊载13楼是通往旧站档案库的 ARG 线索，并非真实建筑物的楼层指南。"
+        note: "管理区域未经工作人员引导不得进入。"
       },
       access: {
-        title: "交通・探视指南", lead: "介绍乘坐轨道交通、公交来院的方式，以及探视住院患者的手续。", mapLabel: "台场周边示意图", station1Short: "百合海鸥线 台场站", station2Short: "临海线 东京电讯站", mapNotice: "示意图／比例与位置关系均为虚构",
-        locationTitle: "所在地（作品设定）", address: "东京都港区台场・临海医疗区划（虚构地址／并非真实所在地）",
+        title: "交通・探视指南", lead: "介绍乘坐轨道交通、公交来院的方式，以及探视住院患者的手续。", mapLabel: "台场周边示意图", station1Short: "百合海鸥线 台场站", station2Short: "临海线 东京电讯站", mapNotice: "示意图／比例并非精确",
+        locationTitle: "所在地", address: "东京都港区台场・临海医疗区划",
         railTitle: "轨道交通", railBody: "从百合海鸥线“台场站”步行约6分钟；从临海线“东京电讯站”步行约12分钟。",
-        busTitle: "公交", busBody: "在“台场临海病院前”（虚构站点）下车。班次请以各交通运营方公告为准。",
+        busTitle: "公交", busBody: "在“台场临海病院前”下车。班次请以各交通运营方公告为准。",
         carTitle: "驾车与停车场", carBody: "设有患者接送区及收费停车场，禁止在救护车通道停车。",
         visitTitle: "探视时间", visitBody: "工作日 14:00–19:00／周六、周日及节假日 13:00–18:00。各病房可能实行预约或人数限制。",
         entryTitle: "探视受理", entryBody: "请在1楼探视受理处领取入馆证，并遵循病房工作人员指引。身体不适时请勿探视。",
-        contactTitle: "联系我们", contactBody: "本网站是 ARG 虚构病院网站，未设置真实总机号码、预约窗口或联系表单。",
+        contactTitle: "联系我们", contactBody: "有关诊疗、探视及各项手续的问题，请咨询1楼综合服务台。",
         barrierTitle: "无障碍设施", barrierBody: "公开楼层设有无障碍出入口、多功能卫生间、哺乳室、书写沟通板及院内轮椅。",
-        note: "台场站与东京电讯站真实存在，但病院、站点、地址及所需时间均为作品设定，请勿前往现场探索。"
+        note: "来院前请确认交通机构的最新运行情况。"
       },
       archive: {
         title: "旧站档案库",
@@ -813,7 +810,7 @@ window.WARD13_ARG_CONTENT = {
         subtitle: "请以4位数字输入最后维护日期的月和日。",
         placeholder: "MMDD",
         denied: "验证信息不符，请核对公开通知日期。",
-        hint1: "定期维护日期为7月13日。",
+        hint1: "定期维护日期为7月15日。",
         hint2: "月份2位＋日期2位，不输入年份。",
         panelTitle: "管理员追加记录 / 2013-09-13",
         panelBody: "CASE 00 不执行出院处理。删除第13观察区入口，仅保留终端显示；将人偶识别名登记为维护终端口令。",
@@ -865,7 +862,7 @@ window.WARD13_ARG_CONTENT = {
       },
       clue: {
         floor_13_omitted: "公开楼层指南中唯独缺少13楼。",
-        date_0713: "系统不断在7月13日05:13重新同步。",
+        date_0715: "系统不断在7月15日05:13重新同步。",
         archive_13_exists: "旧索引中保留着第13观察区的关闭记录。",
         maintenance_crt_w13: "已拆除的CRT-W13终端至今仍在接收信号。",
         cicada_channel: "终端音频线路中残留着近似蝉鸣的周期噪声。",
@@ -884,7 +881,7 @@ window.WARD13_ARG_CONTENT = {
     },
     ko: {
       global: {
-        workLabel: "WARD_13 FICTIONAL ARCHIVE",
+        workLabel: "WARD_13 ARCHIVE",
         institution: "의료법인 시오자카이　다이바 린카이 기념병원",
         region: "도쿄 임해부도심・다이바 지구",
         fictionNotice: "본 사이트는 픽션 작품 《WARD_13》의 일부입니다. 실제 병원・의료인・환자・사건과는 관계가 없습니다.",
@@ -914,11 +911,11 @@ window.WARD13_ARG_CONTENT = {
       portal: {
         title: "다이바 린카이 기념병원",
         subtitle: "물가의 고요함과, 끊이지 않는 관찰을.",
-        intro: "본원은 도쿄 임해부도심・다이바 지구에 설치된 가상의 의료 시설입니다. 현재 구 만안 관찰동에 관한 일반 문의는 받지 않습니다.",
+        intro: "본원은 도쿄 임해부도심・다이바 지구의 지역 의료를 담당하는 종합병원입니다. 현재 구 만안 관찰동에 관한 일반 문의는 받지 않습니다.",
         emergency: "구 시스템 검색 결과에 관한 안내",
         emergencyBody: "검색 엔진에 남아 있는 이전 페이지는 2016년 이전의 보관 자료입니다. 내용의 완전성과 정확성은 보증되지 않습니다.",
         news1Title: "전자 기록 시스템 정기 점검 안내",
-        news1Date: "2026/07/13",
+        news1Date: "2016/07/15",
         news1Body: "오전 1시 13분부터 오전 5시 13분까지 일부 보관 기록이 간헐적으로 표시될 수 있습니다.",
         news2Title: "구 만안 관찰동 안내 종료",
         news2Date: "2013/09/13",
@@ -935,7 +932,7 @@ window.WARD13_ARG_CONTENT = {
         quickDoctors: "상근 의료진과 외래 담당 요일",
         quickFloor: "외래, 검사실, 병동, 원내 시설 배치",
         quickAccess: "철도・버스 교통편과 면회 접수",
-        footerStatus: "PUBLIC WEB / 최종 동기화 2026-07-13 05:13 JST"
+        footerStatus: "PUBLIC WEB / 최종 동기화 2016-07-15 05:13 JST"
       },
       outpatient: {
         title: "외래 진료 안내", lead: "초진 환자, 예약 환자, 재진 환자에게 필요한 절차와 접수 시간을 안내합니다.",
@@ -946,7 +943,7 @@ window.WARD13_ARG_CONTENT = {
         returnTitle: "재진・예약 환자", returnBody: "재진 접수기에서 접수표를 발급받은 뒤 각 진료과 접수로 오십시오. 예약 시각은 진료 시작 시각을 보장하지 않습니다.",
         bringTitle: "준비할 서류", bringBody: "마이넘버 보험증 또는 자격확인서, 진찰권, 진료의뢰서, 복약수첩, 각종 의료증과 예약표를 준비하십시오.",
         flowTitle: "진료 당일 절차", step1: "종합 안내・초재진 접수", step2: "보험 자격과 예약 확인", step3: "진료과 접수・문진", step4: "진찰・검사・처치", step5: "수납・원외처방전 수령",
-        note: "이 페이지의 의료기관, 접수 시간과 제도는 ARG를 위해 구성한 가상 정보이며 실제 진료에 사용할 수 없습니다."
+        note: "접수 시간은 진료과와 예약 내용에 따라 달라질 수 있으므로 내원 전에 최신 안내를 확인하십시오."
       },
       departments: {
         title: "진료과・전문 외래", lead: "지역 급성기 의료와 만안 지역의 생활을 지원하는 진료 부서를 분야별로 안내합니다.",
@@ -956,11 +953,11 @@ window.WARD13_ARG_CONTENT = {
         centersTitle: "센터・중앙진료부", centersList: "응급・재난의료센터｜내시경센터｜영상진단센터｜주산기센터｜재활의학부｜진단검사의학부｜환자지원센터｜지역의료협력실",
         clinicsTitle: "주요 전문 외래", clinicsList: "부정맥 외래｜수면무호흡 외래｜기억장애 외래｜여성 심신 외래｜소아청소년 외래｜스트레스 관련 질환 외래｜금연지원 외래｜2차 의견 외래",
         reservationTitle: "전문 외래 예약", reservationBody: "원칙적으로 일반 외래 진료 후 또는 지역 의료기관의 의뢰를 통해 예약합니다. 진료 요일과 담당의는 변경될 수 있습니다.",
-        note: "진료과와 전문 외래는 작품 속 설정이며 실제 의료기관의 진료 체계를 나타내지 않습니다."
+        note: "담당의와 진료일은 변경될 수 있습니다."
       },
       doctors: {
         title: "의료진 소개", lead: "각 진료과의 상근 의료진과 책임자, 주요 전문 분야 및 외래 담당 요일을 안내합니다.",
-        updatedLabel: "외래 담당표 갱신", updated: "2026년 7월 1일", fictionNote: "아래 의료진의 이름, 경력과 전문 분야는 모두 본 작품을 위해 만든 가상 정보입니다.", fieldLabel: "전문 분야", scheduleLabel: "외래",
+        updatedLabel: "외래 담당표 갱신", updated: "2016년 7월 1일", fieldLabel: "전문 분야", scheduleLabel: "외래",
         d1Department: "종합내과", d1Name: "다카세 나오토（高瀬 直人 / TAKASE NAOTO）", d1Role: "부원장・종합내과장", d1Field: "종합진료, 감염병, 지역의료협력", d1Schedule: "월・목 오전",
         d2Department: "순환기내과", d2Name: "미즈키 하루카（水城 遥 / MIZUKI HARUKA）", d2Role: "순환기내과장", d2Field: "부정맥, 심부전, 순환기 응급", d2Schedule: "화・금 오전",
         d3Department: "정신건강의학과・심료내과", d3Name: "가미야 치카게（神谷 千景 / KAMIYA CHIKAGE）", d3Role: "진료부장", d3Field: "스트레스 관련 질환, 수면, 청소년 정신의료", d3Schedule: "월・수 오후（예약제）",
@@ -969,7 +966,7 @@ window.WARD13_ARG_CONTENT = {
         d6Department: "정형외과", d6Name: "시라이시 도마（白石 冬馬 / SHIRAISHI TOMA）", d6Role: "정형외과장", d6Field: "척추, 관절외과, 스포츠 손상", d6Schedule: "화・목 오전",
         d7Department: "산부인과", d7Name: "아사쿠라 레나（朝倉 玲奈 / ASAKURA RENA）", d7Role: "주산기센터장", d7Field: "주산기 의료, 여성 건강관리", d7Schedule: "월・수・금 오전",
         d8Department: "응급의학과", d8Name: "아이하라 리쓰（相原 律 / AIHARA RITSU）", d8Role: "응급・재난의료센터장", d8Field: "응급의학, 재난의료, 집중치료", d8Schedule: "응급 진료 담당（의뢰 외래 없음）",
-        note: "휴진과 대진 정보도 작품 속 가상 운영이며 실제 의료 판단이나 의료기관 선택에 사용할 수 없습니다."
+        note: "휴진과 대진 정보는 당일 원내 게시 및 각 진료과 접수에서 확인하십시오."
       },
       floor: {
         title: "원내 층별 안내", lead: "외래, 검사실, 병동과 환자 지원 시설의 배치를 안내합니다.", publicNote: "병동 안전 관리를 위해 병실 번호와 관리 구역 동선은 공개하지 않습니다. 면회객은 1층 면회 접수로 오십시오.",
@@ -989,19 +986,19 @@ window.WARD13_ARG_CONTENT = {
         f1Label: "1F", f1Title: "종합 접수・응급 외래", f1Body: "종합안내, 초재진 접수, 수납, 응급 외래, 환자지원센터, 약국 창구, 매점",
         b1Label: "B1", b1Title: "영상진단・재활", b1Body: "일반촬영, CT, MRI, 핵의학검사, 방사선치료, 물리・작업・언어치료실",
         b2Label: "B2", b2Title: "의무기록 관리・설비 구역", b2Body: "진료정보관리실, 재난비축창고, 설비기계실（일반인 출입 금지）",
-        note: "13층이 게재되지 않은 것은 구 사이트 보관실로 이어지는 ARG 단서이며 실제 건물 안내가 아닙니다."
+        note: "관리 구역은 직원의 안내 없이 출입할 수 없습니다."
       },
       access: {
-        title: "오시는 길・면회 안내", lead: "철도와 노선버스로 오는 방법 및 입원 환자 면회 절차를 안내합니다.", mapLabel: "다이바 주변 약도", station1Short: "유리카모메 다이바역", station2Short: "린카이선 도쿄텔레포트역", mapNotice: "약도／축척과 위치 관계는 가상입니다.",
-        locationTitle: "소재지（작품 설정）", address: "도쿄도 미나토구 다이바・임해의료구획（가상 주소／실재 소재지가 아님）",
+        title: "오시는 길・면회 안내", lead: "철도와 노선버스로 오는 방법 및 입원 환자 면회 절차를 안내합니다.", mapLabel: "다이바 주변 약도", station1Short: "유리카모메 다이바역", station2Short: "린카이선 도쿄텔레포트역", mapNotice: "약도／축척은 정확하지 않습니다.",
+        locationTitle: "소재지", address: "도쿄도 미나토구 다이바・임해의료구획",
         railTitle: "철도", railBody: "유리카모메 ‘다이바역’에서 도보 약 6분. 린카이선 ‘도쿄텔레포트역’에서 도보 약 12분.",
-        busTitle: "노선버스", busBody: "‘다이바 린카이 병원 앞’（가상 정류장） 하차. 운행 시각은 각 교통사업자의 안내를 확인하십시오.",
+        busTitle: "노선버스", busBody: "‘다이바 린카이 병원 앞’ 하차. 운행 시각은 각 교통사업자의 안내를 확인하십시오.",
         carTitle: "자동차・주차장", carBody: "환자 승하차장과 유료 주차장이 있습니다. 구급차 동선에는 주정차할 수 없습니다.",
         visitTitle: "면회 시간", visitBody: "평일 14:00–19:00／토・일・공휴일 13:00–18:00. 병동에 따라 예약이나 인원 제한이 있습니다.",
         entryTitle: "면회 접수", entryBody: "1층 면회 접수에서 출입증을 받은 뒤 병동 직원의 안내를 따르십시오. 몸이 좋지 않을 때는 면회를 삼가십시오.",
-        contactTitle: "문의", contactBody: "이 사이트는 ARG의 가상 병원 사이트이므로 실제 대표전화, 예약 창구나 문의 양식은 운영하지 않습니다.",
+        contactTitle: "문의", contactBody: "진료, 면회 및 각종 절차에 관한 문의는 1층 종합안내에서 받습니다.",
         barrierTitle: "배리어프리", barrierBody: "공개 층에 휠체어 출입구, 다목적 화장실, 수유실, 필담판과 원내용 휠체어를 배치했습니다.",
-        note: "다이바역과 도쿄텔레포트역은 실재하지만 병원, 정류장, 주소와 소요 시간은 모두 작품 설정입니다. 현장 탐사를 하지 마십시오."
+        note: "내원 전에 교통기관의 최신 운행 상황을 확인하십시오."
       },
       archive: {
         title: "구 사이트 보관실",
@@ -1042,7 +1039,7 @@ window.WARD13_ARG_CONTENT = {
         subtitle: "최종 점검일의 월일을 숫자 4자리로 입력하십시오.",
         placeholder: "MMDD",
         denied: "인증 정보가 일치하지 않습니다. 공개 공지의 날짜를 확인하십시오.",
-        hint1: "정기 점검일은 7월 13일입니다.",
+        hint1: "정기 점검일은 7월 15일입니다.",
         hint2: "월 2자리＋일 2자리이며 연도는 입력하지 않습니다.",
         panelTitle: "관리자 추가 기록 / 2013-09-13",
         panelBody: "CASE 00은 퇴원 처리를 시행하지 않는다. 제13관찰구역의 입구를 삭제하고 단말 표시만 남긴다. 인형 식별명을 유지보수 단말의 암구호로 등록했다.",
@@ -1094,7 +1091,7 @@ window.WARD13_ARG_CONTENT = {
       },
       clue: {
         floor_13_omitted: "공개 층별 안내에서 13층만 누락되어 있다.",
-        date_0713: "시스템은 7월 13일 05:13에 동기화를 반복한다.",
+        date_0715: "시스템은 7월 15일 05:13에 동기화를 반복한다.",
         archive_13_exists: "구 색인에는 제13관찰구역의 폐쇄 기록이 남아 있다.",
         maintenance_crt_w13: "철거된 CRT-W13 단말이 지금도 신호를 수신하고 있다.",
         cicada_channel: "단말 음성 회선에는 매미 소리와 유사한 주기성 잡음이 남아 있다.",
@@ -1113,7 +1110,7 @@ window.WARD13_ARG_CONTENT = {
     },
     en: {
       global: {
-        workLabel: "WARD_13 FICTIONAL ARCHIVE",
+        workLabel: "WARD_13 ARCHIVE",
         institution: "Shiokai Medical Corporation　Daiba Rinkai Memorial Hospital",
         region: "Daiba District, Tokyo Waterfront Subcenter",
         fictionNotice: "This website is part of the fictional work WARD_13. It is not connected to any real hospital, healthcare worker, patient, or event.",
@@ -1143,11 +1140,11 @@ window.WARD13_ARG_CONTENT = {
       portal: {
         title: "Daiba Rinkai Memorial Hospital",
         subtitle: "Quiet at the water's edge. Observation without interruption.",
-        intro: "This is a fictional medical facility located in the Daiba district of the Tokyo Waterfront Subcenter. General inquiries concerning the former Bayside Observation Annex are no longer accepted.",
+        intro: "Our general hospital serves the Daiba district of the Tokyo Waterfront Subcenter. General inquiries concerning the former Bayside Observation Annex are no longer accepted.",
         emergency: "About search results from the former system",
         emergencyBody: "Pages that remain indexed by search engines are archived materials dating from before 2016. Their completeness and accuracy are not guaranteed.",
         news1Title: "Scheduled Maintenance of the Electronic Records System",
-        news1Date: "2026/07/13",
+        news1Date: "2016/07/15",
         news1Body: "Some archived records may appear intermittently between 1:13 a.m. and 5:13 a.m.",
         news2Title: "Closure of the Former Bayside Observation Annex",
         news2Date: "2013/09/13",
@@ -1164,7 +1161,7 @@ window.WARD13_ARG_CONTENT = {
         quickDoctors: "Full-time physicians and clinic days",
         quickFloor: "Outpatient, diagnostic, ward, and facility locations",
         quickAccess: "Rail, bus, and inpatient visiting information",
-        footerStatus: "PUBLIC WEB / LAST SYNC 2026-07-13 05:13 JST"
+        footerStatus: "PUBLIC WEB / LAST SYNC 2016-07-15 05:13 JST"
       },
       outpatient: {
         title: "Outpatient Guide", lead: "Registration hours and procedures for first-time patients, scheduled appointments, and follow-up visits.",
@@ -1175,7 +1172,7 @@ window.WARD13_ARG_CONTENT = {
         returnTitle: "Follow-up and scheduled patients", returnBody: "Print a reception slip at a return-visit kiosk, then proceed to the relevant department desk. An appointment time does not guarantee the exact time at which consultation will begin.",
         bringTitle: "What to bring", bringBody: "My Number health insurance card or eligibility certificate, patient card, referral letter, medication record, medical certificates, and appointment slip.",
         flowTitle: "What to expect on the day", step1: "Information and registration", step2: "Insurance and appointment check", step3: "Department reception and intake", step4: "Consultation, tests, and treatment", step5: "Payment and outside prescription",
-        note: "The hospital, hours, and procedures on this page are fictional information created for an ARG and cannot be used to obtain real medical care."
+        note: "Registration hours may vary by department and appointment type. Check the latest notice before visiting."
       },
       departments: {
         title: "Departments & Specialist Clinics", lead: "Clinical services supporting acute regional care and daily life in the Tokyo waterfront area.",
@@ -1185,11 +1182,11 @@ window.WARD13_ARG_CONTENT = {
         centersTitle: "Centers & Central Services", centersList: "Emergency & Disaster Medicine Center｜Endoscopy Center｜Diagnostic Imaging Center｜Perinatal Center｜Rehabilitation Department｜Clinical Laboratory｜Patient Support Center｜Regional Liaison Office",
         clinicsTitle: "Selected Specialist Clinics", clinicsList: "Arrhythmia Clinic｜Sleep Apnea Clinic｜Memory Clinic｜Women's Mental Health Clinic｜Child & Adolescent Clinic｜Stress-Related Disorders Clinic｜Smoking Cessation Support｜Second Opinion Clinic",
         reservationTitle: "Specialist clinic appointments", reservationBody: "Specialist clinics are generally booked after a general outpatient consultation or referral from a community medical provider. Clinic days and assigned physicians may change.",
-        note: "All departments and clinics are fictional story settings and do not represent the services of a real medical institution."
+        note: "Assigned physicians and clinic days are subject to change."
       },
       doctors: {
         title: "Medical Staff", lead: "Full-time physicians and department leads, with principal specialties and scheduled outpatient days.",
-        updatedLabel: "Roster updated", updated: "July 1, 2026", fictionNote: "Every physician name, position, specialty, and schedule below is fictional and was created for this work.", fieldLabel: "Specialty", scheduleLabel: "Clinic",
+        updatedLabel: "Roster updated", updated: "July 1, 2016", fieldLabel: "Specialty", scheduleLabel: "Clinic",
         d1Department: "General Internal Medicine", d1Name: "Naoto Takase (高瀬 直人; TAKASE NAOTO)", d1Role: "Deputy Director; Chief of General Internal Medicine", d1Field: "General medicine, infectious diseases, regional liaison", d1Schedule: "Monday and Thursday mornings",
         d2Department: "Cardiology", d2Name: "Haruka Mizuki (水城 遥; MIZUKI HARUKA)", d2Role: "Chief of Cardiology", d2Field: "Arrhythmia, heart failure, cardiovascular emergencies", d2Schedule: "Tuesday and Friday mornings",
         d3Department: "Psychiatry & Psychosomatic Medicine", d3Name: "Chikage Kamiya (神谷 千景; KAMIYA CHIKAGE)", d3Role: "Clinical Services Director", d3Field: "Stress-related disorders, sleep, adolescent psychiatry", d3Schedule: "Monday and Wednesday afternoons; appointment only",
@@ -1198,7 +1195,7 @@ window.WARD13_ARG_CONTENT = {
         d6Department: "Orthopedics", d6Name: "Toma Shiraishi (白石 冬馬; SHIRAISHI TOMA)", d6Role: "Chief of Orthopedics", d6Field: "Spine, joint surgery, sports injuries", d6Schedule: "Tuesday and Thursday mornings",
         d7Department: "Obstetrics & Gynecology", d7Name: "Rena Asakura (朝倉 玲奈; ASAKURA RENA)", d7Role: "Director, Perinatal Center", d7Field: "Perinatal medicine, women's healthcare", d7Schedule: "Monday, Wednesday, and Friday mornings",
         d8Department: "Emergency Medicine", d8Name: "Ritsu Aihara (相原 律; AIHARA RITSU)", d8Role: "Director, Emergency & Disaster Medicine Center", d8Field: "Emergency medicine, disaster medicine, intensive care", d8Schedule: "Emergency service only; no referral clinic",
-        note: "Closure and substitute-physician notices are part of the fictional operation and must not be used for real medical decisions or provider selection."
+        note: "Check same-day hospital notices or the relevant department desk for closures and substitute physicians."
       },
       floor: {
         title: "Hospital Floor Directory", lead: "Locations of outpatient clinics, diagnostic services, inpatient wards, and patient-support facilities.", publicNote: "Room numbers and routes into controlled areas are not published for ward safety. Visitors should report to Visiting Reception on the first floor.",
@@ -1218,19 +1215,19 @@ window.WARD13_ARG_CONTENT = {
         f1Label: "1F", f1Title: "Main Reception & Emergency Department", f1Body: "Information, registration, cashier, emergency department, patient support, pharmacy counter, and shop",
         b1Label: "B1", b1Title: "Diagnostic Imaging & Rehabilitation", b1Body: "Radiography, CT, MRI, nuclear medicine, radiotherapy, and physical, occupational, and speech therapy",
         b2Label: "B2", b2Title: "Health Records & Building Services", b2Body: "Health information management, disaster stores, and mechanical services; staff only",
-        note: "The omitted 13th floor is an ARG clue leading to the legacy archive. This is not a directory for a real building."
+        note: "Managed areas may not be entered without staff guidance."
       },
       access: {
-        title: "Access & Visiting", lead: "Directions by rail and local bus, plus procedures for visiting inpatients.", mapLabel: "Schematic map of Daiba", station1Short: "Daiba Station / Yurikamome", station2Short: "Tokyo Teleport / Rinkai Line", mapNotice: "Schematic only; scale and positions are fictional",
-        locationTitle: "Location（story setting）", address: "Daiba Waterfront Medical Zone, Minato City, Tokyo（fictional address; not a real location）",
+        title: "Access & Visiting", lead: "Directions by rail and local bus, plus procedures for visiting inpatients.", mapLabel: "Schematic map of Daiba", station1Short: "Daiba Station / Yurikamome", station2Short: "Tokyo Teleport / Rinkai Line", mapNotice: "Schematic only; not to exact scale",
+        locationTitle: "Location", address: "Daiba Waterfront Medical Zone, Minato City, Tokyo",
         railTitle: "By rail", railBody: "Approximately 6 minutes on foot from Daiba Station on the Yurikamome Line, or 12 minutes from Tokyo Teleport Station on the Rinkai Line.",
-        busTitle: "By local bus", busBody: "Alight at ‘Daiba Rinkai Hospital’（fictional bus stop）. Check the relevant transport operator for current schedules.",
+        busTitle: "By local bus", busBody: "Alight at ‘Daiba Rinkai Hospital’. Check the relevant transport operator for current schedules.",
         carTitle: "By car and parking", carBody: "A patient drop-off zone and paid parking are provided. Do not stop in ambulance access lanes.",
         visitTitle: "Visiting hours", visitBody: "Weekdays 14:00–19:00; weekends and public holidays 13:00–18:00. Some wards require appointments or limit visitor numbers.",
         entryTitle: "Visitor reception", entryBody: "Collect a visitor badge at Visiting Reception on the first floor and follow ward staff instructions. Please do not visit if you feel unwell.",
-        contactTitle: "Contact", contactBody: "Because this is a fictional ARG hospital site, no real switchboard, booking office, telephone number, or contact form is provided.",
+        contactTitle: "Contact", contactBody: "The first-floor Information Desk handles inquiries about care, visiting, and administrative procedures.",
         barrierTitle: "Accessibility", barrierBody: "Public floors include step-free entrances, accessible toilets, a nursing room, writing boards, and hospital wheelchairs.",
-        note: "Daiba and Tokyo Teleport stations are real. The hospital, bus stop, address, walking times, and map are fictional; do not conduct an on-site search."
+        note: "Check current transport service information before visiting."
       },
       archive: {
         title: "Legacy Site Archive",
@@ -1271,7 +1268,7 @@ window.WARD13_ARG_CONTENT = {
         subtitle: "Enter the month and day of the final maintenance date as four digits.",
         placeholder: "MMDD",
         denied: "Authentication data does not match. Check the date of the public notice.",
-        hint1: "Scheduled maintenance took place on July 13.",
+        hint1: "Scheduled maintenance took place on July 15.",
         hint2: "Enter two digits for the month and two for the day. Do not enter a year.",
         panelTitle: "Administrator Addendum / 2013-09-13",
         panelBody: "Do not process discharge for CASE 00. Delete the entrance to Observation Ward 13 and retain terminal display only. Register the doll identifier as the maintenance-terminal passphrase.",
@@ -1323,7 +1320,7 @@ window.WARD13_ARG_CONTENT = {
       },
       clue: {
         floor_13_omitted: "Only the 13th floor is missing from the public floor guide.",
-        date_0713: "The system repeatedly synchronizes at 05:13 on July 13.",
+        date_0715: "The system repeatedly synchronizes at 05:13 on July 15.",
         archive_13_exists: "The former index retains a closure record for Observation Ward 13.",
         maintenance_crt_w13: "The decommissioned CRT-W13 terminal is still receiving a signal.",
         cicada_channel: "Periodic noise resembling cicadas remains on the terminal's audio line.",
