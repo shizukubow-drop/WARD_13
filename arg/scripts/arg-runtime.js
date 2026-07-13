@@ -9,6 +9,8 @@
   let state = engine.loadState();
   let feedback = '';
   const view = document.body.dataset.view || 'portal';
+  const publicViews = new Set(['portal', 'outpatient', 'departments', 'doctors', 'floor', 'access']);
+  const isPublicView = publicViews.has(view);
   if (!content.locales[state.locale]) state.locale = content.defaultLocale || 'ja';
 
   const escapeHtml = value => String(value ?? '').replace(/[&<>'"]/g, character => ({
@@ -34,7 +36,7 @@
   }
 
   function publicHeading(section, label) {
-    return `<div class="page-heading public-heading"><p class="system-label">${escapeHtml(label)}</p><h1>${escapeHtml(t(`${section}.title`))}</h1><p>${escapeHtml(t(`${section}.lead`))}</p></div>`;
+    return `<div class="breadcrumb"><a href="index.html">${escapeHtml(t('nav.portal'))}</a><span aria-hidden="true">&gt;</span><span>${escapeHtml(t(`${section}.title`))}</span></div><div class="page-heading public-heading"><p class="system-label">${escapeHtml(label)}</p><h1>${escapeHtml(t(`${section}.title`))}</h1><p>${escapeHtml(t(`${section}.lead`))}</p></div>`;
   }
 
   function localeOptions() {
@@ -52,15 +54,17 @@
   function header() {
     const count = state.clues.length;
     return `<header class="site-header">
-      <div class="archive-ribbon">${escapeHtml(t('global.workLabel'))}</div>
-      <div class="brand-row"><div class="institution-lockup"><span class="corporate-mark" aria-hidden="true">潮</span><div><p class="institution">${escapeHtml(t('global.institution'))}</p><p class="region">${escapeHtml(t('global.region'))}</p></div></div>
-      <div class="header-actions"><span class="fragment-counter">${escapeHtml(t('global.savedCount'))}: ${count}/${engine.manifest.clues.length}</span><label class="locale-picker"><span>${escapeHtml(t('global.language'))}</span><select data-action="locale" aria-label="${escapeHtml(t('global.language'))}">${localeOptions()}</select></label></div></div>
+      ${isPublicView ? '' : `<div class="archive-ribbon">${escapeHtml(t('global.workLabel'))}</div>`}
+      <div class="site-topline"><span>${escapeHtml(t('global.region'))}</span><label class="locale-picker"><span>${escapeHtml(t('global.language'))}</span><select data-action="locale" aria-label="${escapeHtml(t('global.language'))}">${localeOptions()}</select></label></div>
+      <div class="brand-row"><div class="institution-lockup"><span class="corporate-mark" aria-hidden="true">潮</span><div><p class="institution">${escapeHtml(t('global.institution'))}</p></div></div>
+      <div class="header-actions"><span class="fragment-counter">${escapeHtml(t('global.savedCount'))}: ${count}/${engine.manifest.clues.length}</span></div></div>
       ${nav()}
     </header>`;
   }
 
   function footer() {
-    return `<footer class="site-footer"><p>${escapeHtml(t('global.fictionNotice'))}</p><a href="../index.html">${escapeHtml(t('global.backToGame'))}</a></footer>`;
+    const links = engine.manifest.views.filter(item => item.navigation === true).map(item => `<a href="${item.file}">${escapeHtml(t(`nav.${item.id}`))}</a>`).join('');
+    return `<footer class="site-footer"><div class="footer-brand"><span class="footer-mark" aria-hidden="true">潮</span><strong>${escapeHtml(t('global.institution'))}</strong></div><nav class="footer-nav">${links}</nav><div class="footer-meta"><p>${escapeHtml(t('global.fictionNotice'))}</p><a href="../index.html">${escapeHtml(t('global.backToGame'))}</a></div></footer>`;
   }
 
   function clueButton(clueId, label) {
@@ -77,7 +81,7 @@
       ['access.html', 'access', 'portal.quickAccess']
     ];
     return `<main class="page portal-page">
-      <section class="hero"><p class="system-label">PUBLIC INFORMATION</p><h1>${escapeHtml(t('portal.title'))}</h1><p class="hero-copy">${escapeHtml(t('portal.subtitle'))}</p><p>${escapeHtml(t('portal.intro'))}</p></section>
+      <section class="hero"><img class="hero-photo" src="assets/img/hospital-exterior-2016.webp" alt="" width="1400" height="754" decoding="async"><div class="hero-copy-panel"><p class="system-label">PUBLIC INFORMATION</p><h1>${escapeHtml(t('portal.title'))}</h1><p class="hero-copy">${escapeHtml(t('portal.subtitle'))}</p><p>${escapeHtml(t('portal.intro'))}</p></div></section>
       <section class="notice critical"><h2>${escapeHtml(t('portal.emergency'))}</h2><p>${escapeHtml(t('portal.emergencyBody'))}</p></section>
       <section class="quick-services" aria-labelledby="quick-services-title"><div class="section-heading"><h2 id="quick-services-title">${escapeHtml(t('portal.quickTitle'))}</h2><p>${escapeHtml(t('portal.quickLead'))}</p></div><div class="quick-grid">${quickLinks.map(([href, id, copy]) => `<a href="${href}"><strong>${escapeHtml(t(`nav.${id}`))}</strong><span>${escapeHtml(t(copy))}</span><b aria-hidden="true">›</b></a>`).join('')}</div></section>
       <div class="portal-grid"><section><h2>NEWS / お知らせ</h2>
@@ -111,7 +115,8 @@
   }
 
   function renderDoctors() {
-    const cards = Array.from({ length: 8 }, (_, index) => index + 1).map(number => `<article class="doctor-card"><div class="doctor-monogram" aria-hidden="true">${String(number).padStart(2, '0')}</div><div><p class="doctor-department">${escapeHtml(t(`doctors.d${number}Department`))}</p><h2>${escapeHtml(t(`doctors.d${number}Name`))}</h2><p class="doctor-role">${escapeHtml(t(`doctors.d${number}Role`))}</p><dl><dt>${escapeHtml(t('doctors.fieldLabel'))}</dt><dd>${escapeHtml(t(`doctors.d${number}Field`))}</dd><dt>${escapeHtml(t('doctors.scheduleLabel'))}</dt><dd>${escapeHtml(t(`doctors.d${number}Schedule`))}</dd></dl></div></article>`).join('');
+    const photoIds = ['takase-naoto', 'mizuki-haruka', 'kamiya-chikage', 'narumi-shuji', 'kuze-mio', 'shiraishi-toma', 'asakura-rena', 'aihara-ritsu'];
+    const cards = Array.from({ length: 8 }, (_, index) => index + 1).map((number, index) => `<article class="doctor-card"><figure class="doctor-photo"><img src="assets/img/doctors/${photoIds[index]}.webp" alt="" width="240" height="320" decoding="async"><span class="doctor-monogram" aria-hidden="true">${String(number).padStart(2, '0')}</span></figure><div class="doctor-profile"><p class="doctor-department">${escapeHtml(t(`doctors.d${number}Department`))}</p><h2>${escapeHtml(t(`doctors.d${number}Name`))}</h2><p class="doctor-role">${escapeHtml(t(`doctors.d${number}Role`))}</p><dl><dt>${escapeHtml(t('doctors.fieldLabel'))}</dt><dd>${escapeHtml(t(`doctors.d${number}Field`))}</dd><dt>${escapeHtml(t('doctors.scheduleLabel'))}</dt><dd>${escapeHtml(t(`doctors.d${number}Schedule`))}</dd></dl></div></article>`).join('');
     return `<main class="page public-page doctors-page">${publicHeading('doctors', 'MEDICAL STAFF')}<div class="staff-update"><span>${escapeHtml(t('doctors.updatedLabel'))}</span><strong>${escapeHtml(t('doctors.updated'))}</strong></div><section class="doctor-grid">${cards}</section><p class="page-note">${escapeHtml(t('doctors.note'))}</p></main>`;
   }
 
