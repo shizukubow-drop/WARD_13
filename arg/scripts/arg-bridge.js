@@ -7,7 +7,7 @@
     try { return Object.keys(JSON.parse(localStorage.getItem('ward13_endings') || '{}')).length; } catch { return 0; }
   })();
   const visits = Number(localStorage.getItem('ward13_visit_count') || '0');
-  const complete = localStorage.getItem('ward13_arg_complete') === '1';
+  const complete = localStorage.getItem('ward13_arg_complete_v2') === '1';
   const polluted = localStorage.getItem('ward13_polluted') === '1';
   if (!complete && !polluted && endings === 0 && visits < 2) return;
 
@@ -16,7 +16,7 @@
   contentScript.src = new URL('data/arg-content.js', base).href;
   contentScript.onload = () => {
     const saved = (() => {
-      try { return JSON.parse(localStorage.getItem('ward13_arg_state_v1') || '{}'); } catch { return {}; }
+      try { return JSON.parse(localStorage.getItem('ward13_arg_state_v2') || '{}'); } catch { return {}; }
     })();
     const locale = saved.locale === 'ja' ? 'ja' : 'zh';
     const text = window.WARD13_ARG_CONTENT?.locales?.[locale]?.bridge;

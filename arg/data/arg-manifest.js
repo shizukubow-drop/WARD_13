@@ -6,8 +6,8 @@ window.WARD13_ARG_MANIFEST = {
     fictional: true,
     region: "東京臨海副都心・台場地区"
   },
-  storageKey: "ward13_arg_state_v1",
-  completeKey: "ward13_arg_complete",
+  storageKey: "ward13_arg_state_v2",
+  completeKey: "ward13_arg_complete_v2",
   views: [
     { id: "portal", file: "index.html", public: true, navigation: true },
     { id: "outpatient", file: "outpatient.html", public: true, navigation: true },
@@ -24,13 +24,13 @@ window.WARD13_ARG_MANIFEST = {
   ],
   clues: [
     { id: "floor_13_omitted", source: "portal", required: true, dependencies: [] },
-    { id: "date_0713", source: "portal", required: true, dependencies: [] },
+    { id: "date_0715", source: "portal", required: true, dependencies: [] },
     { id: "archive_13_exists", source: "archive", required: true, dependencies: ["floor_13_omitted"] },
     { id: "maintenance_crt_w13", source: "archive", required: true, dependencies: [] },
     { id: "cicada_channel", source: "archive", required: false, dependencies: ["maintenance_crt_w13"] },
     { id: "record_case_00", source: "records", required: true, dependencies: ["archive_13_exists"] },
     { id: "alias_utsugi", source: "records", required: true, dependencies: ["record_case_00"] },
-    { id: "staff_override", source: "staff", required: true, dependencies: ["date_0713"] },
+    { id: "staff_override", source: "staff", required: true, dependencies: ["date_0715"] },
     { id: "terminal_patient_zero", source: "terminal", required: true, dependencies: ["staff_override", "alias_utsugi"] },
     { id: "terminal_not_discharged", source: "terminal", required: true, dependencies: ["terminal_patient_zero"] },
     { id: "seagull_marker", source: "lost", required: false, dependencies: [] },
@@ -43,7 +43,7 @@ window.WARD13_ARG_MANIFEST = {
       hintAfter: [1, 3]
     },
     staff: {
-      answers: ["0713", "20130713", "13-0713"],
+      answers: ["0715", "20160715", "15-0715"],
       grants: ["staff_override"],
       hintAfter: [1, 3]
     },
@@ -62,7 +62,7 @@ window.WARD13_ARG_MANIFEST = {
   },
   requiredForFinal: [
     "floor_13_omitted",
-    "date_0713",
+    "date_0715",
     "archive_13_exists",
     "maintenance_crt_w13",
     "record_case_00",
@@ -76,6 +76,6 @@ window.WARD13_ARG_MANIFEST = {
     { id: "case_zero", date: "2013-07-13", sources: ["records", "archive"] },
     { id: "ward_closed", date: "2013-09-13", sources: ["archive", "staff"] },
     { id: "system_migrated", date: "2016-01-04", sources: ["archive"] },
-    { id: "signal_returned", date: "2026-07-13", sources: ["terminal"] }
+    { id: "signal_returned", date: "2016-07-15", sources: ["terminal"] }
   ]
 };

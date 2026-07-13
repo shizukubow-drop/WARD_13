@@ -52,7 +52,7 @@
   function header() {
     const count = state.clues.length;
     return `<header class="site-header">
-      <div class="fiction-ribbon">${escapeHtml(t('global.workLabel'))}</div>
+      <div class="archive-ribbon">${escapeHtml(t('global.workLabel'))}</div>
       <div class="brand-row"><div class="institution-lockup"><span class="corporate-mark" aria-hidden="true">潮</span><div><p class="institution">${escapeHtml(t('global.institution'))}</p><p class="region">${escapeHtml(t('global.region'))}</p></div></div>
       <div class="header-actions"><span class="fragment-counter">${escapeHtml(t('global.savedCount'))}: ${count}/${engine.manifest.clues.length}</span><label class="locale-picker"><span>${escapeHtml(t('global.language'))}</span><select data-action="locale" aria-label="${escapeHtml(t('global.language'))}">${localeOptions()}</select></label></div></div>
       ${nav()}
@@ -81,7 +81,7 @@
       <section class="notice critical"><h2>${escapeHtml(t('portal.emergency'))}</h2><p>${escapeHtml(t('portal.emergencyBody'))}</p></section>
       <section class="quick-services" aria-labelledby="quick-services-title"><div class="section-heading"><h2 id="quick-services-title">${escapeHtml(t('portal.quickTitle'))}</h2><p>${escapeHtml(t('portal.quickLead'))}</p></div><div class="quick-grid">${quickLinks.map(([href, id, copy]) => `<a href="${href}"><strong>${escapeHtml(t(`nav.${id}`))}</strong><span>${escapeHtml(t(copy))}</span><b aria-hidden="true">›</b></a>`).join('')}</div></section>
       <div class="portal-grid"><section><h2>NEWS / お知らせ</h2>
-        <article class="notice-card"><time>${escapeHtml(t('portal.news1Date'))}</time><h3>${escapeHtml(t('portal.news1Title'))}</h3><p>${escapeHtml(t('portal.news1Body'))}</p>${clueButton('date_0713', t('global.open'))}</article>
+        <article class="notice-card"><time>${escapeHtml(t('portal.news1Date'))}</time><h3>${escapeHtml(t('portal.news1Title'))}</h3><p>${escapeHtml(t('portal.news1Body'))}</p>${clueButton('date_0715', t('global.open'))}</article>
         <article class="notice-card"><time>${escapeHtml(t('portal.news2Date'))}</time><h3>${escapeHtml(t('portal.news2Title'))}</h3><p>${escapeHtml(t('portal.news2Body'))}</p><a class="text-link" href="archive.html">${escapeHtml(t('nav.archive'))}</a></article>
       </section><section class="floor-guide"><h2>${escapeHtml(t('portal.floorsTitle'))}</h2><p>${escapeHtml(t('portal.floorsLead'))}</p><ol><li>${escapeHtml(t('portal.floor12'))}</li><li class="floor-gap">${escapeHtml(t('portal.floorGap'))}</li><li>${escapeHtml(t('portal.floor14'))}</li></ol>${clueButton('floor_13_omitted', t('global.open'))}</section></div>
       <p class="sync-status">${escapeHtml(t('portal.footerStatus'))}</p>
@@ -112,7 +112,7 @@
 
   function renderDoctors() {
     const cards = Array.from({ length: 8 }, (_, index) => index + 1).map(number => `<article class="doctor-card"><div class="doctor-monogram" aria-hidden="true">${String(number).padStart(2, '0')}</div><div><p class="doctor-department">${escapeHtml(t(`doctors.d${number}Department`))}</p><h2>${escapeHtml(t(`doctors.d${number}Name`))}</h2><p class="doctor-role">${escapeHtml(t(`doctors.d${number}Role`))}</p><dl><dt>${escapeHtml(t('doctors.fieldLabel'))}</dt><dd>${escapeHtml(t(`doctors.d${number}Field`))}</dd><dt>${escapeHtml(t('doctors.scheduleLabel'))}</dt><dd>${escapeHtml(t(`doctors.d${number}Schedule`))}</dd></dl></div></article>`).join('');
-    return `<main class="page public-page doctors-page">${publicHeading('doctors', 'MEDICAL STAFF')}<div class="staff-update"><span>${escapeHtml(t('doctors.updatedLabel'))}</span><strong>${escapeHtml(t('doctors.updated'))}</strong></div><p class="fiction-staff-note">${escapeHtml(t('doctors.fictionNote'))}</p><section class="doctor-grid">${cards}</section><p class="page-note">${escapeHtml(t('doctors.note'))}</p></main>`;
+    return `<main class="page public-page doctors-page">${publicHeading('doctors', 'MEDICAL STAFF')}<div class="staff-update"><span>${escapeHtml(t('doctors.updatedLabel'))}</span><strong>${escapeHtml(t('doctors.updated'))}</strong></div><section class="doctor-grid">${cards}</section><p class="page-note">${escapeHtml(t('doctors.note'))}</p></main>`;
   }
 
   function renderFloor() {
