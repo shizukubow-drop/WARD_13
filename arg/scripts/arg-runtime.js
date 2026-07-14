@@ -370,10 +370,8 @@
     if (view === 'department') activeDepartment = departmentEntry(requestedDepartment);
     applyDocumentLocale();
     applyTextSize();
-    if (isPublicView) {
-      const pageTitle = view === 'department' ? (activeDepartment?.name || t('departments.title')) : t(view === 'portal' ? 'portal.title' : `${view}.title`);
-      document.title = `${pageTitle}｜${t('global.institution')}`;
-    }
+    const pageTitle = view === 'department' ? (activeDepartment?.name || t('departments.title')) : t(view === 'portal' ? 'portal.title' : `${view}.title`);
+    document.title = view === 'terminal' ? pageTitle : `${pageTitle}｜${t('global.institution')}`;
     app.innerHTML = `${header()}${(renderers[view] || renderPortal)()}${footer()}<div id="arg-toast" class="arg-toast" role="status"></div>`;
     bindEvents();
     activateDepartmentHaunt();
