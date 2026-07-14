@@ -4,6 +4,24 @@
   const manifest = window.WARD13_ARG_MANIFEST;
   if (!manifest) throw new Error('WARD_13 ARG manifest is unavailable');
 
+  const previewSession = (window.location.pathname.match(/\/preview\/([^/]+)\//i)?.[1] || '')
+    .replace(/[^a-z0-9_-]/gi, '');
+  const previewInstanceKey = previewSession ? `ward13.arg.preview-instance.${previewSession}` : '';
+  let previewInstance = previewSession
+    ? (new URLSearchParams(window.location.search).get('studioPreview') || '').replace(/[^a-z0-9_-]/gi, '')
+    : '';
+  if (previewSession) {
+    try {
+      if (previewInstance) sessionStorage.setItem(previewInstanceKey, previewInstance);
+      else previewInstance = sessionStorage.getItem(previewInstanceKey) || 'legacy';
+    } catch {
+      previewInstance ||= 'legacy';
+    }
+  }
+  const storageSuffix = previewSession ? `::preview:${previewSession}:${previewInstance || 'legacy'}` : '';
+  const storageKey = `${manifest.storageKey}${storageSuffix}`;
+  const completeKey = `${manifest.completeKey}${storageSuffix}`;
+
   function freshState() {
     return {
       version: 2,
@@ -21,7 +39,7 @@
 
   function loadState() {
     try {
-      const parsed = JSON.parse(localStorage.getItem(manifest.storageKey) || 'null');
+      const parsed = JSON.parse(localStorage.getItem(storageKey) || 'null');
       if (!parsed || parsed.version !== 2) return freshState();
       return {
         ...freshState(),
@@ -40,8 +58,8 @@
 
   function saveState(state) {
     state.updatedAt = new Date().toISOString();
-    localStorage.setItem(manifest.storageKey, JSON.stringify(state));
-    if (state.completedAt) localStorage.setItem(manifest.completeKey, '1');
+    localStorage.setItem(storageKey, JSON.stringify(state));
+    if (state.completedAt) localStorage.setItem(completeKey, '1');
     return state;
   }
 
