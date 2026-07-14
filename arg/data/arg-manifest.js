@@ -15,6 +15,7 @@ window.WARD13_ARG_MANIFEST = {
     { id: "cooperation", file: "cooperation.html", public: true, navigation: false },
     { id: "outpatient", file: "outpatient.html", public: true, navigation: true },
     { id: "departments", file: "departments.html", public: true, navigation: true },
+    { id: "department", file: "department.html", public: true, navigation: false, footer: false },
     { id: "doctors", file: "doctors.html", public: true, navigation: true },
     { id: "floor", file: "floor.html", public: true, navigation: true },
     { id: "access", file: "access.html", public: true, navigation: true },
