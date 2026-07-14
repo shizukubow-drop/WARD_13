@@ -5,15 +5,50 @@
   const engine = window.WARD13_ARG;
   const content = window.WARD13_ARG_CONTENT;
   const publicContent = window.WARD13_ARG_PUBLIC_2016;
+  const departmentContent = window.WARD13_ARG_DEPARTMENT_DETAIL_2016;
   if (!app || !engine || !content) throw new Error('WARD_13 ARG runtime could not initialize');
 
   let state = engine.loadState();
   let feedback = '';
-  let textSize = 'standard';
+  let textSize = state.textSize;
+  let hauntTimers = [];
   const view = document.body.dataset.view || 'portal';
-  const publicViews = new Set(['portal', 'about', 'news', 'cooperation', 'outpatient', 'departments', 'doctors', 'floor', 'access']);
+  const publicViews = new Set(['portal', 'about', 'news', 'cooperation', 'outpatient', 'departments', 'department', 'doctors', 'floor', 'access']);
   const isPublicView = publicViews.has(view);
   if (!content.locales[state.locale]) state.locale = content.defaultLocale || 'ja';
+
+  const departmentGroups = [
+    { id: 'internal', title: 'departments.internalTitle', list: 'departments.internalList', slugs: ['general-internal', 'cardiology', 'respiratory-medicine', 'gastroenterology', 'nephrology', 'endocrinology', 'neurology', 'hematology'] },
+    { id: 'surgical', title: 'departments.surgicalTitle', list: 'departments.surgicalList', slugs: ['gastrointestinal-surgery', 'thoracic-surgery', 'cardiovascular-surgery', 'orthopedics', 'neurosurgery', 'plastic-surgery', 'urology', 'breast-surgery'] },
+    { id: 'specialty', title: 'departments.specialtyTitle', list: 'departments.specialtyList', slugs: ['pediatrics', 'obstetrics', 'dermatology', 'ophthalmology', 'otolaryngology', 'psychiatry', 'oral-surgery', 'anesthesia'] },
+    { id: 'centers', title: 'departments.centersTitle', list: 'departments.centersList', slugs: ['emergency', 'endoscopy-center', 'diagnostic-imaging', 'perinatal-center', 'rehabilitation', 'clinical-laboratory', 'patient-support', 'regional-liaison'] },
+    { id: 'clinics', title: 'departments.clinicsTitle', list: 'departments.clinicsList', slugs: ['arrhythmia', 'sleep-apnea', 'memory', 'womens-mental', 'child-adolescent', 'stress-disorders', 'smoking-cessation', 'second-opinion'] }
+  ];
+  const hauntedDepartments = {
+    obstetrics: { content: 'obstetrics', image: 'reproductive-scan-2016.png' },
+    psychiatry: { content: 'psychiatry', image: 'neural-tabs-2016.png' },
+    anesthesia: { content: 'anesthesia', image: 'pain-rhythm-2016.png' },
+    arrhythmia: { content: 'arrhythmia', image: 'pain-rhythm-2016.png' },
+    neurology: { content: 'neurology', image: 'neural-tabs-2016.png' },
+    'womens-mental': { content: 'womensMental', image: 'reproductive-scan-2016.png' },
+    urology: { content: 'urology', image: 'evidence-emergency-2016.png' },
+    emergency: { content: 'emergency', image: 'evidence-emergency-2016.png' }
+  };
+
+  function departmentEntry(slug) {
+    for (const group of departmentGroups) {
+      const index = group.slugs.indexOf(slug);
+      if (index >= 0) return { slug, group, index, name: splitItems(group.list)[index] || slug };
+    }
+    return null;
+  }
+
+  const requestedDepartment = new URLSearchParams(window.location.search).get('id') || '';
+  let activeDepartment = view === 'department' ? departmentEntry(requestedDepartment) : null;
+  if (view === 'department' && activeDepartment) {
+    state.departmentVisits[activeDepartment.slug] = Math.max(0, Number(state.departmentVisits[activeDepartment.slug]) || 0) + 1;
+    engine.saveState(state);
+  }
 
   const escapeHtml = value => String(value ?? '').replace(/[&<>'"]/g, character => ({
     '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'
@@ -24,7 +59,7 @@
   }
 
   function resolve(path) {
-    return dig(publicContent?.locales?.[state.locale], path) ?? dig(content.locales[state.locale], path);
+    return dig(departmentContent?.locales?.[state.locale], path) ?? dig(publicContent?.locales?.[state.locale], path) ?? dig(content.locales[state.locale], path);
   }
 
   function t(path) {
@@ -77,7 +112,7 @@
   }
 
   function footer() {
-    const links = engine.manifest.views.filter(item => item.public === true).map(item => `<a href="${item.file}">${escapeHtml(t(`nav.${item.id}`))}</a>`).join('');
+    const links = engine.manifest.views.filter(item => item.public === true && item.footer !== false).map(item => `<a href="${item.file}">${escapeHtml(t(`nav.${item.id}`))}</a>`).join('');
     return `<footer class="site-footer"><div class="footer-brand"><span class="footer-mark" aria-hidden="true">潮</span><strong>${escapeHtml(t('global.institution'))}</strong></div><nav class="footer-nav" id="footer-nav">${links}</nav><div class="footer-meta"><p>${escapeHtml(t('global.fictionNotice'))}</p><a href="../index.html">${escapeHtml(t('global.backToGame'))}</a></div></footer>`;
   }
 
@@ -122,14 +157,41 @@
   }
 
   function renderDepartments() {
-    const groups = [
-      ['departments.internalTitle', 'departments.internalList'],
-      ['departments.surgicalTitle', 'departments.surgicalList'],
-      ['departments.specialtyTitle', 'departments.specialtyList'],
-      ['departments.centersTitle', 'departments.centersList'],
-      ['departments.clinicsTitle', 'departments.clinicsList']
-    ];
-    return `<main class="page public-page departments-page">${publicHeading('departments', 'DEPARTMENTS & CENTERS')}<div class="department-grid">${groups.map(([title, list]) => `<section class="department-card"><h2>${escapeHtml(t(title))}</h2><ul>${splitItems(list).map(item => `<li>${escapeHtml(item)}</li>`).join('')}</ul></section>`).join('')}</div><section class="notice department-note"><h2>${escapeHtml(t('departments.reservationTitle'))}</h2><p>${escapeHtml(t('departments.reservationBody'))}</p></section><p class="page-note">${escapeHtml(t('departments.note'))}</p></main>`;
+    return `<main class="page public-page departments-page">${publicHeading('departments', 'DEPARTMENTS & CENTERS')}<div class="department-grid">${departmentGroups.map(group => `<section class="department-card"><h2>${escapeHtml(t(group.title))}</h2><ul>${splitItems(group.list).map((item, index) => `<li><a href="department.html?id=${escapeHtml(group.slugs[index])}">${escapeHtml(item)}<span aria-hidden="true">›</span></a></li>`).join('')}</ul></section>`).join('')}</div><section class="notice department-note"><h2>${escapeHtml(t('departments.reservationTitle'))}</h2><p>${escapeHtml(t('departments.reservationBody'))}</p></section><p class="page-note">${escapeHtml(t('departments.note'))}</p></main>`;
+  }
+
+  function departmentBreadcrumb(entry) {
+    return `<div class="breadcrumb"><a href="index.html">${escapeHtml(t('nav.portal'))}</a><span aria-hidden="true">&gt;</span><a href="departments.html">${escapeHtml(t('nav.departments'))}</a><span aria-hidden="true">&gt;</span><span>${escapeHtml(entry.name)}</span></div>`;
+  }
+
+  function renderDepartmentHaunt(entry) {
+    const definition = hauntedDepartments[entry.slug];
+    if (!definition) return '';
+    const base = `haunt.${definition.content}`;
+    const visits = Math.max(1, Number(state.departmentVisits[entry.slug]) || 1);
+    const lines = splitItems(`${base}.signalLines`);
+    const codes = splitItems(`${base}.codes`);
+    return `<section class="department-haunt" data-haunt="${escapeHtml(entry.slug)}" data-haunt-level="${Math.min(visits, 4)}">
+      <div class="haunt-scan"><figure><img src="assets/img/departments/${escapeHtml(definition.image)}" alt="${escapeHtml(t(`${base}.imageAlt`))}" width="960" height="640" decoding="async"><figcaption>${escapeHtml(t(`${base}.imageCaption`))}</figcaption></figure><div><p class="system-label">${escapeHtml(t('haunt.common.monitorLabel'))}</p><h2>${escapeHtml(t(`${base}.signalTitle`))}</h2><p>${escapeHtml(t(`${base}.clinical`))}</p><p class="haunt-visit">${escapeHtml(t('detail.visitsLabel'))}: <strong>${visits}</strong></p></div></div>
+      <div class="haunt-console" role="status" aria-live="polite"><div class="haunt-console-bar"><span>DRMH / ${escapeHtml(entry.slug.toUpperCase())}</span><span>${escapeHtml(t('haunt.common.channel'))}</span></div><ol>${lines.map((line, index) => `<li data-haunt-line="${index}"${index ? ' hidden' : ''}><code>${escapeHtml(codes[index % codes.length] || 'W13/NULL')}</code><span>${escapeHtml(line)}</span></li>`).join('')}</ol><button type="button" data-action="haunt-recheck">${escapeHtml(t('haunt.common.recheck'))}</button></div>
+      <p class="haunt-residue" data-haunt-residue hidden>${escapeHtml(t(`${base}.mutations`))}</p>
+    </section>`;
+  }
+
+  function renderDepartment() {
+    if (!activeDepartment) {
+      return `<main class="page public-page department-detail-page">${publicHeading('departments', 'DEPARTMENTS & CENTERS')}<section class="notice"><h2>${escapeHtml(t('detail.notFoundTitle'))}</h2><p>${escapeHtml(t('detail.notFoundBody'))}</p></section><a class="primary-link" href="departments.html">${escapeHtml(t('detail.back'))}</a></main>`;
+    }
+    const entry = activeDepartment;
+    const services = splitItems(`groups.${entry.group.id}.services`);
+    const serial = `DRMH-${String(departmentGroups.indexOf(entry.group) + 1).padStart(2, '0')}${String(entry.index + 1).padStart(2, '0')}`;
+    return `<main class="page public-page department-detail-page">${departmentBreadcrumb(entry)}
+      <div class="page-heading public-heading department-heading"><p class="system-label">${escapeHtml(t('detail.open'))} / ${escapeHtml(serial)}</p><h1>${escapeHtml(entry.name)}</h1><p>${escapeHtml(t(`groups.${entry.group.id}.summary`))}</p></div>
+      <div class="department-detail-layout"><section class="department-clinical"><h2>${escapeHtml(t('detail.clinicalTitle'))}</h2><p>${escapeHtml(t(`groups.${entry.group.id}.clinical`))}</p><h3>${escapeHtml(t('detail.servicesTitle'))}</h3><ul>${services.map(item => `<li>${escapeHtml(item)}</li>`).join('')}</ul></section><aside class="department-practical"><h2>${escapeHtml(t('detail.scheduleTitle'))}</h2><p>${escapeHtml(t('detail.scheduleBody'))}</p><h2>${escapeHtml(t('detail.firstVisitTitle'))}</h2><p>${escapeHtml(t('detail.firstVisitBody'))}</p><dl><dt>${escapeHtml(t('detail.codeLabel'))}</dt><dd>${escapeHtml(serial)}</dd><dt>${escapeHtml(t('detail.updated'))}</dt><dd>2016/07/15</dd></dl></aside></div>
+      ${renderDepartmentHaunt(entry)}
+      <section class="department-related"><h2>${escapeHtml(t('detail.relatedTitle'))}</h2><div><a href="outpatient.html">${escapeHtml(t('detail.relatedOutpatient'))}</a><a href="doctors.html">${escapeHtml(t('detail.relatedDoctors'))}</a><a href="floor.html">${escapeHtml(t('detail.relatedFloor'))}</a></div></section>
+      <a class="department-back" href="departments.html">‹ ${escapeHtml(t('detail.back'))}</a>
+    </main>`;
   }
 
   function renderDoctors() {
@@ -245,17 +307,45 @@
     return `<main class="page lost-page"><div class="error-heading"><p class="error-code">404</p><div><p class="system-label">PAGE NOT FOUND</p><h1>${escapeHtml(t('lost.title'))}</h1></div></div><p class="lost-lead">${escapeHtml(t('lost.body'))}</p><section class="error-help"><h2>${escapeHtml(t('lost.reasonTitle'))}</h2><ul><li>${escapeHtml(t('lost.reason1'))}</li><li>${escapeHtml(t('lost.reason2'))}</li><li>${escapeHtml(t('lost.reason3'))}</li></ul><p><strong>${escapeHtml(t('lost.requestedLabel'))}</strong> <code>${escapeHtml(requested)}</code></p></section><div class="lost-actions"><a class="primary-link" href="index.html">${escapeHtml(t('lost.home'))}</a><a class="text-link" href="archive.html">${escapeHtml(t('lost.return'))}</a></div><details class="legacy-check" data-action="legacy-check"><summary>${escapeHtml(t('lost.legacySummary'))}</summary><p>${escapeHtml(t('lost.legacyBody'))}</p><code>${escapeHtml(t('lost.marker'))}</code></details></main>`;
   }
 
-  const renderers = { portal: renderPortal, about: renderAbout, news: renderNews, cooperation: renderCooperation, outpatient: renderOutpatient, departments: renderDepartments, doctors: renderDoctors, floor: renderFloor, access: renderAccess, archive: renderArchive, records: renderRecords, staff: renderStaff, terminal: renderTerminal, evidence: renderEvidence, lost: renderLost };
+  const renderers = { portal: renderPortal, about: renderAbout, news: renderNews, cooperation: renderCooperation, outpatient: renderOutpatient, departments: renderDepartments, department: renderDepartment, doctors: renderDoctors, floor: renderFloor, access: renderAccess, archive: renderArchive, records: renderRecords, staff: renderStaff, terminal: renderTerminal, evidence: renderEvidence, lost: renderLost };
+
+  function clearHauntTimers() {
+    hauntTimers.forEach(timer => window.clearTimeout(timer));
+    hauntTimers = [];
+    document.documentElement.removeAttribute('data-haunt-active');
+  }
+
+  function activateDepartmentHaunt() {
+    const panel = app.querySelector('.department-haunt');
+    if (!panel || !activeDepartment) return;
+    const level = Math.max(1, Number(panel.dataset.hauntLevel) || 1);
+    const lines = [...panel.querySelectorAll('[data-haunt-line]')];
+    lines.forEach((line, index) => {
+      if (index < level) line.hidden = false;
+      if (index >= level) hauntTimers.push(window.setTimeout(() => {
+        line.hidden = false;
+        document.documentElement.dataset.hauntActive = activeDepartment.slug;
+      }, 1150 + (index - level) * 900));
+    });
+    const residue = panel.querySelector('[data-haunt-residue]');
+    if (residue) hauntTimers.push(window.setTimeout(() => {
+      residue.hidden = false;
+      if (level >= 2) document.title = `${t('haunt.common.titleMutation')}｜${activeDepartment.name}`;
+    }, 1750 + Math.max(0, lines.length - level) * 700));
+  }
 
   function render() {
+    clearHauntTimers();
+    if (view === 'department') activeDepartment = departmentEntry(requestedDepartment);
     applyDocumentLocale();
     applyTextSize();
     if (isPublicView) {
-      const titlePath = view === 'portal' ? 'portal.title' : `${view}.title`;
-      document.title = `${t(titlePath)}｜${t('global.institution')}`;
+      const pageTitle = view === 'department' ? (activeDepartment?.name || t('departments.title')) : t(view === 'portal' ? 'portal.title' : `${view}.title`);
+      document.title = `${pageTitle}｜${t('global.institution')}`;
     }
     app.innerHTML = `${header()}${(renderers[view] || renderPortal)()}${footer()}<div id="arg-toast" class="arg-toast" role="status"></div>`;
     bindEvents();
+    activateDepartmentHaunt();
   }
 
   function showToast(message) {
@@ -287,8 +377,16 @@
       const nextSize = button.dataset.size;
       if (!['small', 'standard', 'large'].includes(nextSize)) return;
       textSize = nextSize;
+      state.textSize = nextSize;
+      engine.saveState(state);
       render();
     }));
+    app.querySelector('[data-action="haunt-recheck"]')?.addEventListener('click', () => {
+      if (!activeDepartment) return;
+      state.departmentVisits[activeDepartment.slug] = Math.max(0, Number(state.departmentVisits[activeDepartment.slug]) || 0) + 1;
+      engine.saveState(state);
+      render();
+    });
     app.querySelector('[data-action="print"]')?.addEventListener('click', () => window.print());
     app.querySelectorAll('[data-action="clue"]').forEach(button => button.addEventListener('click', () => {
       const added = engine.addClue(state, button.dataset.clue);

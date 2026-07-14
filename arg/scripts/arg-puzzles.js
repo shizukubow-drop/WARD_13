@@ -8,9 +8,11 @@
     return {
       version: 2,
       locale: 'ja',
+      textSize: 'standard',
       clues: [],
       gates: {},
       attempts: {},
+      departmentVisits: {},
       terminalHistory: [],
       completedAt: null,
       updatedAt: new Date().toISOString()
@@ -24,9 +26,11 @@
       return {
         ...freshState(),
         ...parsed,
+        textSize: ['small', 'standard', 'large'].includes(parsed.textSize) ? parsed.textSize : 'standard',
         clues: Array.isArray(parsed.clues) ? parsed.clues.filter(id => manifest.clues.some(clue => clue.id === id)) : [],
         gates: parsed.gates && typeof parsed.gates === 'object' ? parsed.gates : {},
         attempts: parsed.attempts && typeof parsed.attempts === 'object' ? parsed.attempts : {},
+        departmentVisits: parsed.departmentVisits && typeof parsed.departmentVisits === 'object' ? parsed.departmentVisits : {},
         terminalHistory: Array.isArray(parsed.terminalHistory) ? parsed.terminalHistory.slice(-30) : []
       };
     } catch {
