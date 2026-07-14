@@ -164,6 +164,27 @@
     return `<div class="breadcrumb"><a href="index.html">${escapeHtml(t('nav.portal'))}</a><span aria-hidden="true">&gt;</span><a href="departments.html">${escapeHtml(t('nav.departments'))}</a><span aria-hidden="true">&gt;</span><span>${escapeHtml(entry.name)}</span></div>`;
   }
 
+  function hauntExposure() {
+    const visited = Object.keys(hauntedDepartments)
+      .map(slug => Math.max(0, Number(state.departmentVisits[slug]) || 0))
+      .filter(Boolean);
+    return {
+      unique: visited.length,
+      total: visited.reduce((sum, visits) => sum + visits, 0)
+    };
+  }
+
+  function corruptClinicalCode(value, index, level, contamination) {
+    const source = String(value || 'W13/NULL');
+    if (level < 2 && contamination < 3) return source;
+    const glyphs = ['0', '1', '?', '█'];
+    const stride = Math.max(3, 8 - Math.min(5, level + Math.floor(contamination / 2)));
+    return [...source].map((character, position) => {
+      if (!/[A-Z0-9]/.test(character) || (position + index + level + contamination) % stride) return character;
+      return glyphs[(position + index + contamination) % glyphs.length];
+    }).join('');
+  }
+
   function renderDepartmentHaunt(entry) {
     const definition = hauntedDepartments[entry.slug];
     if (!definition) return '';
@@ -171,9 +192,15 @@
     const visits = Math.max(1, Number(state.departmentVisits[entry.slug]) || 1);
     const lines = splitItems(`${base}.signalLines`);
     const codes = splitItems(`${base}.codes`);
-    return `<section class="department-haunt" data-haunt="${escapeHtml(entry.slug)}" data-haunt-level="${Math.min(visits, 4)}">
-      <div class="haunt-scan"><figure><img src="assets/img/departments/${escapeHtml(definition.image)}" alt="${escapeHtml(t(`${base}.imageAlt`))}" width="960" height="640" decoding="async"><figcaption>${escapeHtml(t(`${base}.imageCaption`))}</figcaption></figure><div><p class="system-label">${escapeHtml(t('haunt.common.monitorLabel'))}</p><h2>${escapeHtml(t(`${base}.signalTitle`))}</h2><p>${escapeHtml(t(`${base}.clinical`))}</p><p class="haunt-visit">${escapeHtml(t('detail.visitsLabel'))}: <strong>${visits}</strong></p></div></div>
-      <div class="haunt-console" role="status" aria-live="polite"><div class="haunt-console-bar"><span>DRMH / ${escapeHtml(entry.slug.toUpperCase())}</span><span>${escapeHtml(t('haunt.common.channel'))}</span></div><ol>${lines.map((line, index) => `<li data-haunt-line="${index}"${index ? ' hidden' : ''}><code>${escapeHtml(codes[index % codes.length] || 'W13/NULL')}</code><span>${escapeHtml(line)}</span></li>`).join('')}</ol><button type="button" data-action="haunt-recheck">${escapeHtml(t('haunt.common.recheck'))}</button></div>
+    const exposure = hauntExposure();
+    const level = Math.min(visits, 6);
+    const viewerSerial = `LOCAL-${String(exposure.total).padStart(3, '0')}-${String(exposure.unique).padStart(2, '0')}`;
+    const integrity = visits >= 3 ? 'CRC/CONSENT-MISMATCH' : visits >= 2 ? 'SOURCE/OVERWRITTEN' : 'PENDING/RECONCILIATION';
+    const route = `/record/${entry.slug}/viewer/${viewerSerial}/specimen.log`;
+    return `<section class="department-haunt" data-haunt="${escapeHtml(entry.slug)}" data-haunt-level="${level}" data-haunt-contamination="${Math.min(exposure.unique, 8)}">
+      <div class="haunt-scan"><figure><img src="assets/img/departments/${escapeHtml(definition.image)}" alt="${escapeHtml(t(`${base}.imageAlt`))}" width="960" height="640" decoding="async" loading="eager"><figcaption>${escapeHtml(t(`${base}.imageCaption`))}</figcaption></figure><div><p class="system-label">${escapeHtml(t('haunt.common.monitorLabel'))}</p><h2>${escapeHtml(t(`${base}.signalTitle`))}</h2><p>${escapeHtml(t(`${base}.clinical`))}</p><p class="haunt-visit">${escapeHtml(t('detail.visitsLabel'))}: <strong>${visits}</strong></p></div></div>
+      <div class="haunt-ledger"><span><b>${escapeHtml(t('haunt.common.contaminationLabel'))}</b><code>${exposure.unique}/8</code></span><span><b>${escapeHtml(t('haunt.common.viewerLabel'))}</b><code>${escapeHtml(viewerSerial)}</code></span><span><b>${escapeHtml(t('haunt.common.integrityLabel'))}</b><code>${escapeHtml(integrity)}</code></span></div>
+      <div class="haunt-console" role="status" aria-live="polite"><div class="haunt-console-bar"><span>DRMH / ${escapeHtml(entry.slug.toUpperCase())}</span><span>${escapeHtml(t('haunt.common.channel'))}</span></div><ol>${lines.map((line, index) => `<li data-haunt-line="${index}"${index ? ' hidden' : ''}><code>${escapeHtml(corruptClinicalCode(codes[index % codes.length], index, level, exposure.unique))}</code><span>${escapeHtml(line)}</span></li>`).join('')}</ol><div class="haunt-route"><b>${escapeHtml(t('haunt.common.residueLabel'))}</b><code>${escapeHtml(route)}</code></div><button type="button" data-action="haunt-recheck">${escapeHtml(t('haunt.common.recheck'))}</button></div>
       <p class="haunt-residue" data-haunt-residue hidden>${escapeHtml(t(`${base}.mutations`))}</p>
     </section>`;
   }
@@ -313,25 +340,29 @@
     hauntTimers.forEach(timer => window.clearTimeout(timer));
     hauntTimers = [];
     document.documentElement.removeAttribute('data-haunt-active');
+    document.documentElement.removeAttribute('data-haunt-contamination');
   }
 
   function activateDepartmentHaunt() {
     const panel = app.querySelector('.department-haunt');
     if (!panel || !activeDepartment) return;
     const level = Math.max(1, Number(panel.dataset.hauntLevel) || 1);
+    const contamination = Math.max(1, Number(panel.dataset.hauntContamination) || 1);
     const lines = [...panel.querySelectorAll('[data-haunt-line]')];
+    document.documentElement.dataset.hauntContamination = String(contamination);
+    if (level >= 2 || contamination >= 3) document.documentElement.dataset.hauntActive = activeDepartment.slug;
     lines.forEach((line, index) => {
       if (index < level) line.hidden = false;
       if (index >= level) hauntTimers.push(window.setTimeout(() => {
         line.hidden = false;
         document.documentElement.dataset.hauntActive = activeDepartment.slug;
-      }, 1150 + (index - level) * 900));
+      }, 850 + (index - level) * 620));
     });
     const residue = panel.querySelector('[data-haunt-residue]');
     if (residue) hauntTimers.push(window.setTimeout(() => {
       residue.hidden = false;
       if (level >= 2) document.title = `${t('haunt.common.titleMutation')}｜${activeDepartment.name}`;
-    }, 1750 + Math.max(0, lines.length - level) * 700));
+    }, 1350 + Math.max(0, lines.length - level) * 420));
   }
 
   function render() {
