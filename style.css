@@ -1994,7 +1994,9 @@ body.error-presence #gameplay-screen { animation: error-presence-shift .52s step
 
     #phone-screen { align-items: stretch; }
     .phone-shell { width: 100%; border-inline: 0; }
-    .phone-chat { padding: 12px 16px 18px; overscroll-behavior: contain; }
+    .phone-chat { padding: 12px 12px 18px; overscroll-behavior: contain; }
+    .chat-message.incoming { margin-left: 42px; }
+    .chat-message.outgoing { margin-right: 42px; }
     .phone-actions { padding: 10px 12px calc(10px + env(safe-area-inset-bottom)); }
     .phone-primary, .phone-skip { min-height: 44px; }
 
