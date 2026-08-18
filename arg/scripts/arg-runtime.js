@@ -34,6 +34,12 @@
     urology: { content: 'urology', image: 'evidence-emergency-2016.png' },
     emergency: { content: 'emergency', image: 'evidence-emergency-2016.png' }
   };
+  const observationPhotos = [
+    { id: 'corridor', file: 'ward13-corridor-2016.webp', masks: [[47, 41, 6, 10]] },
+    { id: 'staff', file: 'ward13-staff-2016.webp', masks: [[17, 35, 8, 13], [23, 6, 8, 13], [39, 31, 10, 14], [45, 12, 8, 13], [66, 31, 9, 14], [66, 10, 8, 13]] },
+    { id: 'nightRound', stateId: 'night-round', file: 'ward13-night-round-2016.webp', masks: [[60, 52, 8, 12], [72, 48, 9, 14]] },
+    { id: 'procedure', file: 'ward13-procedure-2016.webp', masks: [[12, 16, 9, 12], [38, 24, 8, 12], [55, 17, 8, 12], [76, 36, 9, 14]] }
+  ];
 
   function departmentEntry(slug) {
     for (const group of departmentGroups) {
@@ -185,6 +191,28 @@
     }).join('');
   }
 
+  function renderIdentityAudit(entry) {
+    const definition = hauntedDepartments[entry.slug];
+    if (!definition) return '';
+    const base = `identity.${definition.content}`;
+    const choices = splitItems(`${base}.choices`);
+    const selected = state.identityResponses[entry.slug];
+    const selectedIndex = Number(selected);
+    const status = engine.identityStatus(state);
+    const viewer = status.recognized ? t('identity.common.viewerMatched') : t('identity.common.viewerUnknown');
+    const clinicalLedger = resolve(`${base}.ledger`);
+    const response = selected === undefined ? `<div class="identity-choices" role="group" aria-label="${escapeHtml(t('identity.common.choicePrompt'))}">${choices.map((choice, index) => `<button type="button" data-action="identity-choice" data-choice="${index}">${escapeHtml(choice)}</button>`).join('')}</div>` : `<div class="identity-rewrite"><p><b>${escapeHtml(t('identity.common.registered'))}</b><span>${escapeHtml(choices[selectedIndex] || choices[0] || '')}</span></p><p><b>${escapeHtml(t('identity.common.rewriteLabel'))}</b><code>${escapeHtml(t(`${base}.rewrite`))}</code></p></div>`;
+    const gallery = status.galleryReady ? `<a class="identity-gallery-link" href="observation.html">${escapeHtml(t('identity.common.galleryCta'))}<span aria-hidden="true">▶</span></a>` : `<p class="identity-gallery-locked">${escapeHtml(t('identity.common.galleryLocked'))}</p>`;
+    return `<section class="identity-audit" data-identity-audit="${escapeHtml(entry.slug)}">
+      <div class="identity-audit-head"><div><p class="system-label">${escapeHtml(t('identity.common.label'))}</p><h2>${escapeHtml(t('identity.common.title'))}</h2></div><code>${escapeHtml(t('identity.common.progress'))} ${status.responses}/${status.totalResponses}</code></div>
+      <p class="identity-lead">${escapeHtml(t('identity.common.lead'))}</p>
+      <div class="identity-viewer"><span>${escapeHtml(t('identity.common.viewerLabel'))}</span><strong>${escapeHtml(viewer)}</strong></div>
+      ${typeof clinicalLedger === 'string' ? `<pre class="identity-clinical-ledger">${escapeHtml(clinicalLedger)}</pre>` : ''}
+      <fieldset><legend>${escapeHtml(t(`${base}.question`))}</legend>${response}</fieldset>
+      ${gallery}
+    </section>`;
+  }
+
   function renderDepartmentHaunt(entry) {
     const definition = hauntedDepartments[entry.slug];
     if (!definition) return '';
@@ -216,6 +244,7 @@
       <div class="page-heading public-heading department-heading"><p class="system-label">${escapeHtml(t('detail.open'))} / ${escapeHtml(serial)}</p><h1>${escapeHtml(entry.name)}</h1><p>${escapeHtml(t(`groups.${entry.group.id}.summary`))}</p></div>
       <div class="department-detail-layout"><section class="department-clinical"><h2>${escapeHtml(t('detail.clinicalTitle'))}</h2><p>${escapeHtml(t(`groups.${entry.group.id}.clinical`))}</p><h3>${escapeHtml(t('detail.servicesTitle'))}</h3><ul>${services.map(item => `<li>${escapeHtml(item)}</li>`).join('')}</ul></section><aside class="department-practical"><h2>${escapeHtml(t('detail.scheduleTitle'))}</h2><p>${escapeHtml(t('detail.scheduleBody'))}</p><h2>${escapeHtml(t('detail.firstVisitTitle'))}</h2><p>${escapeHtml(t('detail.firstVisitBody'))}</p><dl><dt>${escapeHtml(t('detail.codeLabel'))}</dt><dd>${escapeHtml(serial)}</dd><dt>${escapeHtml(t('detail.updated'))}</dt><dd>2016/07/15</dd></dl></aside></div>
       ${renderDepartmentHaunt(entry)}
+      ${renderIdentityAudit(entry)}
       <section class="department-related"><h2>${escapeHtml(t('detail.relatedTitle'))}</h2><div><a href="outpatient.html">${escapeHtml(t('detail.relatedOutpatient'))}</a><a href="doctors.html">${escapeHtml(t('detail.relatedDoctors'))}</a><a href="floor.html">${escapeHtml(t('detail.relatedFloor'))}</a></div></section>
       <a class="department-back" href="departments.html">‹ ${escapeHtml(t('detail.back'))}</a>
     </main>`;
@@ -329,12 +358,43 @@
     return `<main class="page evidence-page"><div class="page-heading"><p class="system-label">LOCAL EVIDENCE</p><h1>${escapeHtml(t('evidence.title'))}</h1><p>${escapeHtml(t('evidence.subtitle'))}</p></div>${list}${final}</main>`;
   }
 
+  function renderPhotoMasks(photo) {
+    return `<div class="photo-masks" aria-hidden="true">${photo.masks.map(([x, y, width, height]) => `<span style="--mask-x:${x}%;--mask-y:${y}%;--mask-w:${width}%;--mask-h:${height}%"></span>`).join('')}</div>`;
+  }
+
+  function renderObservation() {
+    const status = engine.identityStatus(state);
+    if (!status.galleryReady) return `<main class="page observation-page"><div class="page-heading"><p class="system-label">PHOTO LEDGER / ACCESS CONTROL</p><h1>${escapeHtml(t('observation.title'))}</h1><p>${escapeHtml(t('observation.subtitle'))}</p></div><section class="observation-locked"><h2>${escapeHtml(t('observation.lockedTitle'))}</h2><p>${escapeHtml(t('observation.lockedBody'))}</p><a class="primary-link" href="departments.html">${escapeHtml(t('observation.return'))}</a></section></main>`;
+    const cards = observationPhotos.map(photo => {
+      const stateId = photo.stateId || photo.id;
+      const inspected = state.photoInspections[stateId] === true;
+      return `<article class="observation-card" data-photo="${escapeHtml(stateId)}"><div class="observation-photo"><img src="assets/img/observation/${escapeHtml(photo.file)}" alt="${escapeHtml(t(`observation.${photo.id}Alt`))}" width="1536" height="1024" decoding="async" loading="lazy">${renderPhotoMasks(photo)}<span class="photo-stamp">2016 / DRMH-W13 / ${escapeHtml(stateId.toUpperCase())}</span></div><div class="observation-copy"><p class="system-label">PHOTO ${String(observationPhotos.indexOf(photo) + 1).padStart(2, '0')}</p><h2>${escapeHtml(t(`observation.${photo.id}Title`))}</h2><p>${escapeHtml(t(`observation.${photo.id}Caption`))}</p>${inspected ? `<p class="photo-anomaly"><b>${escapeHtml(t('observation.inspected'))}</b>${escapeHtml(t(`observation.${photo.id}Anomaly`))}</p>` : `<button type="button" data-action="inspect-photo" data-photo-id="${escapeHtml(stateId)}">${escapeHtml(t('observation.inspect'))}</button>`}</div></article>`;
+    }).join('');
+    const next = status.beautyReady ? `<a class="beauty-door" href="beauty.html"><span>PHOTO 05 / 2016-07-15</span><strong>${escapeHtml(t('observation.doorLabel'))}</strong><small>${escapeHtml(t('observation.doorHint'))}</small></a>` : `<p class="beauty-door-locked">${escapeHtml(t('observation.doorLocked'))}</p>`;
+    return `<main class="page observation-page"><div class="page-heading"><p class="system-label">PHOTO LEDGER / WARD 13</p><h1>${escapeHtml(t('observation.title'))}</h1><p>${escapeHtml(t('observation.subtitle'))}</p></div><section class="observation-intro"><p>${escapeHtml(t('observation.lead'))}</p><code>${escapeHtml(t('observation.progress'))} ${status.inspections}/${status.totalInspections}</code></section><div class="observation-grid">${cards}</div>${next}<a class="department-back" href="departments.html">‹ ${escapeHtml(t('observation.return'))}</a></main>`;
+  }
+
+  function renderBeauty() {
+    const status = engine.identityStatus(state);
+    if (!status.beautyReady) return `<main class="beauty-locked"><p class="error-code">403</p><h1>${escapeHtml(t('beauty.lockedTitle'))}</h1><p>${escapeHtml(t('beauty.lockedBody'))}</p><a href="observation.html">${escapeHtml(t('beauty.return'))}</a></main>`;
+    const phrase = t('beauty.phrase');
+    const notes = Array.from({ length: 112 }, (_, index) => {
+      const x = (index * 37 + index % 7 * 11) % 97;
+      const y = (index * 23 + index % 5 * 17) % 96;
+      const rotation = (index * 17 % 31) - 15;
+      const scale = 76 + (index * 13 % 54);
+      const delay = -(index * 71 % 900);
+      return `<span class="beauty-note" aria-hidden="true" style="--note-x:${x}%;--note-y:${y}%;--note-r:${rotation}deg;--note-s:${scale}%;--note-delay:${delay}ms">${escapeHtml(phrase)}</span>`;
+    }).join('');
+    return `<main class="beauty-wall"><h1 class="visually-hidden">${escapeHtml(t('beauty.screenReader'))}</h1><div class="beauty-notes">${notes}</div><a class="beauty-exit" href="observation.html">${escapeHtml(t('beauty.return'))}</a></main>`;
+  }
+
   function renderLost() {
     const requested = window.location.pathname.replace(/\/$/, '') || '/';
     return `<main class="page lost-page"><div class="error-heading"><p class="error-code">404</p><div><p class="system-label">PAGE NOT FOUND</p><h1>${escapeHtml(t('lost.title'))}</h1></div></div><p class="lost-lead">${escapeHtml(t('lost.body'))}</p><section class="error-help"><h2>${escapeHtml(t('lost.reasonTitle'))}</h2><ul><li>${escapeHtml(t('lost.reason1'))}</li><li>${escapeHtml(t('lost.reason2'))}</li><li>${escapeHtml(t('lost.reason3'))}</li></ul><p><strong>${escapeHtml(t('lost.requestedLabel'))}</strong> <code>${escapeHtml(requested)}</code></p></section><div class="lost-actions"><a class="primary-link" href="index.html">${escapeHtml(t('lost.home'))}</a><a class="text-link" href="archive.html">${escapeHtml(t('lost.return'))}</a></div><details class="legacy-check" data-action="legacy-check"><summary>${escapeHtml(t('lost.legacySummary'))}</summary><p>${escapeHtml(t('lost.legacyBody'))}</p><code>${escapeHtml(t('lost.marker'))}</code></details></main>`;
   }
 
-  const renderers = { portal: renderPortal, about: renderAbout, news: renderNews, cooperation: renderCooperation, outpatient: renderOutpatient, departments: renderDepartments, department: renderDepartment, doctors: renderDoctors, floor: renderFloor, access: renderAccess, archive: renderArchive, records: renderRecords, staff: renderStaff, terminal: renderTerminal, evidence: renderEvidence, lost: renderLost };
+  const renderers = { portal: renderPortal, about: renderAbout, news: renderNews, cooperation: renderCooperation, outpatient: renderOutpatient, departments: renderDepartments, department: renderDepartment, doctors: renderDoctors, floor: renderFloor, access: renderAccess, archive: renderArchive, records: renderRecords, staff: renderStaff, terminal: renderTerminal, evidence: renderEvidence, observation: renderObservation, beauty: renderBeauty, lost: renderLost };
 
   function clearHauntTimers() {
     hauntTimers.forEach(timer => window.clearTimeout(timer));
@@ -368,11 +428,15 @@
   function render() {
     clearHauntTimers();
     if (view === 'department') activeDepartment = departmentEntry(requestedDepartment);
+    if (view === 'beauty' && engine.identityStatus(state).beautyReady && !state.beautySeen) {
+      engine.markBeautySeen(state);
+      state = engine.loadState();
+    }
     applyDocumentLocale();
     applyTextSize();
     const pageTitle = view === 'department' ? (activeDepartment?.name || t('departments.title')) : t(view === 'portal' ? 'portal.title' : `${view}.title`);
-    document.title = view === 'terminal' ? pageTitle : `${pageTitle}｜${t('global.institution')}`;
-    app.innerHTML = `${header()}${(renderers[view] || renderPortal)()}${footer()}<div id="arg-toast" class="arg-toast" role="status"></div>`;
+    document.title = view === 'terminal' || view === 'beauty' ? pageTitle : `${pageTitle}｜${t('global.institution')}`;
+    app.innerHTML = view === 'beauty' ? `${renderBeauty()}<div id="arg-toast" class="arg-toast" role="status"></div>` : `${header()}${(renderers[view] || renderPortal)()}${footer()}<div id="arg-toast" class="arg-toast" role="status"></div>`;
     bindEvents();
     activateDepartmentHaunt();
   }
@@ -416,6 +480,19 @@
       engine.saveState(state);
       render();
     });
+    app.querySelectorAll('[data-action="identity-choice"]').forEach(button => button.addEventListener('click', () => {
+      if (!activeDepartment) return;
+      const result = engine.recordIdentity(state, activeDepartment.slug, button.dataset.choice);
+      state = engine.loadState();
+      render();
+      if (result.ok) showToast(t('identity.common.savedToast'));
+    }));
+    app.querySelectorAll('[data-action="inspect-photo"]').forEach(button => button.addEventListener('click', () => {
+      const result = engine.inspectPhoto(state, button.dataset.photoId);
+      state = engine.loadState();
+      render();
+      if (result.ok) showToast(t('observation.inspected'));
+    }));
     app.querySelector('[data-action="print"]')?.addEventListener('click', () => window.print());
     app.querySelectorAll('[data-action="clue"]').forEach(button => button.addEventListener('click', () => {
       const added = engine.addClue(state, button.dataset.clue);

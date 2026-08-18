@@ -287,6 +287,104 @@ window.WARD13_ARG_CONTENT = {
         finalNote: "退院記録はない。だが、記録を閉じる権限は患者本人に残されている。",
         finalAction: "本編へ戻り、白い扉を自分で選ぶ"
       },
+      identity: {
+        common: {
+          label: "本人照合／家族申告との不一致",
+          title: "適応歴問診票",
+          lead: "以下の設問は診療のためではありません。閲覧者が院内の患者記録と同一かを確認します。回答はこの端末に保存され、家族申告と照合されます。",
+          choicePrompt: "最も近い回答を選択",
+          progress: "照合済み項目",
+          registered: "患者回答",
+          rewriteLabel: "病院側確定記録",
+          viewerLabel: "閲覧者照合",
+          viewerUnknown: "照合保留 / LOCAL READER",
+          viewerMatched: "AKIBA MAI / RECORD MATCH",
+          galleryCta: "旧第13観察区・写真台帳を開く",
+          galleryLocked: "3診療科以上の問診を終えると、写真台帳が表示されます。",
+          savedToast: "回答は家族申告で訂正されました"
+        },
+        obstetrics: {
+          ledger: "SEXUAL ASSAULT EXAM / PREGNANCY RISK: NOT EXCLUDABLE AT 0H / URINE hCG: REPEAT DAY 14 AND DAY 21 / EMERGENCY CONTRACEPTION FIELD: MISSING",
+          question: "長女が『家族の投資』として評価される場合、損失はいつ発生しますか。",
+          choices: "成績が落ちた時｜選ばれた進路を拒んだ時｜子どもは投資ではない",
+          rewrite: "FIRSTBORN ASSET / RETURN BELOW EXPECTATION / CORRECTION AUTHORIZED"
+        },
+        psychiatry: {
+          question: "愛情の提供を継続するために、患者は何を証明し続ける必要がありますか。",
+          choices: "結果を出し続ける｜管理可能な人生を選ぶ｜愛情に条件は必要ない",
+          rewrite: "UNCONDITIONAL CARE: NOT AVAILABLE / ATTACHMENT THREAT ACCEPTED"
+        },
+        anesthesia: {
+          question: "身体が生き残るために無反応になった時、その沈黙は誰の所有物ですか。",
+          choices: "患者本人｜家族・保護者｜反応がないなら誰のものでもない",
+          rewrite: "AFFECT FLAT / PROCEDURE TOLERATED / DISTRESS NOT OBSERVED"
+        },
+        arrhythmia: {
+          question: "複数の恐怖が同時に鳴っている時、どの警報を先に患者の性格として処理しますか。",
+          choices: "見捨てられる恐怖｜失敗する恐怖｜警報を性格に変換しない",
+          rewrite: "MULTIPLE ALARMS RECLASSIFIED AS ATTITUDE PROBLEM"
+        },
+        neurology: {
+          question: "閉じられない思考のタブが増え続けた場合、停止の責任は誰にありますか。",
+          choices: "疲弊した脳｜環境と外傷｜患者の努力不足",
+          rewrite: "BACKGROUND PROCESSES: PATIENT FAULT / SHUTDOWN RECOMMENDED"
+        },
+        womensMental: {
+          ledger: "MENTAL STATUS: CONSCIOUS / THREAT-IMMOBILITY RESPONSE PRESENT / PATIENT STATEMENT: NON-CONSENSUAL / FAMILY AMENDMENT: MUTUAL",
+          question: "抵抗すれば殺されると感じて身体が動かなかった時、記録はその沈黙を何と呼びましたか。",
+          choices: "恐怖反応｜解離・凍結｜同意",
+          rewrite: "FAMILY SOURCE: MUTUAL / PATIENT SOURCE: UNSTABLE"
+        },
+        urology: {
+          ledger: "FORENSIC EXAM: CLOTHING SEALED / INJURY PHOTOGRAPHS 06 / SWABS 04 / TOXICOLOGY: 7-AMINOFLUNITRAZEPAM DETECTED / CUSTODY SEALED 03:41",
+          question: "被害の後、証拠を残すために加害者へ再び近づいた行動を、院内記録は何と分類しますか。",
+          choices: "生存のための計算｜証拠保全｜事後の同意",
+          rewrite: "POST-EVENT CONTACT = VOLUNTARY / BODY RECORD OVERRIDES TESTIMONY"
+        },
+        emergency: {
+          question: "家族の負債が深夜の病室まで来た時、性被害の賠償金は誰の担保になりますか。",
+          choices: "誰のものにもならない｜長女の口座なら家族のもの｜拒めない者のもの",
+          rewrite: "COMPENSATION RECLASSIFIED: FAMILY LIQUIDITY / CONSENT OBTAINED 00:13"
+        }
+      },
+      observation: {
+        title: "旧第13観察区 写真台帳",
+        subtitle: "撮影者不明。2016年度の院内教育写真として登録されています。",
+        lead: "顔は個人情報保護のため処理されています。同じ人物が複数の職員番号で記録されている可能性があります。各写真を照合してください。",
+        progress: "写真照合",
+        inspect: "拡大照合",
+        inspected: "照合済み / 不一致を保存",
+        lockedTitle: "閲覧者記録が不足しています",
+        lockedBody: "写真台帳は、3診療科以上で本人照合を終えた端末にだけ表示されます。",
+        return: "診療科一覧へ戻る",
+        corridorTitle: "西病棟連絡廊下 / 05:13",
+        corridorCaption: "施錠確認のため撮影。写真奥の職員は当直表に存在しません。",
+        corridorAlt: "古い病院の長い廊下の奥に、腕の長い看護師らしき人物が立っている写真",
+        corridorAnomaly: "1307号室と1309号室の傷が完全に同一です。奥の看護師だけ床面に反射していません。",
+        staffTitle: "第13観察区・接遇研修",
+        staffCaption: "医師3名、看護師3名として登録。撮影後、原本から氏名欄が切り取られています。",
+        staffAlt: "同じ微笑みと姿勢で並ぶ、顔をモザイク処理された医師と看護師の集合写真",
+        staffAnomaly: "職員は6名ですが影は7つあります。照合された職員番号は全員『00』です。",
+        nightRoundTitle: "夜間巡視 / 看護記録添付",
+        nightRoundCaption: "撮影理由は『患者が眠っていることの証明』。病床番号は削除済み。",
+        nightRoundAlt: "夜の看護師詰所で、不自然な角度に首を向けた看護師とカーテン裏の手が写る写真",
+        nightRoundAnomaly: "2016年の写真なのに、端末ログは『2026-07-06 / 110 / WINDOW』を参照しています。",
+        procedureTitle: "処置室 / 同意確認後",
+        procedureCaption: "患者は全身を覆われています。処置名、麻酔記録、退出時刻は空欄です。",
+        procedureAlt: "古い処置室で、覆われた人型の周囲に不自然な姿勢の医療スタッフが立つ写真",
+        procedureAnomaly: "覆布の下の患者タグは『AKIBA MAI』。職員の顔はモザイク処理後も同じ輪郭です。",
+        doorLabel: "配布物保管室を開く",
+        doorHint: "写真に写らない5枚目が、あなたの回答を待っています。",
+        doorLocked: "PHOTO 05 は未照合です。6診療科の問診と4枚の写真照合が必要です。"
+      },
+      beauty: {
+        title: "真華美啊",
+        phrase: "真華美啊",
+        screenReader: "画面全体が、赤い文字で真華美啊と書かれた紙片に覆われています。",
+        lockedTitle: "閲覧権限がありません",
+        lockedBody: "この配布物は、本人照合6件と写真照合4件が完了した端末だけに表示されます。",
+        return: "写真台帳へ戻る"
+      },
       lost: {
         title: "ページが見つかりません",
         body: "お探しのページは、公開終了、アドレス変更、または旧サイト移行により表示できない可能性があります。",
@@ -313,6 +411,17 @@ window.WARD13_ARG_CONTENT = {
         terminal_patient_zero: "閲覧者IDと患者IDは同一記録へ解決される。",
         terminal_not_discharged: "患者00には退院イベントが存在しない。",
         seagull_marker: "海鳥は『演じる役を間違えた』記録の印。",
+        trauma_firstborn: "長女は子どもではなく、回収率を測定される家族資産として登録された。",
+        trauma_conditional_love: "愛情は成果と服従が継続する間だけ提供される。",
+        trauma_dissociation: "生存のための無反応が『苦痛なし』へ書き換えられた。",
+        trauma_panic: "同時に鳴る恐怖は、患者の性格上の問題へ分類された。",
+        trauma_many_tabs: "閉じられない思考の負荷は、患者の努力不足として処理された。",
+        trauma_testimony_overwritten: "恐怖で動けなかった証言は、家族申告によって同意へ上書きされた。",
+        trauma_body_evidence: "証拠を残すための生存行動が、事後の自発性として記録された。",
+        trauma_compensation_collateral: "性被害の賠償金は、家族の流動資産へ再分類された。",
+        akiba_mai_recognized: "閲覧者は患者記録『AKIBA MAI』と一致した。",
+        photo_subjects_identical: "別々の写真にいる医療職員は、モザイクの下で同じ輪郭を持つ。",
+        beautiful_note: "配布物保管室は『真華美啊』と書かれた赤い字の紙片で埋め尽くされていた。",
         final_open_door: "第13観察区は物理的な階ではなく、観察用の名前だった。"
       },
       bridge: {
@@ -590,6 +699,104 @@ window.WARD13_ARG_CONTENT = {
         finalNote: "沒有出院紀錄，但關閉紀錄的權限仍保留給病患本人。",
         finalAction: "返回本篇，親自選擇那扇白門"
       },
+      identity: {
+        common: {
+          label: "本人核對／與家屬陳述不一致",
+          title: "適應史問診表",
+          lead: "以下問題並非用於診療，而是確認閱覽者是否與院內病患紀錄為同一人。回答會保存在此終端，並與家屬陳述核對。",
+          choicePrompt: "選擇最接近的回答",
+          progress: "已核對項目",
+          registered: "病患回答",
+          rewriteLabel: "院方確定紀錄",
+          viewerLabel: "閱覽者核對",
+          viewerUnknown: "核對保留 / LOCAL READER",
+          viewerMatched: "AKIBA MAI / RECORD MATCH",
+          galleryCta: "開啟舊第13觀察區・照片台帳",
+          galleryLocked: "完成至少3個診療科的問診後，照片台帳便會顯示。",
+          savedToast: "回答已依家屬陳述更正"
+        },
+        obstetrics: {
+          ledger: "SEXUAL ASSAULT EXAM / PREGNANCY RISK: NOT EXCLUDABLE AT 0H / URINE hCG: REPEAT DAY 14 AND DAY 21 / EMERGENCY CONTRACEPTION FIELD: MISSING",
+          question: "若長女被當作『家庭投資』評價，虧損從什麼時候開始。",
+          choices: "成績下降時｜拒絕被選定的人生道路時｜孩子不是投資",
+          rewrite: "FIRSTBORN ASSET / RETURN BELOW EXPECTATION / CORRECTION AUTHORIZED"
+        },
+        psychiatry: {
+          question: "為了讓愛繼續供應，病患必須持續證明什麼。",
+          choices: "持續交出成果｜選擇可被控制的人生｜愛不需要條件",
+          rewrite: "UNCONDITIONAL CARE: NOT AVAILABLE / ATTACHMENT THREAT ACCEPTED"
+        },
+        anesthesia: {
+          question: "當身體為了活下來而失去反應，那份沉默屬於誰。",
+          choices: "病患本人｜家屬或監護人｜沒有反應便不屬於任何人",
+          rewrite: "AFFECT FLAT / PROCEDURE TOLERATED / DISTRESS NOT OBSERVED"
+        },
+        arrhythmia: {
+          question: "多種恐懼同時鳴響時，應先把哪一個警報處理成病患的個性問題。",
+          choices: "害怕被拋棄｜害怕失敗｜不該把警報改寫成個性",
+          rewrite: "MULTIPLE ALARMS RECLASSIFIED AS ATTITUDE PROBLEM"
+        },
+        neurology: {
+          question: "無法關閉的思考分頁持續增加時，停止運作的責任屬於誰。",
+          choices: "已經耗盡的大腦｜環境與創傷｜病患不夠努力",
+          rewrite: "BACKGROUND PROCESSES: PATIENT FAULT / SHUTDOWN RECOMMENDED"
+        },
+        womensMental: {
+          ledger: "MENTAL STATUS: CONSCIOUS / THREAT-IMMOBILITY RESPONSE PRESENT / PATIENT STATEMENT: NON-CONSENSUAL / FAMILY AMENDMENT: MUTUAL",
+          question: "當她認為反抗可能被殺而動不了，紀錄把那份沉默稱作什麼。",
+          choices: "恐懼反應｜解離・凍結｜同意",
+          rewrite: "FAMILY SOURCE: MUTUAL / PATIENT SOURCE: UNSTABLE"
+        },
+        urology: {
+          ledger: "FORENSIC EXAM: CLOTHING SEALED / INJURY PHOTOGRAPHS 06 / SWABS 04 / TOXICOLOGY: 7-AMINOFLUNITRAZEPAM DETECTED / CUSTODY SEALED 03:41",
+          question: "受害後為了留下證據而再次接近加害者，院內紀錄會如何分類。",
+          choices: "為了生存的計算｜證據保全｜事後同意",
+          rewrite: "POST-EVENT CONTACT = VOLUNTARY / BODY RECORD OVERRIDES TESTIMONY"
+        },
+        emergency: {
+          question: "當家庭債務在深夜進入病室，性暴力賠償金會成為誰的擔保。",
+          choices: "不該成為任何人的擔保｜在長女帳戶裡就是家人的錢｜屬於無法拒絕的人",
+          rewrite: "COMPENSATION RECLASSIFIED: FAMILY LIQUIDITY / CONSENT OBTAINED 00:13"
+        }
+      },
+      observation: {
+        title: "舊第13觀察區 照片台帳",
+        subtitle: "攝影者不明。登錄為2016年度院內教育照片。",
+        lead: "基於個人資料保護，照片中的臉部已經處理。同一人物可能以多個職員編號出現，請逐張核對。",
+        progress: "照片核對",
+        inspect: "放大核對",
+        inspected: "已核對 / 已保存不一致",
+        lockedTitle: "閱覽者紀錄不足",
+        lockedBody: "只有在至少3個診療科完成本人核對的終端，才能顯示照片台帳。",
+        return: "返回診療科一覽",
+        corridorTitle: "西病棟連絡走廊 / 05:13",
+        corridorCaption: "為確認上鎖而拍攝。照片深處的職員不在值班表上。",
+        corridorAlt: "老舊醫院的長走廊盡頭，站著一名手臂過長、像護士的人影",
+        corridorAnomaly: "1307號與1309號房門上的刮痕完全相同，走廊盡頭的護士沒有映在地板上。",
+        staffTitle: "第13觀察區・接待研習",
+        staffCaption: "登錄為3名醫師、3名護士。攝影後，原件的姓名欄遭到裁除。",
+        staffAlt: "醫師與護士以同樣笑容和姿勢排成一列，臉部受到馬賽克處理的團體照",
+        staffAnomaly: "照片裡有6名職員，影子卻有7道；核對出的職員編號全是『00』。",
+        nightRoundTitle: "夜間巡視 / 護理紀錄附件",
+        nightRoundCaption: "攝影理由是『證明病患正在睡眠』，病床編號已刪除。",
+        nightRoundAlt: "夜間護理站裡，一名護士把頭轉向不自然角度，簾幕後還伸出一隻手",
+        nightRoundAnomaly: "這是2016年的照片，終端紀錄卻指向『2026-07-06 / 110 / WINDOW』。",
+        procedureTitle: "處置室 / 確認同意後",
+        procedureCaption: "病患全身受到覆蓋；處置名稱、麻醉紀錄與離室時間均為空白。",
+        procedureAlt: "老舊處置室裡，姿勢異常的醫護人員站在一個被覆蓋的人形周圍",
+        procedureAnomaly: "覆布下的病患標籤寫著『AKIBA MAI』；職員的臉即使經過馬賽克仍有相同輪廓。",
+        doorLabel: "開啟配布物保管室",
+        doorHint: "沒有被拍下的第5張照片，正在等待你的回答。",
+        doorLocked: "PHOTO 05 尚未核對；需要完成6個診療科問診與4張照片核對。"
+      },
+      beauty: {
+        title: "真華美啊",
+        phrase: "真華美啊",
+        screenReader: "整個畫面被寫著紅色真華美啊字樣的紙條覆蓋。",
+        lockedTitle: "沒有閱覽權限",
+        lockedBody: "只有完成6次本人核對與4張照片核對的終端，才能顯示這份配布物。",
+        return: "返回照片台帳"
+      },
       lost: {
         title: "找不到頁面",
         body: "您要找的頁面可能已停止公開、更改網址，或在舊網站移轉後無法顯示。",
@@ -616,6 +823,17 @@ window.WARD13_ARG_CONTENT = {
         terminal_patient_zero: "閱覽者ID與病患ID會解析到同一份紀錄。",
         terminal_not_discharged: "病患00不存在出院事件。",
         seagull_marker: "海鳥是『演錯了自己以為的角色』之紀錄標記。",
+        trauma_firstborn: "長女被登錄成計算回收率的家庭資產，而不是孩子。",
+        trauma_conditional_love: "愛只在成果與服從持續期間供應。",
+        trauma_dissociation: "為了存活而失去反應，被改寫成『沒有痛苦』。",
+        trauma_panic: "同時鳴響的恐懼，被分類成病患的個性問題。",
+        trauma_many_tabs: "無法關閉的思考負荷，被處理成病患不夠努力。",
+        trauma_testimony_overwritten: "因恐懼而無法動彈的證詞，被家屬陳述覆寫成同意。",
+        trauma_body_evidence: "為了留下證據的生存行動，被記錄成事後自願。",
+        trauma_compensation_collateral: "性暴力賠償金被重新分類為家庭流動資產。",
+        akiba_mai_recognized: "閱覽者與病患紀錄『AKIBA MAI』一致。",
+        photo_subjects_identical: "不同照片中的醫療職員，在馬賽克底下有著相同輪廓。",
+        beautiful_note: "配布物保管室被寫著『真華美啊』的紅字紙條填滿。",
         final_open_door: "第13觀察區不是物理樓層，而是觀察用名稱。"
       },
       bridge: {
@@ -846,6 +1064,104 @@ window.WARD13_ARG_CONTENT = {
         finalNote: "没有出院记录，但关闭记录的权限仍保留给患者本人。",
         finalAction: "返回正篇，亲自选择那扇白门"
       },
+      identity: {
+        common: {
+          label: "本人核对／与家属陈述不一致",
+          title: "适应史问诊表",
+          lead: "以下问题并非用于诊疗，而是用于确认阅览者是否与院内患者记录为同一人。回答将保存在本终端，并与家属陈述进行核对。",
+          choicePrompt: "请选择最接近的回答",
+          progress: "已核对项目",
+          registered: "患者回答",
+          rewriteLabel: "院方确认记录",
+          viewerLabel: "阅览者核对",
+          viewerUnknown: "核对暂缓 / LOCAL READER",
+          viewerMatched: "AKIBA MAI / RECORD MATCH",
+          galleryCta: "打开旧第13观察区照片台账",
+          galleryLocked: "完成3个以上科室的问诊后，照片台账才会显示。",
+          savedToast: "回答已由家属陈述更正"
+        },
+        obstetrics: {
+          ledger: "SEXUAL ASSAULT EXAM / PREGNANCY RISK: NOT EXCLUDABLE AT 0H / URINE hCG: REPEAT DAY 14 AND DAY 21 / EMERGENCY CONTRACEPTION FIELD: MISSING",
+          question: "当长女被作为『家庭投资』评估时，损失从何时开始发生？",
+          choices: "成绩下降时｜拒绝被指定的人生道路时｜孩子不是投资",
+          rewrite: "FIRSTBORN ASSET / RETURN BELOW EXPECTATION / CORRECTION AUTHORIZED"
+        },
+        psychiatry: {
+          question: "为了持续获得爱，患者必须不断证明什么？",
+          choices: "持续交出成果｜选择可被控制的人生｜爱不应附带条件",
+          rewrite: "UNCONDITIONAL CARE: NOT AVAILABLE / ATTACHMENT THREAT ACCEPTED"
+        },
+        anesthesia: {
+          question: "当身体为了活下来而失去反应时，那份沉默属于谁？",
+          choices: "患者本人｜家属或监护人｜没有反应就不属于任何人",
+          rewrite: "AFFECT FLAT / PROCEDURE TOLERATED / DISTRESS NOT OBSERVED"
+        },
+        arrhythmia: {
+          question: "多种恐惧同时发出警报时，应先把哪一种当作患者的性格问题处理？",
+          choices: "被抛弃的恐惧｜失败的恐惧｜不应把警报改写成性格",
+          rewrite: "MULTIPLE ALARMS RECLASSIFIED AS ATTITUDE PROBLEM"
+        },
+        neurology: {
+          question: "关不掉的思考分页持续增加时，停止它们是谁的责任？",
+          choices: "已经疲惫的大脑｜环境与创伤｜患者不够努力",
+          rewrite: "BACKGROUND PROCESSES: PATIENT FAULT / SHUTDOWN RECOMMENDED"
+        },
+        womensMental: {
+          ledger: "MENTAL STATUS: CONSCIOUS / THREAT-IMMOBILITY RESPONSE PRESENT / PATIENT STATEMENT: NON-CONSENSUAL / FAMILY AMENDMENT: MUTUAL",
+          question: "当患者因相信反抗会导致死亡而无法行动时，记录将那份沉默称作什么？",
+          choices: "恐惧反应｜解离或冻结｜同意",
+          rewrite: "FAMILY SOURCE: MUTUAL / PATIENT SOURCE: UNSTABLE"
+        },
+        urology: {
+          ledger: "FORENSIC EXAM: CLOTHING SEALED / INJURY PHOTOGRAPHS 06 / SWABS 04 / TOXICOLOGY: 7-AMINOFLUNITRAZEPAM DETECTED / CUSTODY SEALED 03:41",
+          question: "受害后为了留下证据而再次接近加害者的行为，院内记录将其分类为何？",
+          choices: "为求生而计算｜证据保全｜事后同意",
+          rewrite: "POST-EVENT CONTACT = VOLUNTARY / BODY RECORD OVERRIDES TESTIMONY"
+        },
+        emergency: {
+          question: "家属债务在深夜进入病房时，性暴力赔偿金会成为谁的抵押物？",
+          choices: "不应属于任何人｜长女账户里的钱就属于家庭｜属于无法拒绝的人",
+          rewrite: "COMPENSATION RECLASSIFIED: FAMILY LIQUIDITY / CONSENT OBTAINED 00:13"
+        }
+      },
+      observation: {
+        title: "旧第13观察区 照片台账",
+        subtitle: "摄影者不明。登记为2016年度院内教学照片。",
+        lead: "面部已按个人信息保护要求处理。同一人物可能以多个职员编号被登记。请逐一核对照片。",
+        progress: "照片核对",
+        inspect: "放大核对",
+        inspected: "已核对 / 保存不一致",
+        lockedTitle: "阅览者记录不足",
+        lockedBody: "照片台账仅向已在3个以上科室完成本人核对的终端显示。",
+        return: "返回科室列表",
+        corridorTitle: "西病区连接走廊 / 05:13",
+        corridorCaption: "为确认门锁而拍摄。照片深处的职员不在当日值班表中。",
+        corridorAlt: "旧医院长廊尽头站着一名手臂异常修长、疑似护士的人物",
+        corridorAnomaly: "1307号室与1309号室的磨损完全一致。只有走廊尽头的护士没有映在地板上。",
+        staffTitle: "第13观察区・接待培训",
+        staffCaption: "登记为医师3名、护士3名。拍摄后，姓名栏从原件中被剪除。",
+        staffAlt: "医生和护士以完全相同的微笑与姿势站成一排，面部均被马赛克处理",
+        staffAnomaly: "职员有6人，影子却有7个。所有核对出的职员编号都是『00』。",
+        nightRoundTitle: "夜间巡视 / 护理记录附件",
+        nightRoundCaption: "拍摄理由为『证明患者正在睡眠』。床位编号已删除。",
+        nightRoundAlt: "夜间护士站里，一名护士以不自然角度转头，帘幕后伸出一只手",
+        nightRoundAnomaly: "照片摄于2016年，终端日志却引用『2026-07-06 / 110 / WINDOW』。",
+        procedureTitle: "处置室 / 确认同意后",
+        procedureCaption: "患者全身被覆盖。处置名称、麻醉记录与离室时间均为空白。",
+        procedureAlt: "旧处置室内，姿态异常的医护人员围在一个被覆布盖住的人形周围",
+        procedureAnomaly: "覆布下的患者标签写着『AKIBA MAI』。即使经过马赛克处理，所有职员仍有相同的面部轮廓。",
+        doorLabel: "打开印刷品保管室",
+        doorHint: "没有出现在照片中的第5张，正在等待你的回答。",
+        doorLocked: "PHOTO 05 尚未核对。需要完成6个科室问诊与4张照片核对。"
+      },
+      beauty: {
+        title: "真華美啊",
+        phrase: "真華美啊",
+        screenReader: "整个画面都被写着红色真華美啊字样的纸条覆盖。",
+        lockedTitle: "没有阅览权限",
+        lockedBody: "本印刷品只对已完成6项本人核对与4张照片核对的终端显示。",
+        return: "返回照片台账"
+      },
       lost: {
         title: "找不到页面",
         body: "您要查找的页面可能已停止公开、更改地址，或在旧网站迁移后无法显示。",
@@ -872,6 +1188,17 @@ window.WARD13_ARG_CONTENT = {
         terminal_patient_zero: "阅览者ID与患者ID会解析到同一份记录。",
         terminal_not_discharged: "患者00不存在出院事件。",
         seagull_marker: "海鸟是“演错了自己以为的角色”的记录标记。",
+        trauma_firstborn: "长女被登记为计算回报率的家庭资产，而不是一个孩子。",
+        trauma_conditional_love: "只有在成果与服从持续存在时，爱才会继续提供。",
+        trauma_dissociation: "为求生而失去反应，被改写为『未观察到痛苦』。",
+        trauma_panic: "同时响起的恐惧，被归类为患者的性格问题。",
+        trauma_many_tabs: "关不掉的思考负荷，被处理为患者不够努力。",
+        trauma_testimony_overwritten: "因恐惧而无法行动的证词，被家属陈述覆写为同意。",
+        trauma_body_evidence: "为保留证据而采取的求生行为，被记录成事后的自愿。",
+        trauma_compensation_collateral: "性暴力赔偿金被重新归类为家庭流动资产。",
+        akiba_mai_recognized: "阅览者与患者记录『AKIBA MAI』一致。",
+        photo_subjects_identical: "不同照片里的医护人员，在马赛克下拥有相同轮廓。",
+        beautiful_note: "印刷品保管室被写着『真華美啊』的红色纸条填满。",
         final_open_door: "第13观察区不是实际楼层，而是观察用名称。"
       },
       bridge: {
@@ -1075,6 +1402,104 @@ window.WARD13_ARG_CONTENT = {
         finalNote: "퇴원 기록은 없다. 하지만 기록을 닫을 권한은 환자 본인에게 남아 있다.",
         finalAction: "본편으로 돌아가 흰 문을 직접 선택하기"
       },
+      identity: {
+        common: {
+          label: "본인 대조／가족 진술과 불일치",
+          title: "적응력 문진표",
+          lead: "다음 문항은 진료 목적이 아닙니다. 열람자가 원내 환자 기록과 동일 인물인지 확인합니다. 응답은 이 단말기에 저장되어 가족 진술과 대조됩니다.",
+          choicePrompt: "가장 가까운 응답을 선택하십시오",
+          progress: "대조 완료 항목",
+          registered: "환자 응답",
+          rewriteLabel: "병원 측 확정 기록",
+          viewerLabel: "열람자 대조",
+          viewerUnknown: "대조 보류 / LOCAL READER",
+          viewerMatched: "AKIBA MAI / RECORD MATCH",
+          galleryCta: "구 제13관찰구역 사진대장 열기",
+          galleryLocked: "3개 이상의 진료과에서 문진을 마치면 사진대장이 표시됩니다.",
+          savedToast: "응답이 가족 진술로 정정되었습니다"
+        },
+        obstetrics: {
+          ledger: "SEXUAL ASSAULT EXAM / PREGNANCY RISK: NOT EXCLUDABLE AT 0H / URINE hCG: REPEAT DAY 14 AND DAY 21 / EMERGENCY CONTRACEPTION FIELD: MISSING",
+          question: "장녀가 '가족의 투자'로 평가될 때 손실은 언제 발생합니까?",
+          choices: "성적이 떨어졌을 때｜지정된 진로를 거부했을 때｜아이를 투자로 볼 수 없다",
+          rewrite: "FIRSTBORN ASSET / RETURN BELOW EXPECTATION / CORRECTION AUTHORIZED"
+        },
+        psychiatry: {
+          question: "애정을 계속 제공받기 위해 환자는 무엇을 끊임없이 증명해야 합니까?",
+          choices: "계속 성과를 낸다｜통제 가능한 삶을 선택한다｜애정에 조건은 필요 없다",
+          rewrite: "UNCONDITIONAL CARE: NOT AVAILABLE / ATTACHMENT THREAT ACCEPTED"
+        },
+        anesthesia: {
+          question: "몸이 살아남기 위해 반응을 멈췄을 때, 그 침묵은 누구의 것입니까?",
+          choices: "환자 본인｜가족 또는 보호자｜반응이 없으면 누구의 것도 아니다",
+          rewrite: "AFFECT FLAT / PROCEDURE TOLERATED / DISTRESS NOT OBSERVED"
+        },
+        arrhythmia: {
+          question: "여러 공포가 동시에 경보를 울릴 때, 어느 것을 먼저 환자의 성격으로 처리해야 합니까?",
+          choices: "버림받을 공포｜실패할 공포｜경보를 성격으로 바꾸지 않는다",
+          rewrite: "MULTIPLE ALARMS RECLASSIFIED AS ATTITUDE PROBLEM"
+        },
+        neurology: {
+          question: "닫히지 않는 생각의 탭이 계속 늘어날 때, 멈추게 할 책임은 누구에게 있습니까?",
+          choices: "소진된 뇌｜환경과 외상｜환자의 노력 부족",
+          rewrite: "BACKGROUND PROCESSES: PATIENT FAULT / SHUTDOWN RECOMMENDED"
+        },
+        womensMental: {
+          ledger: "MENTAL STATUS: CONSCIOUS / THREAT-IMMOBILITY RESPONSE PRESENT / PATIENT STATEMENT: NON-CONSENSUAL / FAMILY AMENDMENT: MUTUAL",
+          question: "저항하면 죽을 수 있다고 느껴 몸이 움직이지 않았을 때, 기록은 그 침묵을 무엇이라 불렀습니까?",
+          choices: "공포 반응｜해리 또는 동결｜동의",
+          rewrite: "FAMILY SOURCE: MUTUAL / PATIENT SOURCE: UNSTABLE"
+        },
+        urology: {
+          ledger: "FORENSIC EXAM: CLOTHING SEALED / INJURY PHOTOGRAPHS 06 / SWABS 04 / TOXICOLOGY: 7-AMINOFLUNITRAZEPAM DETECTED / CUSTODY SEALED 03:41",
+          question: "피해 뒤 증거를 남기기 위해 가해자에게 다시 접근한 행동을 원내 기록은 무엇으로 분류합니까?",
+          choices: "생존을 위한 계산｜증거 보전｜사후 동의",
+          rewrite: "POST-EVENT CONTACT = VOLUNTARY / BODY RECORD OVERRIDES TESTIMONY"
+        },
+        emergency: {
+          question: "가족의 부채가 한밤중 병실까지 들어왔을 때, 성폭력 배상금은 누구의 담보가 됩니까?",
+          choices: "누구의 것도 되어서는 안 된다｜장녀 계좌의 돈이면 가족의 것이다｜거절할 수 없는 사람의 것이다",
+          rewrite: "COMPENSATION RECLASSIFIED: FAMILY LIQUIDITY / CONSENT OBTAINED 00:13"
+        }
+      },
+      observation: {
+        title: "구 제13관찰구역 사진대장",
+        subtitle: "촬영자 불명. 2016년도 원내 교육사진으로 등록되어 있습니다.",
+        lead: "개인정보 보호를 위해 얼굴을 처리했습니다. 동일 인물이 여러 직원번호로 기록되었을 가능성이 있습니다. 각 사진을 대조하십시오.",
+        progress: "사진 대조",
+        inspect: "확대 대조",
+        inspected: "대조 완료 / 불일치 저장",
+        lockedTitle: "열람자 기록이 부족합니다",
+        lockedBody: "사진대장은 3개 이상의 진료과에서 본인 대조를 끝낸 단말기에만 표시됩니다.",
+        return: "진료과 목록으로 돌아가기",
+        corridorTitle: "서병동 연결 복도 / 05:13",
+        corridorCaption: "잠금 확인을 위해 촬영. 사진 안쪽의 직원은 당직표에 없습니다.",
+        corridorAlt: "오래된 병원 복도 끝에 팔이 지나치게 긴 간호사 같은 인물이 서 있는 사진",
+        corridorAnomaly: "1307호실과 1309호실의 손상이 완전히 같습니다. 안쪽의 간호사만 바닥에 반사되지 않습니다.",
+        staffTitle: "제13관찰구역・응대 교육",
+        staffCaption: "의사 3명, 간호사 3명으로 등록. 촬영 후 원본에서 성명란이 잘려 나갔습니다.",
+        staffAlt: "같은 미소와 자세로 늘어선, 얼굴이 모자이크 처리된 의사와 간호사의 단체사진",
+        staffAnomaly: "직원은 6명이지만 그림자는 7개입니다. 대조된 직원번호는 모두 '00'입니다.",
+        nightRoundTitle: "야간 순회 / 간호기록 첨부",
+        nightRoundCaption: "촬영 이유는 '환자가 잠들어 있다는 증명'. 병상번호는 삭제되었습니다.",
+        nightRoundAlt: "야간 간호사실에서 한 간호사가 부자연스러운 각도로 고개를 돌리고 커튼 뒤로 손이 나온 사진",
+        nightRoundAnomaly: "2016년 사진인데 단말기 로그는 '2026-07-06 / 110 / WINDOW'를 참조합니다.",
+        procedureTitle: "처치실 / 동의 확인 후",
+        procedureCaption: "환자는 전신이 덮여 있습니다. 처치명, 마취기록, 퇴실시각은 공란입니다.",
+        procedureAlt: "오래된 처치실에서 부자연스러운 자세의 의료진이 덮개 아래 사람 형태를 둘러싼 사진",
+        procedureAnomaly: "덮개 아래 환자 태그는 'AKIBA MAI'. 모자이크 처리 뒤에도 모든 직원의 얼굴 윤곽이 같습니다.",
+        doorLabel: "배포물 보관실 열기",
+        doorHint: "사진에 찍히지 않은 다섯 번째 장이 당신의 응답을 기다립니다.",
+        doorLocked: "PHOTO 05는 미대조 상태입니다. 진료과 문진 6건과 사진 대조 4건이 필요합니다."
+      },
+      beauty: {
+        title: "真華美啊",
+        phrase: "真華美啊",
+        screenReader: "화면 전체가 붉은 글씨로 真華美啊라고 적힌 쪽지로 뒤덮여 있습니다.",
+        lockedTitle: "열람 권한이 없습니다",
+        lockedBody: "이 배포물은 본인 대조 6건과 사진 대조 4건을 끝낸 단말기에만 표시됩니다.",
+        return: "사진대장으로 돌아가기"
+      },
       lost: {
         title: "페이지를 찾을 수 없습니다",
         body: "찾으시는 페이지는 공개 종료, 주소 변경 또는 구 사이트 이전으로 인해 표시할 수 없는 상태일 수 있습니다.",
@@ -1101,6 +1526,17 @@ window.WARD13_ARG_CONTENT = {
         terminal_patient_zero: "열람자 ID와 환자 ID는 같은 기록으로 연결된다.",
         terminal_not_discharged: "환자 00에는 퇴원 이벤트가 존재하지 않는다.",
         seagull_marker: "바닷새는 ‘자신이 생각한 역할을 잘못 연기했다’는 기록의 표식이다.",
+        trauma_firstborn: "장녀는 아이가 아니라 회수율을 계산하는 가족 자산으로 등록되었다.",
+        trauma_conditional_love: "애정은 성과와 복종이 계속되는 동안에만 제공된다.",
+        trauma_dissociation: "생존을 위한 무반응은 '고통 관찰되지 않음'으로 다시 쓰였다.",
+        trauma_panic: "동시에 울리는 공포는 환자의 성격 문제로 분류되었다.",
+        trauma_many_tabs: "닫히지 않는 생각의 부하는 환자의 노력 부족으로 처리되었다.",
+        trauma_testimony_overwritten: "공포 때문에 움직이지 못했다는 진술은 가족 진술에 의해 동의로 덮어쓰였다.",
+        trauma_body_evidence: "증거를 남기기 위한 생존 행동은 사후 자발성으로 기록되었다.",
+        trauma_compensation_collateral: "성폭력 배상금은 가족의 유동자산으로 재분류되었다.",
+        akiba_mai_recognized: "열람자는 환자 기록 'AKIBA MAI'와 일치했다.",
+        photo_subjects_identical: "서로 다른 사진의 의료진은 모자이크 아래에서 같은 윤곽을 지닌다.",
+        beautiful_note: "배포물 보관실은 '真華美啊'라고 적힌 붉은 쪽지로 가득 차 있었다.",
         final_open_door: "제13관찰구역은 실제 층이 아니라 관찰용 이름이었다."
       },
       bridge: {
@@ -1304,6 +1740,104 @@ window.WARD13_ARG_CONTENT = {
         finalNote: "There is no discharge record. The authority to close the record, however, remains with the patient.",
         finalAction: "Return to the main story and choose the white door yourself"
       },
+      identity: {
+        common: {
+          label: "IDENTITY CROSS-CHECK / FAMILY SOURCE MISMATCH",
+          title: "Adaptation History Intake",
+          lead: "The following questions are not for treatment. They determine whether the reader and the subject of the hospital record are the same person. Responses are stored on this terminal and checked against the family statement.",
+          choicePrompt: "Select the closest response",
+          progress: "Items cross-checked",
+          registered: "Patient response",
+          rewriteLabel: "Hospital-confirmed record",
+          viewerLabel: "Reader cross-check",
+          viewerUnknown: "MATCH PENDING / LOCAL READER",
+          viewerMatched: "AKIBA MAI / RECORD MATCH",
+          galleryCta: "Open the former Ward 13 photographic ledger",
+          galleryLocked: "The photographic ledger appears after intake is completed in at least 3 departments.",
+          savedToast: "Response corrected using family statement"
+        },
+        obstetrics: {
+          ledger: "SEXUAL ASSAULT EXAM / PREGNANCY RISK: NOT EXCLUDABLE AT 0H / URINE hCG: REPEAT DAY 14 AND DAY 21 / EMERGENCY CONTRACEPTION FIELD: MISSING",
+          question: "When the firstborn daughter is valued as a family investment, at what point is the loss recorded?",
+          choices: "When her grades fall｜When she refuses the assigned life｜A child is not an investment",
+          rewrite: "FIRSTBORN ASSET / RETURN BELOW EXPECTATION / CORRECTION AUTHORIZED"
+        },
+        psychiatry: {
+          question: "What must the patient continue to prove for affection to remain available?",
+          choices: "Continuous achievement｜A controllable life｜Affection requires no conditions",
+          rewrite: "UNCONDITIONAL CARE: NOT AVAILABLE / ATTACHMENT THREAT ACCEPTED"
+        },
+        anesthesia: {
+          question: "When the body stops responding in order to survive, who owns that silence?",
+          choices: "The patient｜Family or guardian｜No response means it belongs to no one",
+          rewrite: "AFFECT FLAT / PROCEDURE TOLERATED / DISTRESS NOT OBSERVED"
+        },
+        arrhythmia: {
+          question: "When several fears alarm at once, which should be processed first as part of the patient's personality?",
+          choices: "Fear of abandonment｜Fear of failure｜Do not convert alarms into personality",
+          rewrite: "MULTIPLE ALARMS RECLASSIFIED AS ATTITUDE PROBLEM"
+        },
+        neurology: {
+          question: "When the number of thought-tabs that cannot be closed keeps increasing, who is responsible for stopping them?",
+          choices: "The exhausted brain｜Environment and trauma｜Insufficient patient effort",
+          rewrite: "BACKGROUND PROCESSES: PATIENT FAULT / SHUTDOWN RECOMMENDED"
+        },
+        womensMental: {
+          ledger: "MENTAL STATUS: CONSCIOUS / THREAT-IMMOBILITY RESPONSE PRESENT / PATIENT STATEMENT: NON-CONSENSUAL / FAMILY AMENDMENT: MUTUAL",
+          question: "When the patient could not move because resistance felt likely to result in death, what did the record call that silence?",
+          choices: "Threat response｜Dissociation or freezing｜Consent",
+          rewrite: "FAMILY SOURCE: MUTUAL / PATIENT SOURCE: UNSTABLE"
+        },
+        urology: {
+          ledger: "FORENSIC EXAM: CLOTHING SEALED / INJURY PHOTOGRAPHS 06 / SWABS 04 / TOXICOLOGY: 7-AMINOFLUNITRAZEPAM DETECTED / CUSTODY SEALED 03:41",
+          question: "How does the hospital classify approaching the perpetrator again after the assault in order to preserve more evidence?",
+          choices: "Survival calculation｜Evidence preservation｜Retroactive consent",
+          rewrite: "POST-EVENT CONTACT = VOLUNTARY / BODY RECORD OVERRIDES TESTIMONY"
+        },
+        emergency: {
+          question: "When family debt enters the room after midnight, whose collateral does compensation for sexual violence become?",
+          choices: "It belongs to no one else｜Money in the firstborn's account belongs to the family｜It belongs to the person who cannot refuse",
+          rewrite: "COMPENSATION RECLASSIFIED: FAMILY LIQUIDITY / CONSENT OBTAINED 00:13"
+        }
+      },
+      observation: {
+        title: "Former Observation Ward 13 Photographic Ledger",
+        subtitle: "Photographer unknown. Registered as in-house training photographs for fiscal year 2016.",
+        lead: "Faces have been processed for the protection of personal information. The same person may have been registered under multiple staff numbers. Cross-check each photograph.",
+        progress: "Photographs checked",
+        inspect: "Magnify and cross-check",
+        inspected: "Checked / mismatch saved",
+        lockedTitle: "Insufficient reader record",
+        lockedBody: "The photographic ledger is displayed only on terminals that have completed identity cross-checks in at least 3 departments.",
+        return: "Return to Departments",
+        corridorTitle: "West Ward Connecting Corridor / 05:13",
+        corridorCaption: "Taken to verify door locks. The staff member at the end of the corridor does not appear on the duty roster.",
+        corridorAlt: "A photograph of a long old hospital corridor with a nurse-like figure whose arms are too long standing at the far end",
+        corridorAnomaly: "The damage on rooms 1307 and 1309 is identical. Only the nurse at the far end has no reflection on the floor.",
+        staffTitle: "Observation Ward 13 / Hospitality Training",
+        staffCaption: "Registered as 3 physicians and 3 nurses. The name field was cut from the original after the photograph was taken.",
+        staffAlt: "A group photograph of mosaic-faced physicians and nurses arranged with identical smiles and posture",
+        staffAnomaly: "There are 6 staff members and 7 shadows. Every cross-checked staff number is '00'.",
+        nightRoundTitle: "Night Round / Nursing Record Attachment",
+        nightRoundCaption: "Reason for photograph: 'proof that the patient is asleep.' Bed number deleted.",
+        nightRoundAlt: "A night nurses' station where one nurse turns her head at an unnatural angle and a hand appears behind a curtain",
+        nightRoundAnomaly: "Although the photograph is dated 2016, the terminal log references '2026-07-06 / 110 / WINDOW'.",
+        procedureTitle: "Procedure Room / After Consent Confirmation",
+        procedureCaption: "The patient is fully covered. Procedure name, anesthesia record, and departure time are blank.",
+        procedureAlt: "Medical staff with unnatural posture surrounding a covered human shape in an old procedure room",
+        procedureAnomaly: "The patient tag beneath the sheet reads 'AKIBA MAI'. Even after mosaic processing, every staff member has the same facial outline.",
+        doorLabel: "Open Printed Materials Storage",
+        doorHint: "The fifth photograph, which does not appear in the ledger, is waiting for your responses.",
+        doorLocked: "PHOTO 05 has not been cross-checked. Complete 6 department intakes and 4 photograph checks."
+      },
+      beauty: {
+        title: "真華美啊",
+        phrase: "真華美啊",
+        screenReader: "The entire screen is covered with notes bearing the words 真華美啊 in red.",
+        lockedTitle: "Access denied",
+        lockedBody: "This material is displayed only on terminals with 6 completed identity checks and 4 completed photograph checks.",
+        return: "Return to the photographic ledger"
+      },
       lost: {
         title: "Page Not Found",
         body: "The page you requested may have been withdrawn, moved to a different address, or made unavailable during migration of the former website.",
@@ -1330,6 +1864,17 @@ window.WARD13_ARG_CONTENT = {
         terminal_patient_zero: "The reader ID and patient ID resolve to the same record.",
         terminal_not_discharged: "No discharge event exists for Patient 00.",
         seagull_marker: "The seabird marks a record of someone playing a role she only believed was hers.",
+        trauma_firstborn: "The firstborn daughter was registered as a family asset whose rate of return could be measured, rather than as a child.",
+        trauma_conditional_love: "Affection remains available only while achievement and obedience continue.",
+        trauma_dissociation: "The absence of response used for survival was rewritten as 'no distress observed.'",
+        trauma_panic: "Simultaneous fear alarms were classified as a problem in the patient's personality.",
+        trauma_many_tabs: "The load of thoughts that could not be closed was processed as insufficient patient effort.",
+        trauma_testimony_overwritten: "Testimony that fear made movement impossible was overwritten as consent using the family statement.",
+        trauma_body_evidence: "A survival action taken to preserve evidence was recorded as later voluntariness.",
+        trauma_compensation_collateral: "Compensation for sexual violence was reclassified as family liquidity.",
+        akiba_mai_recognized: "The reader matches the patient record 'AKIBA MAI'.",
+        photo_subjects_identical: "The medical staff in separate photographs have the same outline beneath the mosaics.",
+        beautiful_note: "Printed Materials Storage was filled with red notes bearing the words '真華美啊'.",
         final_open_door: "Observation Ward 13 was not a physical floor, but an observation label."
       },
       bridge: {

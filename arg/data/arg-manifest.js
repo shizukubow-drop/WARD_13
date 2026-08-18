@@ -24,6 +24,8 @@ window.WARD13_ARG_MANIFEST = {
     { id: "staff", file: "staff.html", public: false },
     { id: "terminal", file: "terminal.html", public: false },
     { id: "evidence", file: "evidence.html", public: false },
+    { id: "observation", file: "observation.html", public: false },
+    { id: "beauty", file: "beauty.html", public: false, footer: false },
     { id: "lost", file: "old/ward-13-observation/index.html", public: false }
   ],
   clues: [
@@ -38,6 +40,17 @@ window.WARD13_ARG_MANIFEST = {
     { id: "terminal_patient_zero", source: "terminal", required: true, dependencies: ["staff_override", "alias_utsugi"] },
     { id: "terminal_not_discharged", source: "terminal", required: true, dependencies: ["terminal_patient_zero"] },
     { id: "seagull_marker", source: "lost", required: false, dependencies: [] },
+    { id: "trauma_firstborn", source: "department", required: false, dependencies: [] },
+    { id: "trauma_conditional_love", source: "department", required: false, dependencies: [] },
+    { id: "trauma_dissociation", source: "department", required: false, dependencies: [] },
+    { id: "trauma_panic", source: "department", required: false, dependencies: [] },
+    { id: "trauma_many_tabs", source: "department", required: false, dependencies: [] },
+    { id: "trauma_testimony_overwritten", source: "department", required: false, dependencies: [] },
+    { id: "trauma_body_evidence", source: "department", required: false, dependencies: [] },
+    { id: "trauma_compensation_collateral", source: "department", required: false, dependencies: [] },
+    { id: "akiba_mai_recognized", source: "department", required: false, dependencies: ["trauma_firstborn", "trauma_conditional_love"] },
+    { id: "photo_subjects_identical", source: "observation", required: false, dependencies: ["akiba_mai_recognized"] },
+    { id: "beautiful_note", source: "beauty", required: false, dependencies: ["akiba_mai_recognized", "photo_subjects_identical"] },
     { id: "final_open_door", source: "evidence", required: true, dependencies: ["terminal_not_discharged"] }
   ],
   gates: {
