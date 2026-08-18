@@ -21,6 +21,18 @@
   const storageSuffix = previewSession ? `::preview:${previewSession}:${previewInstance || 'legacy'}` : '';
   const storageKey = `${manifest.storageKey}${storageSuffix}`;
   const completeKey = `${manifest.completeKey}${storageSuffix}`;
+  const identityDepartments = new Set(['obstetrics', 'psychiatry', 'anesthesia', 'arrhythmia', 'neurology', 'womens-mental', 'urology', 'emergency']);
+  const identityClues = {
+    obstetrics: 'trauma_firstborn',
+    psychiatry: 'trauma_conditional_love',
+    anesthesia: 'trauma_dissociation',
+    arrhythmia: 'trauma_panic',
+    neurology: 'trauma_many_tabs',
+    'womens-mental': 'trauma_testimony_overwritten',
+    urology: 'trauma_body_evidence',
+    emergency: 'trauma_compensation_collateral'
+  };
+  const observationPhotos = new Set(['corridor', 'staff', 'night-round', 'procedure']);
 
   function freshState() {
     return {
@@ -31,6 +43,9 @@
       gates: {},
       attempts: {},
       departmentVisits: {},
+      identityResponses: {},
+      photoInspections: {},
+      beautySeen: false,
       terminalHistory: [],
       completedAt: null,
       updatedAt: new Date().toISOString()
@@ -49,6 +64,9 @@
         gates: parsed.gates && typeof parsed.gates === 'object' ? parsed.gates : {},
         attempts: parsed.attempts && typeof parsed.attempts === 'object' ? parsed.attempts : {},
         departmentVisits: parsed.departmentVisits && typeof parsed.departmentVisits === 'object' ? parsed.departmentVisits : {},
+        identityResponses: Object.fromEntries(Object.entries(parsed.identityResponses && typeof parsed.identityResponses === 'object' ? parsed.identityResponses : {}).filter(([slug]) => identityDepartments.has(slug)).map(([slug, choice]) => [slug, String(choice).slice(0, 32)])),
+        photoInspections: Object.fromEntries(Object.entries(parsed.photoInspections && typeof parsed.photoInspections === 'object' ? parsed.photoInspections : {}).filter(([photoId, inspected]) => observationPhotos.has(photoId) && inspected === true)),
+        beautySeen: parsed.beautySeen === true,
         terminalHistory: Array.isArray(parsed.terminalHistory) ? parsed.terminalHistory.slice(-30) : []
       };
     } catch {
@@ -102,6 +120,50 @@
     return { ready: missing.length === 0, missing };
   }
 
+  function identityStatus(state) {
+    const responses = Object.keys(state.identityResponses || {}).filter(slug => identityDepartments.has(slug));
+    const inspections = Object.keys(state.photoInspections || {}).filter(photoId => observationPhotos.has(photoId) && state.photoInspections[photoId] === true);
+    return {
+      responses: responses.length,
+      totalResponses: identityDepartments.size,
+      inspections: inspections.length,
+      totalInspections: observationPhotos.size,
+      galleryReady: responses.length >= 3,
+      recognized: responses.length >= 4,
+      beautyReady: responses.length >= 6 && inspections.length === observationPhotos.size
+    };
+  }
+
+  function recordIdentity(state, department, choice) {
+    if (!identityDepartments.has(department)) return { ok: false, first: false, ...identityStatus(state) };
+    const first = !Object.prototype.hasOwnProperty.call(state.identityResponses, department);
+    state.identityResponses[department] = String(choice || '').slice(0, 32);
+    if (first) addClue(state, identityClues[department]);
+    const status = identityStatus(state);
+    if (status.recognized) addClue(state, 'akiba_mai_recognized');
+    saveState(state);
+    return { ok: true, first, ...status };
+  }
+
+  function inspectPhoto(state, photoId) {
+    if (!observationPhotos.has(photoId)) return { ok: false, first: false, ...identityStatus(state) };
+    const first = state.photoInspections[photoId] !== true;
+    state.photoInspections[photoId] = true;
+    const status = identityStatus(state);
+    if (status.inspections === observationPhotos.size) addClue(state, 'photo_subjects_identical');
+    saveState(state);
+    return { ok: true, first, ...status };
+  }
+
+  function markBeautySeen(state) {
+    if (!identityStatus(state).beautyReady) return false;
+    const first = state.beautySeen !== true;
+    state.beautySeen = true;
+    addClue(state, 'beautiful_note');
+    saveState(state);
+    return first;
+  }
+
   function runTerminalCommand(state, rawCommand) {
     const command = normalize(rawCommand).split(/\s+/)[0] || '';
     const definition = manifest.terminalCommands[command];
@@ -121,6 +183,10 @@
     addClue,
     solveGate,
     finalStatus,
+    identityStatus,
+    recordIdentity,
+    inspectPhoto,
+    markBeautySeen,
     runTerminalCommand
   };
 })();
