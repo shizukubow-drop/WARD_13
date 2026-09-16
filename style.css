@@ -1778,7 +1778,7 @@ body.phase-4 {
 }
 
 .char-card.expanded .char-body {
-    max-height: 400px;
+    max-height: none;
     padding: 10px 16px 14px;
     border-top: 1px solid #222;
 }

@@ -309,82 +309,82 @@ const CHARACTER_UNLOCKS = {
 };
 
 const CHARACTER_DOSSIERS = {
-    akiba_mai: {
-        status: '被驗者 / ACTIVE',
-        phase: 'No.0 // 主診斷對象',
-        appearance: '枯葉紅濾鏡中的瘦弱病人。指甲縫常殘留壁癌粉末，口袋裡有黑卡、藥盒與抗噪耳機。',
-        personality: '以冷笑話、消費、創作與病徵命名維持自我邊界。她不是想傷害誰，只是不知道怎麼不被痛苦吞掉。',
-        notes: '所有路線的發病中心。她的選擇不是自由意志，而是不同防衛機制的自動書寫。'
+    "akiba_mai": {
+        "status": "結局後復原 / RECOVERED",
+        "phase": "No.0 // 主診斷對象",
+        "appearance": "枯葉紅濾鏡中的瘦弱病人。指甲縫常殘留壁癌粉末，口袋裡有黑卡、藥盒與抗噪耳機。",
+        "personality": "她記得別人的台詞，也習慣先替別人找理由。冷笑話、耳機與寫到一半的紙張，讓她在說不清楚的日子裡還能留下自己的聲音。想被接住，和想自己走，可以同時發生。",
+        "notes": "每條路線都替她安排了一種生活，卻未必問過她是否願意。家庭真結局把「回家」寫進紀錄；她想說的話，仍留在紀錄之外。這份檔案不能替她作最後的回答。"
     },
-    mizore: {
-        status: '妄想體 / CONSTRUCT',
-        phase: 'Phase 1 // The Golden Delusion',
-        appearance: '表層：茶褐長髮、藍眼睛與乾淨白洋裝，帶繡球花、曬過床單和雨後石階的淡香。污染後：白裙逐寸染成黑白維多利亞洋裝，左臉化為開裂陶瓷，肘膝浮出球體關節。',
-        personality: '溫柔、乾淨、永遠配合劇本。她沒有拒絕能力，因此成為最安全也最危險的女主角。',
-        notes: '對應重度解離與幻想伴侶。她保存蒔的美感與敘事能力，但也能把蒔永遠鎖進玩偶屋。'
+    "mizore": {
+        "status": "結局後復原 / RECOVERED",
+        "phase": "Phase 1 // The Golden Delusion",
+        "appearance": "表層：茶褐長髮、藍眼睛與乾淨白洋裝，帶繡球花、曬過床單和雨後石階的淡香。污染後：白裙逐寸染成黑白維多利亞洋裝，左臉化為開裂陶瓷，肘膝浮出球體關節。",
+        "personality": "戲劇組的霙很會接台詞，也會有頭髮黏到嘴角、顧不過來的時候。她把角色名留空，等蒔回答；那份等待既像信任，也讓蒔逐漸忘了她可以有自己的選擇。",
+        "notes": "玩偶屋保住了相伴的形狀，卻讓對話失去另一個人的回答。留下空白不會立刻打破房間，但至少讓「今天的我是誰」還是一個問題。她的溫柔不該只剩永遠配合。"
     },
-    yura: {
-        status: '妄想體 / MIRROR',
-        phase: 'Phase 2 // The Red Anxiety',
-        appearance: '表層：蜜糖色短髮、玫紅眼睛、改短制服與碎亮片蝴蝶結，身上有蜜桃唇膏和烤甜麵包的香氣。污染後：制服增生為黑粉短外套，飾品變成玻璃與眼球，臉裂成替蒔做表情的化妝鏡。',
-        personality: '甜美但刻薄。她說的是惡作劇，蒔聽見的是父母、網路、社會與自我厭惡的混聲。',
-        notes: '對應自戀性暴怒與自我審判。她讓攻擊看起來像防衛，讓自傷看起來像奪回權力。'
+    "yura": {
+        "status": "結局後復原 / RECOVERED",
+        "phase": "Phase 2 // The Red Anxiety",
+        "appearance": "表層：蜜糖色短髮、玫紅眼睛、改短制服與碎亮片蝴蝶結，身上有蜜桃唇膏和烤甜麵包的香氣。污染後：制服增生為黑粉短外套，飾品變成玻璃與眼球，臉裂成替蒔做表情的化妝鏡。",
+        "personality": "宣傳組的由良好勝、愛漂亮，會先抿掉畫出界的唇蜜，再把鏡子舉起來。她想被注意；蒔卻常在她的玩笑裡聽見別人的責備。兩個人都在看對方，又都被自己的倒影擋住。",
+        "notes": "鏡子破裂之後，評價並沒有跟著消失。這條路線留下的疑問是：那句苛刻的話究竟是誰說的？遮住鏡面、要求重複原話，都是試著把眼前的人與腦內字幕分開。"
     },
-    roro: {
-        status: '妄想體 / RECORDER',
-        phase: 'Phase 3 // Dissociation Log',
-        appearance: '表層：灰黑長髮、安靜的深色眼睛、定位碼般整齊的格紋裙與手寫板，靠近時有乾淨紙張、洗髮精和電子零件微熱的味道。污染後：頭部變成厚重 CRT，指尖垂下 USB、VGA 與斷裂接頭。',
-        personality: '無情、精準、非人。她不阻止災難，只把災難轉成可儲存的資料。',
-        notes: '對應創傷當下的徹底抽離。身體留在現場，意識退成錄音機：不是我，只是資料。'
+    "roro": {
+        "status": "結局後復原 / RECOVERED",
+        "phase": "Phase 3 // Dissociation Log",
+        "appearance": "表層：灰黑長髮、安靜的深色眼睛、定位碼般整齊的格紋裙與手寫板，靠近時有乾淨紙張、洗髮精和電子零件微熱的味道。污染後：頭部變成厚重 CRT，指尖垂下 USB、VGA 與斷裂接頭。",
+        "personality": "紀錄組的ロロ寡言，習慣把鏡頭對準事情發生的位置。她的安靜讓蒔不必立刻解釋自己；可是當一句說不清楚的話被整理得太乾淨，記錄也可能開始代替說話的人。",
+        "notes": "螢幕能留下影像，不能保證影像沒有被裁切。選擇保留「我不知道怎麼說」，是在資料裡替尚未說完的人留位置。準確的時間碼，並不等於完整的經歷。"
     },
-    zetsu: {
-        status: '妄想體 / ALARM',
-        phase: 'Phase 3 // Chaotic Mania',
-        appearance: '表層：黑色高馬尾、紅色舞台服、清亮紅眼與練習留下薄繭的溫暖手掌，髮梢有舞台煙霧和柑橘洗髮精的味道。污染後：舞台袖帶纏成鮮紅拘束衣，雙手焦黑，喉嚨長出擴音器。',
-        personality: '煽動、熱烈、正義成癮。她把羞恥點燃成革命，把自毀翻譯成英雄敘事。',
-        notes: '對應毀滅衝動與躁性爆發。她讓蒔第一次感到爽快，也讓蒔最接近真正傷害他人。'
+    "zetsu": {
+        "status": "結局後復原 / RECOVERED",
+        "phase": "Phase 3 // Chaotic Mania",
+        "appearance": "表層：黑色高馬尾、紅色舞台服、清亮紅眼與練習留下薄繭的溫暖手掌，髮梢有舞台煙霧和柑橘洗髮精的味道。污染後：舞台袖帶纏成鮮紅拘束衣，雙手焦黑，喉嚨長出擴音器。",
+        "personality": "舞台組的絶熱烈、直接，伸手時掌心有練習留下的薄繭。她能把蒔從羞恥裡拉起來，讓桌子變成舞台；她也很容易把所有遲疑都聽成需要更大的音量。",
+        "notes": "警報與掌聲混在一起時，被看見和被推上台只差一步。這條路線追問的不是誰比較勇敢，而是當蒔想停下來，絶還聽不聽得見。"
     },
-    ekuro: {
-        status: '妄想體 / PADDED CELL',
-        phase: 'Phase 4 // Regression',
-        appearance: '表層：麥穗般的金色長髮、濕潤綠眼與米黃色針織衫，帶奶油、蘋果和洗衣精的居家香味。污染後：身形被柔軟棉墊般的輪廓放大，手臂異常延長，胸前垂下氧氣面罩，甜香逐漸腐敗。',
-        personality: '慈愛到令人窒息。她不責備蒔，只剝奪蒔站起來的必要。',
-        notes: '對應退行。不是想死，而是想回到還沒出生以前，回到不需要負責的羊水裡。'
+    "ekuro": {
+        "status": "結局後復原 / RECOVERED",
+        "phase": "Phase 4 // Regression",
+        "appearance": "表層：麥穗般的金色長髮、濕潤綠眼與米黃色針織衫，帶奶油、蘋果和洗衣精的居家香味。污染後：身形被柔軟棉墊般的輪廓放大，手臂異常延長，胸前垂下氧氣面罩，甜香逐漸腐敗。",
+        "personality": "絵躯把照顧放在細節裡：乾淨的枕套、暖和的針織衫、有人疲倦時張開的手臂。她讓蒔暫時不必解釋。只是她太擅長代勞，有時連一句回答，也會一起替蒔說完。",
+        "notes": "擁抱可以留住溫度，也可以讓人再也不必站起來。「抱著我，但不要替我點頭」把兩件容易混在一起的事分開：需要照顧，並不等於把所有決定都交出去。"
     },
-    mahiru: {
-        status: '妄想體 / OVEREXPOSURE',
-        phase: 'Phase 2 // Sensory Overload',
-        appearance: '表層：蜂蜜色肌膚、會反光的金髮、螢光髮圈與毫不節省的笑容，聞起來像柑橘汽水、防曬乳和剛運動完的暖意。污染後：金髮被過曝白光燒成霓虹白並不自然地拉長，眼睛變成無影燈。',
-        personality: '過度明亮、過度樂觀、過度接近。她的善意像噪音，照亮所有想藏起來的地方。',
-        notes: '對應感官過載與強制樂觀。她讓蒔覺得「我很好」，直到身體被光燒乾。'
+    "mahiru": {
+        "status": "結局後復原 / RECOVERED",
+        "phase": "Phase 2 // Sensory Overload",
+        "appearance": "表層：蜂蜜色肌膚、會反光的金髮、螢光髮圈與毫不節省的笑容，聞起來像柑橘汽水、防曬乳和剛運動完的暖意。污染後：金髮被過曝白光燒成霓虹白並不自然地拉長，眼睛變成無影燈。",
+        "personality": "真晝把笑容和光帶進房間，總想讓大家重新有精神。她的靠近原本是邀請；當房間裡只容得下快樂，蒔便開始分不清自己在笑，還是在交出一個讓人放心的表情。",
+        "notes": "過曝會讓細節消失，連不舒服也像被照得不存在了。她的路線留下了一個很小的要求：陪伴能不能容得下一個今天笑不出來的人？"
     },
-    sai: {
-        status: '妄想體 / PROCEDURE',
-        phase: 'Phase 4 // Cold Abyss',
-        appearance: '表層：落在鎖骨的深藍長髮、灰藍眼睛與剪裁如晚禮服的深藍制服，帶消毒酒精和冷冽香水。污染後：制服顯出刷手服結構，細長指尖化為藏在皮膚裡的手術刀，手中多出福馬林罐。',
-        personality: '冷靜、優雅、非情緒化。她不處罰蒔，她只把蒔修成安靜。',
-        notes: '對應治療、重置、認知切除。她代表那種看似成功，實則把痛覺與自我一起削薄的平靜。'
+    "sai": {
+        "status": "結局後復原 / RECOVERED",
+        "phase": "Phase 4 // Cold Abyss",
+        "appearance": "表層：落在鎖骨的深藍長髮、灰藍眼睛與剪裁如晚禮服的深藍制服，帶消毒酒精和冷冽香水。污染後：制服顯出刷手服結構，細長指尖化為藏在皮膚裡的手術刀，手中多出福馬林罐。",
+        "personality": "再冷靜、整潔，善於把混亂分成可以處理的步驟。對疲倦的蒔而言，明確的程序曾經像可以扶住的欄杆；當程序只接受固定答案，沒能填進格子的話就逐漸消失。",
+        "notes": "這份結局裡的安靜，不足以證明一切已經好轉。留下敘述或要求見證，是為了讓表格之外仍有人存在。再代表的是本作裡失去傾聽的程序，不是對所有照顧與治療的判決。"
     },
-    yoi: {
-        status: '妄想體 / IV DRIP',
-        phase: 'Phase 2-4 // Sedation',
-        appearance: '表層：淡紫長髮、半睜睡眼與寬大針織外套，懷抱有乾淨枕套、甜牛奶和晚安前的柔香。污染後：雙腿被床單吞沒，髮絲間垂下透明輸液管，紫色液體把擁抱變成甜味沼澤。',
-        personality: '溫柔、睏倦、誘惑。她從不命令蒔死，只邀請蒔不要再醒。',
-        notes: '對應慢性自殺與藥物依賴。她是最安靜的壞結局，也是最像休息的深淵。'
+    "yoi": {
+        "status": "結局後復原 / RECOVERED",
+        "phase": "Phase 2-4 // Sedation",
+        "appearance": "表層：淡紫長髮、半睜睡眼與寬大針織外套，懷抱有乾淨枕套、甜牛奶和晚安前的柔香。污染後：雙腿被床單吞沒，髮絲間垂下透明輸液管，紫色液體把擁抱變成甜味沼澤。",
+        "personality": "宵說話很輕，不急著要人振作。她讓蒔相信今晚可以先休息，把回答留給醒來以後。她的危險也藏在這份體貼裡：如果明天一直不來，那句「以後再說」還會有人記得嗎？",
+        "notes": "睡眠般的柔軟逐漸變成沒有出口的等待。她的路線關心休息與消失之間的距離，也關心承諾守候的人，是否仍願意聽見醒來之後不一樣的回答。"
     },
-    hina: {
-        status: '外部介入 / OWNER',
-        phase: 'Special // Capitalized Sin',
-        appearance: '表層：一絲不亂的烏黑長髮、黑色晚禮服、珍珠耳墜與高級香水，靠近時還有紅酒與新鈔拆封的乾燥氣味。污染後：她本人的美貌幾乎不變，變形的是周圍——紅酒杯、鑲鑽項圈、高樓夜景與金色鳥籠依次出現。',
-        personality: '優雅、危險、收藏家式的溫柔。她不否定蒔的瘋狂，她替瘋狂標價。',
-        notes: '對應金錢焦慮與所有權。她不是救贖，而是「只要有錢，連妄想都能被包養」。'
+    "hina": {
+        "status": "結局後復原 / RECOVERED",
+        "phase": "Special // Capitalized Sin",
+        "appearance": "表層：一絲不亂的烏黑長髮、黑色晚禮服、珍珠耳墜與高級香水，靠近時還有紅酒與新鈔拆封的乾燥氣味。污染後：她本人的美貌幾乎不變，變形的是周圍——紅酒杯、鑲鑽項圈、高樓夜景與金色鳥籠依次出現。",
+        "personality": "雛很會安排，也很會在別人看表演時先看出口。她能說出蒔等了很久的話：「妳不用在這裡證明自己。」接著遞來的文件，卻把以後的安排交到了她手上。",
+        "notes": "鳥籠不一定看起來像牢房，也可能像終於有人負擔得起的好生活。拿回卡夾、讀附註或要求副本，讓被安排的人留下自己的位置；被珍惜和被擁有，仍然需要分清。"
     },
-    rinbaku: {
-        status: '妄想體 / DOORKEEPER',
-        phase: 'Unknown // The Gravity',
-        appearance: '表層：煙粉棕及肩髮、灰紫眼睛、粉色制服與腰側針線盒，帶皂香、曬乾衣物和淡淡藥草味；抓住蒔時掌心是真人的溫熱。污染後：她沒有華麗變形，只有影子長成黑色荊棘；額角傷口與瘀青會固執地延續到下一幕。',
-        personality: '溫柔、執著、擅長扮演青梅竹馬。無論被推開、辱罵或毆打，她都會在下一個場景再次出現。',
-        notes: '病歷將她暫列為「上鎖病房門的擬人化」。來源不明。接觸時可測得體溫；此項紀錄被患者判定為系統錯誤。'
+    "rinbaku": {
+        "status": "結局後復原 / RECOVERED",
+        "phase": "Unknown // The Gravity",
+        "appearance": "表層：煙粉棕及肩髮、灰紫眼睛、粉色制服與腰側針線盒，帶皂香、曬乾衣物和淡淡藥草味；抓住蒔時掌心是真人的溫熱。污染後：她沒有華麗變形，只有影子長成黑色荊棘；額角傷口與瘀青會固執地延續到下一幕。",
+        "personality": "縛總是回到蒔身邊，記得手帕，也記得替她梳頭。她的擔心很真切，卻常比蒔的回答先一步決定該怎麼做。蒔想要她留下，有時也想請她再退一步。",
+        "notes": "沒有門的黃昏把陪伴與關閉出口放在同一個房間。想握住她的手，並不代表不想出去。這份紀錄保留兩種願望，沒有替蒔刪掉任何一種。"
     }
 };
 
@@ -644,13 +644,24 @@ function init() {
 
         // Character card expand/collapse
         document.querySelectorAll('.char-card').forEach(card => {
+            card.addEventListener('keydown', event => {
+                if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); card.click(); }
+            });
             card.addEventListener('click', () => {
                 if (card.classList.contains('locked')) return;
                 const wasExpanded = card.classList.contains('expanded');
                 // Collapse all others
-                document.querySelectorAll('.char-card.expanded').forEach(c => c.classList.remove('expanded'));
+                document.querySelectorAll('.char-card.expanded').forEach(c => {
+                    c.classList.remove('expanded');
+                    c.setAttribute('aria-expanded', 'false');
+                    c.querySelector('.char-body').hidden = true;
+                });
                 // Toggle this one
-                if (!wasExpanded) card.classList.add('expanded');
+                if (!wasExpanded) {
+                    card.classList.add('expanded');
+                    card.setAttribute('aria-expanded', 'true');
+                    card.querySelector('.char-body').hidden = false;
+                }
             });
         });
 
@@ -2104,29 +2115,28 @@ function dismissChoices() {
 }
 
 function updateCharacterCards() {
-    const polluted = isArchivePolluted();
+    const unlocked = getUnlockedEndings();
+    const recovered = Object.values(CHARACTER_UNLOCKS).filter(key => unlocked[key]).length;
     const title = document.getElementById('chars-title');
     const subtitle = document.getElementById('chars-subtitle');
-    if (title) title.textContent = polluted ? '☠ SUBJECT DATABASE' : '✦ STUDENT DIRECTORY';
-    if (subtitle) subtitle.innerHTML = polluted
-        ? 'WARD_13 // 被驗者總覽 // CLEARANCE: <span class="blink-text">LEVEL-0</span>'
-        : '台場聯合學園 // 同好會名簿 // 放學後閲覽';
+    if (title) title.textContent = '被驗者檔案 / RECOVERED RECORDS';
+    if (subtitle) subtitle.textContent = '已復原 ' + recovered + ' / 11 ｜看完對應結局後解鎖介紹；秋葉蒔的檔案在家庭真結局後開放。';
     document.querySelectorAll('.char-card').forEach(card => {
         const id = card.dataset.id;
-        // Character introductions are part of the opening premise, not route
-        // rewards. Ending gallery entries remain progression-gated.
-        const isUnlocked = true;
-        const dossier = polluted ? CHARACTER_DOSSIERS[id] : SCHOOL_DOSSIERS[id];
+        const isUnlocked = Boolean(unlocked[CHARACTER_UNLOCKS[id]]);
         card.classList.toggle('locked', !isUnlocked);
         card.classList.remove('expanded');
-        card.classList.toggle('diagnosed', polluted);
+        card.classList.toggle('diagnosed', isUnlocked);
+        card.setAttribute('role', 'button');
+        card.setAttribute('aria-disabled', String(!isUnlocked));
+        card.setAttribute('aria-expanded', 'false');
+        card.tabIndex = isUnlocked ? 0 : -1;
+        const body = card.querySelector('.char-body');
+        if (body) body.hidden = true;
         const tag = card.querySelector('.char-tag');
-        if (tag) {
-            tag.textContent = polluted ? (id === 'akiba_mai' ? 'PATIENT' : '診斷標籤') : (id === 'akiba_mai' ? 'PLAYER' : '學生');
-            tag.classList.toggle('tag-player', id === 'akiba_mai' && !polluted);
-            tag.classList.toggle('tag-delusion', polluted || id !== 'akiba_mai');
-        }
-        if (dossier) populateCharacterCard(card, dossier);
+        if (tag) tag.textContent = isUnlocked ? '已復原' : '未解鎖';
+        if (isUnlocked) populateCharacterCard(card, CHARACTER_DOSSIERS[id]);
+        else card.querySelectorAll('.field-val').forEach(val => { val.textContent = '對應結局尚未完成。'; });
     });
 }
 
