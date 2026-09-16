@@ -295,7 +295,7 @@ const WHITE_DOOR_FRAGMENT_THRESHOLD = REQUIRED_BAD_ENDINGS.length;
 const SCORE_KEYS = [...REQUIRED_BAD_ENDINGS];
 
 const CHARACTER_UNLOCKS = {
-    maki: 'end_rinbaku_good_mother',
+    akiba_mai: 'end_rinbaku_good_mother',
     mizore: 'end_mizore',
     yura: 'end_yura',
     roro: 'end_roro',
@@ -309,7 +309,7 @@ const CHARACTER_UNLOCKS = {
 };
 
 const CHARACTER_DOSSIERS = {
-    maki: {
+    akiba_mai: {
         status: '被驗者 / ACTIVE',
         phase: 'No.0 // 主診斷對象',
         appearance: '枯葉紅濾鏡中的瘦弱病人。指甲縫常殘留壁癌粉末，口袋裡有黑卡、藥盒與抗噪耳機。',
@@ -392,7 +392,7 @@ const CHARACTER_DOSSIERS = {
 // These records are deliberately ordinary: she is at school, and the reader
 // has no authority to diagnose her friends before she does.
 const SCHOOL_DOSSIERS = {
-    maki: {
+    akiba_mai: {
         status: '學生 / 在籍',
         phase: 'No.0 // 同好會製作人',
         appearance: '纖瘦、短髮，習慣戴著抗噪耳機。制服口袋塞滿票根、黑卡與寫到一半的企劃紙。',
@@ -1340,7 +1340,13 @@ function deleteManualSlot(slotIndex) {
     if (btnLoad && !hasAnySave()) btnLoad.style.display = 'none';
 }
 
+let narrativeAmbientTimer;
+let narrativeSceneVersion = 0;
+
 function renderNode(nodeId) {
+    narrativeSceneVersion++;
+    clearTimeout(narrativeAmbientTimer);
+    for (const id of ['ward-error', 'lyric-ghost', 'interface-haunt']) document.getElementById(id)?.classList.remove('visible');
     const node = story[nodeId];
     if (!node) {
         console.error('Node not found:', nodeId);
@@ -1382,8 +1388,6 @@ function renderNode(nodeId) {
         triggerBugFlood();
     }
 
-    scheduleNarrativeError(nodeId);
-    scheduleLyricGhost(nodeId);
 
     // Typewriter effect
     typeText(displayText, () => {
@@ -1395,36 +1399,12 @@ function composeNodeText(nodeId, node) {
     const echo = gameState.pendingEcho;
     gameState.pendingEcho = '';
     const delayedConsequence = buildDelayedConsequence(nodeId);
-    const prelude = [echo, delayedConsequence].filter(Boolean).join('\n\n');
-    if (!prelude) return node.text;
-
-    return `<span class='choice-echo'>${prelude}</span>\n\n${node.text}`;
+    return [echo ? `<span class='choice-echo'>${echo}</span>` : '', node.text,
+        delayedConsequence ? `<span class='choice-echo'>${delayedConsequence}</span>` : ''].filter(Boolean).join('\n\n');
 }
 
 function buildDelayedConsequence(nodeId) {
-    const checkpoints = {
-        p2_1: 'DELAYED ECHO // 第一節課留下的東西，直到現在才從書包底部滲出來。',
-        p3_1: 'DELAYED ECHO // 昨天選過的答案先我一步抵達教室，坐在我的位子上。',
-        p4_1: 'DELAYED ECHO // 處置室讀取了我一路否認的偏好，並替它換上乾淨制服。'
-    };
-    if (!checkpoints[nodeId] || !gameState.scores) return '';
-
-    const dominant = SCORE_KEYS.reduce((best, key) => {
-        return (gameState.scores[key] || 0) > (gameState.scores[best] || 0) ? key : best;
-    }, SCORE_KEYS[0]);
-    const consequences = {
-        end_mizore: '霙把我的台詞本翻到下一頁；上面已經有我的筆跡，寫著我還沒說出口的求愛。',
-        end_yura: '每一塊反光面都慢半拍才模仿我，像由良正在鏡後決定哪一個我比較值得留下。',
-        end_roro: 'ロロ的錄影紅點沒有熄滅；我剛才刪掉的反應，被系統列為唯一可信的版本。',
-        end_zetsu: '絶把走廊廣播調到最大聲，連我的心跳都被迫跟著她錯拍。',
-        end_ekuro: '絵躯把袖口收得更緊，說這樣我就不會從自己身上漏出去。',
-        end_mahiru: '真昼的笑聲亮得過曝，我看見自己的影子被曬死在鞋尖旁邊。',
-        end_sai: '再替我整理衣領，指腹冰得像器械；她說整齊的人比較容易被判定為正常。',
-        end_yoi: '宵身上的甜味黏在舌根，所有門把都忽然像枕頭一樣柔軟。',
-        end_hina: '雛把帳單折成紙鶴塞進我口袋，提醒我連被拯救都有展示價格。',
-        end_rinbaku: '縛站得比記憶更近；她沒問我選了什麼，只替我揉著那隻曾經推開她的手。'
-    };
-    return `${checkpoints[nodeId]}<br>${consequences[dominant]}`;
+    return WARD13_NARRATIVE.recall(story[nodeId], gameState.narrativeMemory);
 }
 
 function createInitialScores() {
@@ -1441,6 +1421,7 @@ function shouldShowWhiteDoor() {
 }
 
 function applyChoiceEffects(choice) {
+    WARD13_NARRATIVE.remember(gameState, choice, getDominantChoiceEffect(choice));
     if (!gameState.scores) gameState.scores = createInitialScores();
     if (!choice.effects) return;
 
@@ -1528,21 +1509,14 @@ function buildLivingReaction(chosenKey) {
 
 function chooseEndingByScores() {
     if (!gameState.scores) gameState.scores = createInitialScores();
-
-    let selected = SCORE_KEYS[0];
-    let selectedScore = Number.NEGATIVE_INFINITY;
-    SCORE_KEYS.forEach(key => {
-        const score = gameState.scores[key] || 0;
-        if (score > selectedScore) {
-            selected = key;
-            selectedScore = score;
-        }
-    });
-
-    return selected;
+    const trail = gameState.choiceTrail || [gameState.socialMemory?.lastChoiceLead].filter(Boolean);
+    return WARD13_NARRATIVE.chooseRoute(gameState.scores, SCORE_KEYS, trail);
 }
 
 function finishNodePresentation(nodeId, node) {
+    if (node.next !== null && !node.adjudicate && nodeId !== 'white_door') {
+        if (!scheduleNarrativeError(nodeId)) scheduleLyricGhost(nodeId);
+    }
     if (nodeId === 'white_door') return;
     if (node.choices) {
         // Keep the final line on screen. Choices are only revealed by the
@@ -1738,7 +1712,7 @@ function showChoices(choices) {
         btn.onclick = () => {
             clearTimeout(choiceHauntTimer);
             applyChoiceEffects(choice);
-            gameState.pendingEcho = choice.echo || buildChoiceEcho(choice);
+            gameState.pendingEcho = choice.echo !== undefined ? choice.echo : buildChoiceEcho(choice);
             choicesContainer.classList.add('hidden');
             choicesContainer.classList.remove('active');
             renderNode(choice.next);
@@ -1993,11 +1967,16 @@ function scheduleNarrativeError(nodeId) {
         }
     };
     const error = errors[nodeId];
-    if (!error || gameState.errorFlags?.[nodeId]) return;
-    gameState.errorFlags = gameState.errorFlags || {};
-    gameState.errorFlags[nodeId] = true;
-    saveGame();
-    setTimeout(() => showWardError(error), 2400);
+    if (!error || gameState.errorFlags?.[nodeId]) return false;
+    const version = narrativeSceneVersion;
+    narrativeAmbientTimer = setTimeout(() => {
+        if (!canShowNarrativeAmbient(version)) return;
+        gameState.errorFlags = gameState.errorFlags || {};
+        gameState.errorFlags[nodeId] = true;
+        saveGame();
+        showWardError(error);
+    }, 3200);
+    return true;
 }
 
 function showWardError({ code, title, detail, action, tone = '' }) {
@@ -2041,12 +2020,21 @@ function getNextLyricFragment() {
     return LYRIC_FRAGMENTS[index];
 }
 
+function canShowNarrativeAmbient(version) {
+    return version === narrativeSceneVersion && !isTyping &&
+        gameplayScreen?.classList.contains('active') &&
+        choicesContainer.classList.contains('hidden');
+}
+
 function scheduleLyricGhost(nodeId) {
     if (!gameplayScreen?.classList.contains('active')) return;
     const depth = gameState.history?.length || 0;
-    if (depth < 2 || depth % 2 !== 0 || nodeId === 'white_door') return;
+    if (depth < 2 || depth % 4 !== 0 || nodeId === 'white_door') return;
     const fragment = LYRIC_FRAGMENTS[(depth / 2 - 1) % LYRIC_FRAGMENTS.length];
-    setTimeout(() => showLyricGhost(fragment, depth), 1100 + (depth % 3) * 700);
+    const version = narrativeSceneVersion;
+    narrativeAmbientTimer = setTimeout(() => {
+        if (canShowNarrativeAmbient(version)) showLyricGhost(fragment, depth);
+    }, 3600);
 }
 
 function showLyricGhost(fragment, seed) {
@@ -2134,9 +2122,9 @@ function updateCharacterCards() {
         card.classList.toggle('diagnosed', polluted);
         const tag = card.querySelector('.char-tag');
         if (tag) {
-            tag.textContent = polluted ? (id === 'maki' ? 'PATIENT' : '診斷標籤') : (id === 'maki' ? 'PLAYER' : '學生');
-            tag.classList.toggle('tag-player', id === 'maki' && !polluted);
-            tag.classList.toggle('tag-delusion', polluted || id !== 'maki');
+            tag.textContent = polluted ? (id === 'akiba_mai' ? 'PATIENT' : '診斷標籤') : (id === 'akiba_mai' ? 'PLAYER' : '學生');
+            tag.classList.toggle('tag-player', id === 'akiba_mai' && !polluted);
+            tag.classList.toggle('tag-delusion', polluted || id !== 'akiba_mai');
         }
         if (dossier) populateCharacterCard(card, dossier);
     });

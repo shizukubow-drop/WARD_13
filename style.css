@@ -528,7 +528,7 @@ body {
 .outgoing .chat-avatar { right: -42px; left: auto; }
 .avatar-mizore { background: #bde6ee; }
 .avatar-yura { background: #ffd8e4; }
-.avatar-maki { background: #e8a25e; }
+.avatar-akiba-mai { background: #e8a25e; }
 .avatar-mahiru { background: #ffe67e; }
 .avatar-roro { background: #cad2db; }
 .avatar-yoi { background: #cbbce7; }
@@ -1994,7 +1994,9 @@ body.error-presence #gameplay-screen { animation: error-presence-shift .52s step
 
     #phone-screen { align-items: stretch; }
     .phone-shell { width: 100%; border-inline: 0; }
-    .phone-chat { padding: 12px 16px 18px; overscroll-behavior: contain; }
+    .phone-chat { padding: 12px 12px 18px; overscroll-behavior: contain; }
+    .chat-message.incoming { margin-left: 42px; }
+    .chat-message.outgoing { margin-right: 42px; }
     .phone-actions { padding: 10px 12px calc(10px + env(safe-area-inset-bottom)); }
     .phone-primary, .phone-skip { min-height: 44px; }
 

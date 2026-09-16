@@ -177,6 +177,7 @@
 
   window.WARD13_ARG = {
     manifest,
+    storageKey,
     loadState,
     saveState,
     normalize,

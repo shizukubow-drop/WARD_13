@@ -438,6 +438,7 @@
     document.title = view === 'terminal' || view === 'beauty' ? pageTitle : `${pageTitle}｜${t('global.institution')}`;
     app.innerHTML = view === 'beauty' ? `${renderBeauty()}<div id="arg-toast" class="arg-toast" role="status"></div>` : `${header()}${(renderers[view] || renderPortal)()}${footer()}<div id="arg-toast" class="arg-toast" role="status"></div>`;
     bindEvents();
+    window.WARD13_INVESTIGATION?.mount();
     activateDepartmentHaunt();
   }
 
@@ -532,6 +533,11 @@
     });
   }
 
+  window.addEventListener('ward13-investigation-change', () => {
+    state = engine.loadState();
+    render();
+  });
+
   applyDocumentLocale();
   render();
 
@@ -556,4 +562,11 @@
   window.addEventListener('load', reportPreviewMetrics);
   window.addEventListener('resize', reportPreviewMetrics);
   reportPreviewMetrics();
+})();
+
+// Additive opening investigation; original author copy remains untouched.
+(function () {
+  const script = document.createElement('script');
+  script.src = new URL('investigation.js', document.currentScript.src).href;
+  document.head.appendChild(script);
 })();
